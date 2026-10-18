@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 1320 400" width="1320" height="400" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="seta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1b5e4a"/>
+    </marker>
+    <marker id="seta-l" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c4621a"/>
+    </marker>
+  </defs>
+
+  <rect width="1320" height="400" fill="#fbfaf6"/>
+
+  <!-- etapas: x de cada cartão = 20 + i*217, largura 180 -->
+  <g font-size="15">
+    <!-- 1 -->
+    <rect x="20" y="70" width="180" height="170" rx="14" fill="#fff" stroke="#9fc0aa" stroke-width="1.5"/>
+    <circle cx="110" cy="70" r="24" fill="#1b5e4a"/>
+    <text x="110" y="78" text-anchor="middle" font-size="22" font-weight="bold" fill="#fff">1</text>
+    <text x="110" y="128" text-anchor="middle" font-size="18" font-weight="bold" fill="#1b5e4a">DEFINIR</text>
+    <text x="110" y="150" text-anchor="middle" font-size="18" font-weight="bold" fill="#1b5e4a">OBJETIVO</text>
+    <text x="110" y="190" text-anchor="middle" fill="#3d5a51">Qual resultado</text>
+    <text x="110" y="210" text-anchor="middle" fill="#3d5a51">exato preciso?</text>
+
+    <!-- 2 -->
+    <rect x="237" y="70" width="180" height="170" rx="14" fill="#fff" stroke="#9fc0aa" stroke-width="1.5"/>
+    <circle cx="327" cy="70" r="24" fill="#1b5e4a"/>
+    <text x="327" y="78" text-anchor="middle" font-size="22" font-weight="bold" fill="#fff">2</text>
+    <text x="327" y="128" text-anchor="middle" font-size="18" font-weight="bold" fill="#1b5e4a">EXECUÇÃO</text>
+    <text x="327" y="150" text-anchor="middle" font-size="18" font-weight="bold" fill="#1b5e4a">MANUAL</text>
+    <text x="327" y="190" text-anchor="middle" fill="#3d5a51">Quais ferramentas,</text>
+    <text x="327" y="210" text-anchor="middle" fill="#3d5a51">ordem e parâmetros?</text>
+
+    <!-- 3 -->
+    <rect x="454" y="70" width="180" height="170" rx="14" fill="#fff" stroke="#9fc0aa" stroke-width="1.5"/>
+    <circle cx="544" cy="70" r="24" fill="#1b5e4a"/>
+    <text x="544" y="78" text-anchor="middle" font-size="22" font-weight="bold" fill="#fff">3</text>
+    <text x="544" y="128" text-anchor="middle" font-size="18" font-weight="bold" fill="#1b5e4a">TRADUÇÃO</text>
+    <text x="544" y="150" text-anchor="middle" font-size="18" font-weight="bold" fill="#1b5e4a">PARA CÓDIGO</text>
+    <text x="544" y="190" text-anchor="middle" fill="#3d5a51">Cada clique vira</text>
+    <text x="544" y="211" text-anchor="middle" font-size="13" font-family="Menlo, Consolas, monospace" fill="#3d5a51">processing.run()</text>
+
+    <!-- 4 (IA) -->
+    <rect x="671" y="70" width="180" height="170" rx="14" fill="#e6f4f1" stroke="#2a9d8f" stroke-width="1.5"/>
+    <circle cx="761" cy="70" r="24" fill="#2a9d8f"/>
+    <text x="761" y="78" text-anchor="middle" font-size="22" font-weight="bold" fill="#fff">4</text>
+    <text x="761" y="128" text-anchor="middle" font-size="18" font-weight="bold" fill="#1f7a6f">APOIO</text>
+    <text x="761" y="150" text-anchor="middle" font-size="18" font-weight="bold" fill="#1f7a6f">COM IA</text>
+    <text x="761" y="190" text-anchor="middle" fill="#2f5d57">Gerar, explicar</text>
+    <text x="761" y="210" text-anchor="middle" fill="#2f5d57">e depurar</text>
+
+    <!-- 5 (validação) -->
+    <rect x="888" y="70" width="180" height="170" rx="14" fill="#fdf3ea" stroke="#c4621a" stroke-width="1.5"/>
+    <circle cx="978" cy="70" r="24" fill="#c4621a"/>
+    <text x="978" y="78" text-anchor="middle" font-size="22" font-weight="bold" fill="#fff">5</text>
+    <text x="978" y="128" text-anchor="middle" font-size="18" font-weight="bold" fill="#a34f12">VALIDAR</text>
+    <text x="978" y="150" text-anchor="middle" font-size="18" font-weight="bold" fill="#a34f12">RESULTADO</text>
+    <text x="978" y="190" text-anchor="middle" fill="#6b4a33">SRC, unidades,</text>
+    <text x="978" y="210" text-anchor="middle" fill="#6b4a33">mapa e contagens</text>
+
+    <!-- 6 -->
+    <rect x="1105" y="70" width="195" height="170" rx="14" fill="#1b5e4a"/>
+    <circle cx="1202" cy="70" r="24" fill="#fff" stroke="#1b5e4a" stroke-width="2"/>
+    <text x="1202" y="78" text-anchor="middle" font-size="22" font-weight="bold" fill="#1b5e4a">6</text>
+    <text x="1202" y="128" text-anchor="middle" font-size="18" font-weight="bold" fill="#fff">AUTOMATIZAR E</text>
+    <text x="1202" y="150" text-anchor="middle" font-size="18" font-weight="bold" fill="#fff">REAPROVEITAR</text>
+    <text x="1202" y="190" text-anchor="middle" fill="#d6ebe0">Novas bases,</text>
+    <text x="1202" y="210" text-anchor="middle" fill="#d6ebe0">rotinas em lote</text>
+  </g>
+
+  <!-- setas entre etapas -->
+  <g stroke="#1b5e4a" stroke-width="2.5" marker-end="url(#seta)">
+    <line x1="202"  y1="155" x2="233"  y2="155"/>
+    <line x1="419"  y1="155" x2="450"  y2="155"/>
+    <line x1="636"  y1="155" x2="667"  y2="155"/>
+    <line x1="853"  y1="155" x2="884"  y2="155"/>
+    <line x1="1070" y1="155" x2="1101" y2="155"/>
+  </g>
+
+  <!-- laço de correção: validação → código -->
+  <path d="M978,242 C978,330 544,330 544,246" fill="none" stroke="#c4621a" stroke-width="2.5" stroke-dasharray="8 6" marker-end="url(#seta-l)"/>
+  <rect x="611" y="300" width="300" height="38" rx="19" fill="#fbfaf6" stroke="#c4621a" stroke-width="1.5"/>
+  <text x="761" y="325" text-anchor="middle" font-size="16" font-weight="bold" fill="#c4621a">Não passou? Volte, corrija e repita</text>
+
+  <text x="660" y="380" text-anchor="middle" font-size="16" font-style="italic" fill="#1b5e4a">Do problema ao script reutilizável: a IA acelera as etapas 3 e 4; a etapa 5 é sempre sua.</text>
+</svg>

@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 1200 560" width="1200" height="560" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="seta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1b5e4a"/>
+    </marker>
+    <marker id="seta-l" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c4621a"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="560" fill="#fbfaf6"/>
+
+  <!-- ===================== MANUAL ===================== -->
+  <rect x="20" y="20" width="560" height="520" rx="18" fill="#fdf3ea" stroke="#f2c9a5"/>
+  <rect x="150" y="40" width="300" height="46" rx="23" fill="#c4621a"/>
+  <text x="300" y="70" text-anchor="middle" font-size="21" font-weight="bold" fill="#fff">FLUXO MANUAL</text>
+
+  <g font-size="16" fill="#3b2a1d">
+    <rect x="60"  y="120" width="200" height="50" rx="10" fill="#fff" stroke="#e0a77a"/>
+    <text x="160" y="151" text-anchor="middle">1. Abrir a camada</text>
+    <rect x="60"  y="190" width="200" height="50" rx="10" fill="#fff" stroke="#e0a77a"/>
+    <text x="160" y="221" text-anchor="middle">2. Reprojetar</text>
+    <rect x="60"  y="260" width="200" height="50" rx="10" fill="#fff" stroke="#e0a77a"/>
+    <text x="160" y="291" text-anchor="middle">3. Buffer</text>
+    <rect x="60"  y="330" width="200" height="50" rx="10" fill="#fff" stroke="#e0a77a"/>
+    <text x="160" y="361" text-anchor="middle">4. Recortar</text>
+    <rect x="60"  y="400" width="200" height="50" rx="10" fill="#fff" stroke="#e0a77a"/>
+    <text x="160" y="431" text-anchor="middle">5. Exportar</text>
+  </g>
+  <g stroke="#c4621a" stroke-width="2" marker-end="url(#seta-l)">
+    <line x1="160" y1="170" x2="160" y2="188"/>
+    <line x1="160" y1="240" x2="160" y2="258"/>
+    <line x1="160" y1="310" x2="160" y2="328"/>
+    <line x1="160" y1="380" x2="160" y2="398"/>
+  </g>
+  <!-- laço de repetição -->
+  <path d="M260,425 C330,425 330,145 262,145" fill="none" stroke="#c4621a" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#seta-l)"/>
+  <rect x="300" y="262" width="96" height="34" rx="17" fill="#c4621a"/>
+  <text x="348" y="285" text-anchor="middle" font-size="17" font-weight="bold" fill="#fff">× 30</text>
+
+  <g font-size="15" fill="#6b4a33">
+    <text x="410" y="150">• dezenas de cliques</text>
+    <text x="410" y="176">  por arquivo</text>
+    <text x="410" y="214">• parâmetros digitados</text>
+    <text x="410" y="240">  de novo a cada vez</text>
+    <text x="410" y="278">• fácil pular um passo</text>
+    <text x="410" y="304">  ou trocar um valor</text>
+    <text x="410" y="342">• o método fica</text>
+    <text x="410" y="368">  só na memória</text>
+  </g>
+  <text x="300" y="505" text-anchor="middle" font-size="17" font-style="italic" fill="#c4621a">Ótimo para aprender. Ruim para repetir.</text>
+
+  <!-- ===================== AUTOMATIZADO ===================== -->
+  <rect x="620" y="20" width="560" height="520" rx="18" fill="#eef4ef" stroke="#b9d2c1"/>
+  <rect x="725" y="40" width="350" height="46" rx="23" fill="#1b5e4a"/>
+  <text x="900" y="70" text-anchor="middle" font-size="21" font-weight="bold" fill="#fff">FLUXO AUTOMATIZADO</text>
+
+  <!-- parâmetros -->
+  <rect x="660" y="115" width="480" height="78" rx="10" fill="#fff" stroke="#9fc0aa"/>
+  <text x="676" y="140" font-size="14" font-weight="bold" fill="#1b5e4a">PARÂMETROS (escritos uma única vez)</text>
+  <text x="676" y="166" font-size="15" font-family="Menlo, Consolas, monospace" fill="#24433a">PASTA = "dados/"   CRS = "EPSG:31984"</text>
+  <text x="676" y="185" font-size="15" font-family="Menlo, Consolas, monospace" fill="#24433a">DISTANCIA = 3000</text>
+
+  <line x1="900" y1="193" x2="900" y2="216" stroke="#1b5e4a" stroke-width="2" marker-end="url(#seta)"/>
+
+  <!-- script -->
+  <rect x="660" y="220" width="480" height="150" rx="10" fill="#1d2b28"/>
+  <circle cx="680" cy="238" r="5" fill="#f28c38"/><circle cx="696" cy="238" r="5" fill="#f2c94c"/><circle cx="712" cy="238" r="5" fill="#5cb85c"/>
+  <g font-size="15" font-family="Menlo, Consolas, monospace">
+    <text x="676" y="268" fill="#f28c38">for <tspan fill="#e8efe9">arquivo</tspan> in <tspan fill="#e8efe9">PASTA.glob("*.shp"):</tspan></text>
+    <text x="676" y="292" fill="#e8efe9">    camada = reprojetar(arquivo, CRS)</text>
+    <text x="676" y="316" fill="#e8efe9">    faixa  = buffer(camada, DISTANCIA)</text>
+    <text x="676" y="340" fill="#e8efe9">    exportar(recortar(faixa))</text>
+    <text x="676" y="362" fill="#7fa894">    # as mesmas regras, para todos</text>
+  </g>
+
+  <line x1="900" y1="370" x2="900" y2="393" stroke="#1b5e4a" stroke-width="2" marker-end="url(#seta)"/>
+
+  <!-- resultados -->
+  <g>
+    <rect x="722" y="410" width="120" height="70" rx="8" fill="#cfe2d4" stroke="#1b5e4a"/>
+    <rect x="714" y="403" width="120" height="70" rx="8" fill="#dcebe0" stroke="#1b5e4a"/>
+    <rect x="706" y="396" width="120" height="70" rx="8" fill="#fff" stroke="#1b5e4a"/>
+    <text x="766" y="428" text-anchor="middle" font-size="15" font-weight="bold" fill="#1b5e4a">30 resultados</text>
+    <text x="766" y="450" text-anchor="middle" font-size="13" fill="#24433a">padronizados</text>
+  </g>
+  <g>
+    <rect x="880" y="396" width="250" height="84" rx="8" fill="#fff" stroke="#1b5e4a"/>
+    <circle cx="905" cy="420" r="11" fill="#2e8b57"/>
+    <path d="M899,420 l4,5 l8,-9" stroke="#fff" stroke-width="2.5" fill="none"/>
+    <text x="924" y="425" font-size="15" font-weight="bold" fill="#1b5e4a">Validação</text>
+    <text x="896" y="450" font-size="13" fill="#24433a">contagens, CRS, áreas,</text>
+    <text x="896" y="468" font-size="13" fill="#24433a">conferência no mapa</text>
+  </g>
+
+  <text x="900" y="515" text-anchor="middle" font-size="17" font-style="italic" fill="#1b5e4a">O script é o método, escrito e reaproveitável.</text>
+</svg>

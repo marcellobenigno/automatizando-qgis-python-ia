@@ -220,3 +220,15 @@ pyvenv.cfg
 pip-selfcheck.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python,macos,gis,virtualenv
+
+### Dados do minicurso (ficam no Google Drive — ver dados_curso/README.md) ###
+dados_curso/*
+!dados_curso/README.md
+# salvaguarda caso algum dado seja salvo fora de dados_curso/
+*.gpkg
+*.gpkg-wal
+*.gpkg-shm
+*.tif
+
+# A regra [Ss]cripts do virtualenv acima ignoraria os scripts do curso
+!apoio/scripts/

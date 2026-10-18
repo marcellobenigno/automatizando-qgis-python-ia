@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 1200 300" width="1200" height="300" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="seta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1b5e4a"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="300" fill="#fbfaf6"/>
+
+  <rect x="350" y="16" width="500" height="44" rx="22" fill="#1b5e4a"/>
+  <text x="600" y="45" text-anchor="middle" font-size="19" font-weight="bold" fill="#fff">TRILHA DE APRENDIZAGEM PRÁTICA (PB)</text>
+
+  <!-- 1 -->
+  <rect x="30" y="90" width="340" height="170" rx="16" fill="#eef6ee" stroke="#4caf50" stroke-width="2"/>
+  <rect x="30" y="90" width="340" height="44" rx="16" fill="#4caf50"/>
+  <rect x="30" y="118" width="340" height="16" fill="#4caf50"/>
+  <text x="200" y="119" text-anchor="middle" font-size="17" font-weight="bold" fill="#fff">EXERCÍCIO 1 · INICIANTE</text>
+  <text x="200" y="180" text-anchor="middle" font-size="21" font-weight="bold" fill="#1b5e4a">Geocodificação</text>
+  <text x="200" y="206" text-anchor="middle" font-size="21" font-weight="bold" fill="#1b5e4a">de endereços</text>
+  <text x="200" y="238" text-anchor="middle" font-size="16" fill="#3d5a51">João Pessoa</text>
+
+  <!-- 2 -->
+  <rect x="430" y="90" width="340" height="170" rx="16" fill="#fdf7e6" stroke="#e0a800" stroke-width="2"/>
+  <rect x="430" y="90" width="340" height="44" rx="16" fill="#e0a800"/>
+  <rect x="430" y="118" width="340" height="16" fill="#e0a800"/>
+  <text x="600" y="119" text-anchor="middle" font-size="17" font-weight="bold" fill="#fff">EXERCÍCIO 2 · INTERMEDIÁRIO</text>
+  <text x="600" y="180" text-anchor="middle" font-size="21" font-weight="bold" fill="#1b5e4a">Análise de impacto</text>
+  <text x="600" y="206" text-anchor="middle" font-size="21" font-weight="bold" fill="#1b5e4a">ambiental</text>
+  <text x="600" y="238" text-anchor="middle" font-size="16" fill="#3d5a51">Rodovia PB-200</text>
+
+  <!-- 3 -->
+  <rect x="830" y="90" width="340" height="170" rx="16" fill="#fdf7e6" stroke="#e0a800" stroke-width="2"/>
+  <rect x="830" y="90" width="340" height="44" rx="16" fill="#e0a800"/>
+  <rect x="830" y="118" width="340" height="16" fill="#e0a800"/>
+  <text x="1000" y="119" text-anchor="middle" font-size="17" font-weight="bold" fill="#fff">EXERCÍCIO 3 · INTERMEDIÁRIO</text>
+  <text x="1000" y="180" text-anchor="middle" font-size="21" font-weight="bold" fill="#1b5e4a">Automação de</text>
+  <text x="1000" y="206" text-anchor="middle" font-size="21" font-weight="bold" fill="#1b5e4a">dados SRTM</text>
+  <text x="1000" y="238" text-anchor="middle" font-size="16" fill="#3d5a51">Grade interativa TOPODATA</text>
+
+  <g stroke="#1b5e4a" stroke-width="3" marker-end="url(#seta)">
+    <line x1="374" y1="175" x2="424" y2="175"/>
+    <line x1="774" y1="175" x2="824" y2="175"/>
+  </g>
+
+  <text x="600" y="288" text-anchor="middle" font-size="15" font-style="italic" fill="#1b5e4a">Cada exercício parte do que o anterior ensinou. Próximos exercícios: em produção.</text>
+</svg>
