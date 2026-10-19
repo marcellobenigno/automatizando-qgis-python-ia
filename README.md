@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="imgs/logos/ifpb.png" alt="Instituto Federal da Paraíba — Campus João Pessoa" height="60">
+  <img src="imgs/logos/ifpb.png" alt="Instituto Federal da Paraíba — Campus João Pessoa" height="90">
   &nbsp;&nbsp;&nbsp;&nbsp;
   <img src="imgs/logos/geotec.jpg" alt="2º GeoTEC — Encontro de Geotecnologias" height="130">
 </p>
