@@ -259,6 +259,19 @@ Nos exercícios seguintes, este fluxo será aplicado a cenários reais de análi
 
 👉 [Abrir o exercício](../modulos/grade_topodata/README.md)
 
+#### ⛰️ Exercício 4 — Perfil topográfico da PB-200
+
+- **Nível:** 🟡 Intermediário
+- **O desafio:** juntar os dois exercícios anteriores e traçar o perfil topográfico da PB-200 inteira, do km 0 ao km 104, com o MDE TOPODATA baixado pela ação de clique. O ponto de partida é um tutorial da web escrito para uma versão antiga do QGIS.
+- **O que você irá aprender:**
+  - usar a IA para atualizar código antigo e conferir o que ela trocou (GRASS e SAGA por algoritmos nativos);
+  - descobrir por que a solução "óbvia" para unir trechos falha (trechos invertidos e com falhas) e costurá-los pela ordem do km;
+  - gerar pontos ao longo de uma linha e ler a altitude de cada um no raster;
+  - desenhar o perfil com matplotlib e conferir com a ferramenta nativa Perfil de Elevação;
+  - interpretar o resultado: exagero vertical, ruído do SRTM e o que o dado permite (ou não) afirmar.
+
+👉 [Abrir o exercício](../modulos/perfil_pb200/README.md)
+
 #### 🚧 Próximos exercícios
 
 Em produção.

@@ -55,6 +55,7 @@ Os exercícios formam uma **trilha progressiva**, em ordem crescente de complexi
 | 1 | 📍 [**Geocodificação urbana em João Pessoa**](modulos/geocodificacao/README.md) | 🟢 Iniciante | Ler um CSV com Python, consultar o Nominatim (OpenStreetMap) respeitando o limite de requisições e criar uma camada de pontos. |
 | 2 | 🛣️ [**Impacto ambiental da duplicação da PB-200**](modulos/pb200/README.md) | 🟡 Intermediário | Fazer a análise à mão e traduzir cada passo em `processing.run(...)`: buffer de 3 km, municípios atingidos e uso do solo em hectares. |
 | 3 | 🗺️ [**Grade interativa SRTM/TOPODATA**](modulos/grade_topodata/README.md) | 🟡 Intermediário | Investigar uma página web com IA, gerar uma grade vetorial e criar ações em Python que baixam o MDE da célula clicada. |
+| 4 | ⛰️ [**Perfil topográfico da PB-200**](modulos/perfil_pb200/README.md) | 🟡 Intermediário | Unir os trechos da rodovia numa linha só, amostrar o MDE TOPODATA a cada 30 m, desenhar o perfil com matplotlib e atualizar com IA um tutorial escrito para uma versão antiga do QGIS. |
 | 🚧 | **Próximos módulos** | — | Em produção. |
 | Último | 🛰️ [**Composições RGB de Landsat e Sentinel**](modulos/composicao_rgb/README.md) | a definir | Montar composições em cor natural e falsa-cor como rasters virtuais e automatizar as quatro de uma vez com um script. |
 
@@ -95,6 +96,7 @@ Introdução à automação de tarefas de geoprocessamento no QGIS. Apresentaç�
 │   ├── geocodificacao/
 │   ├── pb200/
 │   ├── grade_topodata/
+│   ├── perfil_pb200/
 │   ├── composicao_rgb/
 │   └── dados_vetoriais/
 ├── apoio/             ← textos de apoio, scripts de exemplo e biblioteca de prompts
