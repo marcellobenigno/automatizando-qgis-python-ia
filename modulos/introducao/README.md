@@ -17,7 +17,7 @@ Automatizar é **transformar uma sequência de operações em instruções que o
 
 Antes de escrever qualquer linha de código, vale organizar o vocabulário. São cinco peças, cada uma com um papel:
 
-![Fluxo QGIS + Python + IA](../imgs/introducao/01_fluxo_qgis_python_ia.png)
+![Fluxo QGIS + Python + IA](../../imgs/introducao/01_fluxo_qgis_python_ia.png)
 
 | Recurso | O que é | Analogia |
 | --- | --- | --- |
@@ -29,7 +29,7 @@ Antes de escrever qualquer linha de código, vale organizar o vocabulário. São
 
 ### Onde o Python entra no QGIS
 
-![Onde o Python entra no QGIS](../imgs/introducao/02_python_no_qgis.png)
+![Onde o Python entra no QGIS](../../imgs/introducao/02_python_no_qgis.png)
 
 O Python alcança praticamente tudo no QGIS. Para este curso, o que importa é saber **qual porta usar para cada situação**:
 
@@ -51,7 +51,7 @@ O Python alcança praticamente tudo no QGIS. Para este curso, o que importa é s
 
 Esta é a ponte que sustenta o curso inteiro. Quando você executa uma ferramenta da Caixa de Ferramentas de Processamento, o QGIS registra, na aba **Log**, o nome do algoritmo e **todos** os parâmetros usados:
 
-![Do clique ao código](../imgs/introducao/08_do_clique_ao_codigo.png)
+![Do clique ao código](../../imgs/introducao/08_do_clique_ao_codigo.png)
 
 Compare o Log acima com o código abaixo. É a mesma coisa:
 
@@ -90,7 +90,7 @@ Você não precisa decorar nada disso. O próprio QGIS entrega o código:
 
 ## 4. Primeiro contato: o Console Python
 
-![Console Python do QGIS](../imgs/introducao/07_console_python.png)
+![Console Python do QGIS](../../imgs/introducao/07_console_python.png)
 
 Abra o Console em **Complementos → Console Python** (`Ctrl+Alt+P`). Com a camada `municipios` selecionada no painel Camadas, digite uma linha de cada vez:
 
@@ -113,7 +113,7 @@ Para comandos maiores, use o **Editor** do Console (ícone *Mostrar editor*): al
 
 ## 5. A IA como copiloto: escrevendo bons prompts
 
-![Estrutura de Prompt GIS](../imgs/introducao/03_prompt_gis.png)
+![Estrutura de Prompt GIS](../../imgs/introducao/03_prompt_gis.png)
 
 Um **prompt** é a instrução que você envia à IA. A IA não vê seu projeto, não conhece seus dados e não sabe qual versão do QGIS você usa. Tudo o que você não disser, ela vai **supor** — e suposições viram código errado.
 
@@ -160,9 +160,9 @@ Regras:
 
 ## 6. Rodou sem erro ≠ está certo
 
-![Buffer em graus vs metros](../imgs/introducao/06_buffer_graus_vs_metros.png)
+![Buffer em graus vs metros](../../imgs/introducao/06_buffer_graus_vs_metros.png)
 
-![Validação de SRC/CRS](../imgs/introducao/04_validacao_crs.png)
+![Validação de SRC/CRS](../../imgs/introducao/04_validacao_crs.png)
 
 Os dois códigos rodaram **sem nenhuma mensagem de erro**. À esquerda, a camada está em UTM: `DISTANCE: 3000` significa 3 000 **metros**, e o resultado é a faixa de 3 km esperada. À direita, alguém escreveu `DISTANCE: 3` "pensando em quilômetros" numa camada em WGS 84, cuja unidade é o **grau**: o buffer tem raio de ~330 km e engole a Paraíba inteira.
 
@@ -207,7 +207,7 @@ Trate todo código — seu ou da IA — como uma **proposta** a ser testada. A l
 
 Integrando todos os conceitos apresentados, este é o fluxo de trabalho prático que orientará cada exercício e desafio ao longo da sua jornada de automação:
 
-![Método de trabalho: definir objetivo, execução manual, tradução para código, apoio com IA, validação e reaproveitamento](../imgs/introducao/09_metodo_de_trabalho.svg)
+![Método de trabalho: definir objetivo, execução manual, tradução para código, apoio com IA, validação e reaproveitamento](../../imgs/introducao/09_metodo_de_trabalho.svg)
 
 | Etapa | Foco da etapa | Pergunta-chave que ela responde |
 | :--- | :--- | :--- |
@@ -233,7 +233,7 @@ Nos exercícios seguintes, este fluxo será aplicado a cenários reais de análi
   - criar uma camada temporária de pontos no QGIS;
   - desconfiar de um ponto "encontrado": verificar se ele caiu na rua correta.
 
-👉 [Abrir o exercício](../modulos/geocodificacao/README.md)
+👉 [Abrir o exercício](../geocodificacao/README.md)
 
 #### 🛣️ Exercício 2 — Impacto ambiental da duplicação da PB-200
 
@@ -245,7 +245,7 @@ Nos exercícios seguintes, este fluxo será aplicado a cenários reais de análi
   - calcular áreas em hectares num SRC métrico adequado (UTM / SIRGAS 2000);
   - comparar o resultado do script com o do fluxo manual.
 
-👉 [Abrir o exercício](../modulos/pb200/README.md)
+👉 [Abrir o exercício](../pb200/README.md)
 
 #### 🗺️ Exercício 3 — Grade interativa SRTM/TOPODATA
 
@@ -257,7 +257,7 @@ Nos exercícios seguintes, este fluxo será aplicado a cenários reais de análi
   - descobrir a regra de formação dos links de download de cada quadrícula;
   - criar **ações personalizadas** em Python no QGIS para baixar arquivos sob demanda, com barra de progresso.
 
-👉 [Abrir o exercício](../modulos/grade_topodata/README.md)
+👉 [Abrir o exercício](../grade_topodata/README.md)
 
 #### ⛰️ Exercício 4 — Perfil topográfico da PB-200
 
@@ -270,7 +270,7 @@ Nos exercícios seguintes, este fluxo será aplicado a cenários reais de análi
   - desenhar o perfil com matplotlib e conferir com a ferramenta nativa Perfil de Elevação;
   - interpretar o resultado: exagero vertical, ruído do SRTM e o que o dado permite (ou não) afirmar.
 
-👉 [Abrir o exercício](../modulos/perfil_pb200/README.md)
+👉 [Abrir o exercício](../perfil_pb200/README.md)
 
 #### 🚧 Próximos exercícios
 

@@ -41,17 +41,11 @@ Os exercícios formam uma **trilha progressiva**, em ordem crescente de complexi
 
 ## 🧭 Navegação pelo material
 
-### Comece por aqui
-
-| | Tópico | Descrição |
-| :---: | --- | --- |
-| 📘 | [**Introdução**](introducao/README.md) | Conceitos de automação, as peças do quebra-cabeça (QGIS, PyQGIS, Processing, Console e IA), como escrever bons prompts, por que validar e o método de trabalho usado em todos os exercícios. Leitura de cerca de 15 min. |
-
 ### Trilha de módulos
-
 
 | # | Módulo | Nível | O que você vai praticar |
 | :---: | --- | :---: | --- |
+| 0 | 📘 [**Introdução**](modulos/introducao/README.md) | — | Conceitos de automação, as peças do quebra-cabeça (QGIS, PyQGIS, Processing, Console e IA), como escrever bons prompts, por que validar e o método de trabalho usado em todos os exercícios. Leitura de cerca de 15 min. |
 | 1 | 📍 [**Geocodificação urbana em João Pessoa**](modulos/geocodificacao/README.md) | 🟢 Iniciante | Ler um CSV com Python, consultar o Nominatim (OpenStreetMap) respeitando o limite de requisições e criar uma camada de pontos. |
 | 2 | 🛣️ [**Impacto ambiental da duplicação da PB-200**](modulos/pb200/README.md) | 🟡 Intermediário | Fazer a análise à mão e traduzir cada passo em `processing.run(...)`: buffer de 3 km, municípios atingidos e uso do solo em hectares. |
 | 3 | 🗺️ [**Grade interativa SRTM/TOPODATA**](modulos/grade_topodata/README.md) | 🟡 Intermediário | Investigar uma página web com IA, gerar uma grade vetorial e criar ações em Python que baixam o MDE da célula clicada. |
@@ -91,8 +85,8 @@ Introdução à automação de tarefas de geoprocessamento no QGIS. Apresentaç�
 ```
 ├── README.md          ← você está aqui
 ├── LICENSE
-├── introducao/        ← material introdutório (comece por aqui)
 ├── modulos/           ← um módulo por pasta: roteiro (README.md) e scripts
+│   ├── introducao/
 │   ├── geocodificacao/
 │   ├── pb200/
 │   ├── grade_topodata/
