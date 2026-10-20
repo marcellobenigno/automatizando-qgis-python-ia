@@ -229,15 +229,16 @@ Ao clicar numa célula:
 2. Monte a URL:
    https://data.inpe.br/bdc/data/topodata/v001/{scene[:3]}/{scene[3:]}/{scene}ZN.tif
    Nome do arquivo: {scene}ZN.tif
-3. Peça a pasta de destino com QFileDialog (padrão: ~/TOPODATA).
+3. Peça a pasta de destino com QFileDialog (padrão: ~/TOPODATA) e lembre
+   a última pasta escolhida com QgsSettings.
 4. Se o raster já estiver carregado no projeto (mesmo caminho), apenas
    ative a camada e avise.
-5. Se o arquivo já existir na pasta e for um raster válido (QgsRasterLayer
-   .isValid()), carregue sem baixar.
+5. Se o arquivo já existir na pasta e for um raster válido (gdal.Open,
+   fechando o dataset em seguida), carregue sem baixar.
 6. Senão, baixe com urllib para um arquivo temporário ".part", com
    QProgressDialog e botão Cancelar; confira se o tamanho baixado bate com
-   o Content-Length; valide como raster e só então renomeie para o nome
-   final.
+   o Content-Length; valide como raster com gdal.Open, feche o dataset
+   (ds = None) e só então renomeie para o nome final.
 7. Carregue no projeto com o nome da célula.
 8. Em qualquer saída (erro, cancelamento), apague o ".part". Mostre erros
    com QMessageBox, incluindo a URL usada.
@@ -252,8 +253,10 @@ Comentários em português.
 > | --- | --- |
 > | download em `arquivo.tif.part` e `temporario.replace(arquivo)` no fim | se a internet cair no meio, o arquivo final nunca fica pela metade |
 > | `tamanho_baixado != tamanho_total` | o servidor pode fechar a conexão sem erro; só o tamanho denuncia |
-> | `QgsRasterLayer(...).isValid()` **antes** de renomear | um 404 pode vir como página HTML salva com extensão `.tif` |
-> | `finally: temporario.unlink()` | limpa o `.part` mesmo se der erro ou cancelamento |
+> | `raster_valido()` (`gdal.Open`) **antes** de renomear | um 404 pode vir como página HTML salva com extensão `.tif` |
+> | `ds = None` em `raster_valido()` | fecha o arquivo: no Windows, um arquivo aberto não pode ser renomeado nem apagado (`PermissionError: [WinError 32]`). Um `QgsRasterLayer` de teste deixaria o `.part` aberto |
+> | `finally: apagar_seguro(temporario)` | limpa o `.part` mesmo se der erro ou cancelamento, sem que uma falha ao apagar esconda o erro real |
+> | `renomear_com_tentativas()` | no Windows, antivírus e pastas de rede podem segurar o arquivo por um instante: tenta de novo antes de desistir |
 > | comparação por `Path(fonte).resolve()` | evita carregar duas vezes o mesmo arquivo escrito com caminhos diferentes |
 
 ### 4.2 Criar a ação na camada

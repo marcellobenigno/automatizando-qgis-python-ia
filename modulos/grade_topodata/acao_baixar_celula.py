@@ -7,10 +7,12 @@
 # Propriedades da camada → Ações.
 
 import re
+import time
 from pathlib import Path
 from urllib.request import Request, urlopen
 
-from qgis.core import QgsProject, QgsRasterLayer
+from osgeo import gdal
+from qgis.core import QgsProject, QgsRasterLayer, QgsSettings
 from qgis.PyQt.QtCore import Qt
 from qgis.PyQt.QtWidgets import (
     QMessageBox,
@@ -19,6 +21,38 @@ from qgis.PyQt.QtWidgets import (
     QFileDialog,
 )
 from qgis.utils import iface
+
+
+CHAVE_PASTA = "topodata/ultima_pasta"
+
+
+def raster_valido(caminho):
+    """Valida o raster com o GDAL e fecha o arquivo em seguida."""
+    ds = gdal.Open(str(caminho))
+    ok = ds is not None
+    ds = None  # fecha o dataset (libera o arquivo no Windows)
+    return ok
+
+
+def apagar_seguro(caminho):
+    """Apaga o arquivo sem deixar a falha mascarar o erro real."""
+    try:
+        if caminho.exists():
+            caminho.unlink()
+    except OSError:
+        pass
+
+
+def renomear_com_tentativas(origem, destino, tentativas=5):
+    """Renomeia com repetição (antivírus/rede podem segurar o arquivo)."""
+    for i in range(tentativas):
+        try:
+            origem.replace(destino)
+            return
+        except PermissionError:
+            if i == tentativas - 1:
+                raise
+            time.sleep(0.5)
 
 
 # --------------------------------------------------
@@ -57,16 +91,20 @@ else:
     nome_arquivo = f"{scene}ZN.tif"
 
     # --------------------------------------------------
-    # 4. Escolhe a pasta de destino
+    # 4. Escolhe a pasta de destino (lembra a última)
     # --------------------------------------------------
 
-    diretorio_inicial = str(Path.home() / "TOPODATA")
+    config = QgsSettings()
+    diretorio_inicial = config.value(
+        CHAVE_PASTA,
+        str(Path.home() / "TOPODATA")
+    )
 
     diretorio_escolhido = QFileDialog.getExistingDirectory(
         iface.mainWindow(),
         "Escolha a pasta para salvar o raster TOPODATA",
         diretorio_inicial,
-        QFileDialog.ShowDirsOnly
+        QFileDialog.Option.ShowDirsOnly
     )
 
     if not diretorio_escolhido:
@@ -77,6 +115,8 @@ else:
         )
 
     else:
+
+        config.setValue(CHAVE_PASTA, diretorio_escolhido)
 
         diretorio = Path(diretorio_escolhido)
         diretorio.mkdir(parents=True, exist_ok=True)
@@ -123,17 +163,17 @@ else:
                 # 6. Reutiliza arquivo local válido
                 # --------------------------------------
 
-                raster_local = None
-
-                if arquivo.is_file() and arquivo.stat().st_size > 0:
+                if (
+                    arquivo.is_file()
+                    and arquivo.stat().st_size > 0
+                    and raster_valido(arquivo)
+                ):
 
                     raster_local = QgsRasterLayer(
                         str(arquivo.resolve()),
                         scene,
                         "gdal"
                     )
-
-                if raster_local is not None and raster_local.isValid():
 
                     QgsProject.instance().addMapLayer(raster_local)
                     iface.setActiveLayer(raster_local)
@@ -146,8 +186,7 @@ else:
                 else:
 
                     # Remove arquivo inválido, se existir.
-                    if arquivo.exists():
-                        arquivo.unlink()
+                    apagar_seguro(arquivo)
 
                     # ----------------------------------
                     # 7. Baixa o raster
@@ -176,8 +215,15 @@ else:
                         )
 
                         progresso.setWindowTitle("Download TOPODATA")
-                        progresso.setWindowModality(Qt.WindowModal)
+                        progresso.setWindowModality(
+                            Qt.WindowModality.WindowModal
+                        )
                         progresso.setMinimumDuration(0)
+
+                        # Sem Content-Length: barra indeterminada
+                        if tamanho_total == 0:
+                            progresso.setRange(0, 0)
+
                         progresso.show()
 
                         with open(temporario, "wb") as destino:
@@ -219,19 +265,13 @@ else:
                     ):
                         raise IOError("O download terminou incompleto.")
 
-                    # Valida antes de manter o arquivo definitivo.
-                    raster_teste = QgsRasterLayer(
-                        str(temporario.resolve()),
-                        scene,
-                        "gdal"
-                    )
-
-                    if not raster_teste.isValid():
+                    # Valida com o GDAL (fecha o arquivo logo depois)
+                    if not raster_valido(temporario):
                         raise RuntimeError(
                             "O arquivo recebido não é um raster válido."
                         )
 
-                    temporario.replace(arquivo)
+                    renomear_com_tentativas(temporario, arquivo)
 
                     # ----------------------------------
                     # 8. Carrega no projeto QGIS
@@ -277,5 +317,4 @@ else:
             if progresso is not None:
                 progresso.close()
 
-            if temporario.exists():
-                temporario.unlink()
+            apagar_seguro(temporario)
