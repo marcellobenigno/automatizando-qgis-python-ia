@@ -232,3 +232,6 @@ dados_curso/*
 
 # A regra [Ss]cripts do virtualenv acima ignoraria os scripts do curso
 !apoio/scripts/
+
+# Guia em PDF: fica no Google Drive, não no git
+apoio/osmnx/Guia_OSMnx_QGIS_Roteamento_Windows.pdf

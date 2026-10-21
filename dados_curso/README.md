@@ -17,6 +17,9 @@ dados_curso/
 │   └── resultados/             ← saídas do fluxo manual e dos scripts
 ├── grade_topodata/
 │   └── grade_topodata.geojson
+├── alcance_ifpb/
+│   ├── malha_joao_pessoa_all.gpkg  ← malha do OSM baixada uma vez com o OSMnx (27 MB)
+│   └── resultados/             ← alcance a pé e de carro
 ├── composicao_rgb/
 │   ├── area_interese.geojson
 │   ├── LC08_L1TP_216065_…/     ← bandas Landsat 8 recortadas
