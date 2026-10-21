@@ -272,6 +272,19 @@ Nos exercícios seguintes, este fluxo será aplicado a cenários reais de análi
 
 👉 [Abrir o exercício](../perfil_pb200/README.md)
 
+#### 🚶 Exercício 5 — Alcance a partir do IFPB
+
+- **Nível:** 🔴 Avançado
+- **O desafio:** descobrir até onde se chega, pelas ruas, a partir do IFPB Campus João Pessoa: andando 800 m e dirigindo 4 km. A malha viária é baixada uma única vez do OpenStreetMap, e as análises rodam offline.
+- **O que você irá aprender:**
+  - separar o download (OSMnx, uma vez) da análise (PyQGIS + NetworkX, sem internet), ganhando velocidade e independência de servidores públicos;
+  - montar um grafo dirigido a partir de um GeoPackage e tirar dele duas redes: a pé e de carro, com mão única;
+  - calcular a distância pela rede (Dijkstra) e cortar as ruas em faixas de distância;
+  - comparar o alcance pela rede com o círculo em linha reta;
+  - conferir o resultado com a Área de serviço nativa do QGIS e desconfiar de números que não fecham.
+
+👉 [Abrir o exercício](../alcance_ifpb/README.md)
+
 #### 🚧 Próximos exercícios
 
 Em produção.

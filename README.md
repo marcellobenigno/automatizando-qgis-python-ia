@@ -50,6 +50,7 @@ Os exercícios formam uma **trilha progressiva**, em ordem crescente de complexi
 | 🛣️ [**Impacto ambiental da duplicação da PB-200**](modulos/pb200/README.md) | 🟡 Intermediário | Fazer a análise à mão e traduzir cada passo em `processing.run(...)`: buffer de 3 km, municípios atingidos e uso do solo em hectares. |
 | 🗺️ [**Grade interativa SRTM/TOPODATA**](modulos/grade_topodata/README.md) | 🟡 Intermediário | Investigar uma página web com IA, gerar uma grade vetorial e criar ações em Python que baixam o MDE da célula clicada. |
 | ⛰️ [**Perfil topográfico da PB-200**](modulos/perfil_pb200/README.md) | 🟡 Intermediário | Unir os trechos da rodovia numa linha só, amostrar o MDE TOPODATA a cada 30 m, desenhar o perfil com matplotlib e atualizar com IA um tutorial escrito para uma versão antiga do QGIS. |
+| 🚶 [**Alcance a partir do IFPB**](modulos/alcance_ifpb/README.md) | 🔴 Avançado | Baixar uma vez a malha viária de João Pessoa com o OSMnx e, offline, calcular com PyQGIS e NetworkX até onde se chega pelas ruas: 800 m a pé e 4 km de carro, respeitando a mão única. |
 | 🚧 **Próximos módulos** | — | Em produção. |
 | 🛰️ [**Composições RGB de Landsat e Sentinel**](modulos/composicao_rgb/README.md) | a definir | Montar composições em cor natural e falsa-cor como rasters virtuais e automatizar as quatro de uma vez com um script. |
 
@@ -91,6 +92,7 @@ Introdução à automação de tarefas de geoprocessamento no QGIS. Apresentaç�
 │   ├── pb200/
 │   ├── grade_topodata/
 │   ├── perfil_pb200/
+│   ├── alcance_ifpb/
 │   ├── composicao_rgb/
 │   └── dados_vetoriais/
 ├── apoio/             ← textos de apoio, scripts de exemplo e biblioteca de prompts
