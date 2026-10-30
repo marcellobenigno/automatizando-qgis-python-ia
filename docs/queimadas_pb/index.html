@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Focos de queimadas na Paraíba — 2026</title>
+  <meta name="description" content="Dashboard dos focos de queimadas detectados na Paraíba de janeiro a outubro de 2026 (INPE/BDQueimadas).">
+
+  <!-- Leaflet 1.9 e plugins (todos para a série 1.x) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.1/dist/leaflet.timedimension.control.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/iso8601-js-period@0.2.1/iso8601.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.1/dist/leaflet.timedimension.min.js"></script>
+
+  <!-- Tom Select: busca de município enquanto se digita -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/css/tom-select.css">
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"></script>
+
+  <!-- Gráficos, reatividade e estilo -->
+  <script src="https://cdn.jsdelivr.net/npm/highcharts@12.1.2/highcharts.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/highcharts@12.1.2/modules/accessibility.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.5.13/dist/vue.global.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.4"></script>
+
+  <style>
+    [v-cloak] { display: none; }
+    .leaflet-container { font-family: inherit; background: #f4f4f2; }
+    /* Agrupamentos: 4 faixas de tamanho e cor, borda branca e sombra discreta */
+    .cluster-foco {
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 9999px; border: 1.5px solid #fff;
+      font: 600 12px/1 system-ui, sans-serif; color: #fff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+    }
+    .cluster-foco.faixa-1 { background: #f39466; color: #3d1504; }
+    .cluster-foco.faixa-2 { background: #eb6834; }
+    .cluster-foco.faixa-3 { background: #c94d1f; }
+    .cluster-foco.faixa-4 { background: #7a1f0b; }
+    /* Controle do TimeDimension, levado para a faixa abaixo do mapa */
+    .faixa-tempo .leaflet-bar-timecontrol {
+      float: none; margin: 0; display: flex; flex-wrap: wrap; align-items: center; width: 100%;
+      box-shadow: none; border: 1px solid #d6d3d1; border-radius: 6px; overflow: hidden;
+    }
+    .faixa-tempo .leaflet-bar-timecontrol a { border-bottom: none; width: 36px; height: 36px; line-height: 36px; }
+    .faixa-tempo .timecontrol-date { min-width: 12rem; font-weight: 600; cursor: default; }
+    .faixa-tempo .timecontrol-dateslider { flex: 1 1 12rem; }
+    .faixa-tempo .timecontrol-dateslider .slider { width: auto; margin: 0 12px; }
+    .faixa-tempo .timecontrol-speed { position: relative; padding: 0 8px 0 4px; }
+    .faixa-tempo .timecontrol-speed .speed { width: 4.2rem; }
+    @media (max-width: 639px) {
+      /* no celular, a barra de tempo vai para uma linha inteira */
+      .faixa-tempo .timecontrol-dateslider { flex-basis: 100%; order: 10; padding: 10px 0; border-top: 1px solid #e7e5e4; }
+      .faixa-tempo .timecontrol-date { min-width: 0; flex: 1; }
+    }
+    /* Popup em forma de cartão. O padding do invólucro não pode ser zero:
+       sem ele, a margem do conteúdo "vaza" e o botão de fechar fica fora */
+    .popup-foco .leaflet-popup-content-wrapper { border-radius: 10px; }
+    .popup-foco .leaflet-popup-content { margin: 12px 30px 12px 14px; }
+    .popup-foco a.leaflet-popup-close-button { top: 4px; right: 4px; color: #57534e; }
+    .popup-foco .leaflet-popup-content p { margin: 0; }
+    /* Busca de município (Tom Select) no visual do painel */
+    .ts-wrapper.single .ts-control { min-height: 40px; border-radius: 6px; border-color: #d6d3d1; font-size: 14px; align-items: center; }
+    .ts-wrapper.focus .ts-control { border-color: #c2410c; box-shadow: 0 0 0 2px rgba(194, 65, 12, .25); }
+    .ts-dropdown { font-size: 14px; border-radius: 6px; }
+    .ts-dropdown .active { background: #fff7ed; color: #7c2d12; }
+    .ts-dropdown .option { display: flex; justify-content: space-between; gap: 12px; }
+    .ts-dropdown .option .n { color: #57534e; font-variant-numeric: tabular-nums; }
+    /* Botão "voltar à Paraíba" dentro da barra de zoom */
+    .leaflet-bar a.controle-inicio { display: flex; align-items: center; justify-content: center; color: #44403c; }
+    /* Tela cheia: o cartão do mapa ocupa a tela, o mapa estica */
+    .cartao-mapa:fullscreen { display: flex; flex-direction: column; background: #fff; padding: 0; }
+    .cartao-mapa:fullscreen .area-mapa { flex: 1; height: auto; }
+  </style>
+</head>
+<body class="bg-stone-100 text-stone-900 antialiased">
+
+<!-- Se uma biblioteca da CDN não carregar, o Vue nem chega a montar a página -->
+<div id="falha-cdn" hidden class="mx-auto mt-10 max-w-xl rounded-xl bg-white p-6 text-sm shadow ring-1 ring-red-200">
+  <h1 class="text-lg font-semibold text-red-800">O painel não pôde ser montado</h1>
+  <p class="mt-2 text-stone-700">Não foi possível baixar: <b id="falha-cdn-lista"></b>. Essas bibliotecas vêm de uma CDN
+    (cdn.jsdelivr.net): verifique a conexão ou se a rede bloqueia esse endereço e recarregue a página.</p>
+  <button onclick="location.reload()" class="mt-4 rounded-md bg-orange-700 px-4 py-2 font-medium text-white hover:bg-orange-800">
+    Recarregar</button>
+</div>
+
+<div id="app" v-cloak class="mx-auto max-w-7xl space-y-4 px-3 py-5 sm:px-4 sm:py-6">
+
+  <!-- Cabeçalho -->
+  <header class="flex flex-wrap items-end justify-between gap-3">
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wider text-orange-800">Paraíba · INPE / BDQueimadas</p>
+      <h1 class="text-2xl font-bold sm:text-3xl">Focos de queimadas em 2026</h1>
+      <p class="text-sm text-stone-600" v-if="estado === 'pronto'">
+        Detecções do satélite de referência {{ meta.satelite }} de {{ formatarData(limites.inicio) }} a
+        {{ formatarData(limites.fim) }} · {{ numero(dados.length) }} focos em {{ municipiosComFoco.length }} municípios
+      </p>
+    </div>
+    <a class="text-sm font-medium text-orange-800 underline underline-offset-4 hover:text-orange-950"
+       href="https://github.com/marcellobenigno/automatizando-qgis-python-ia/tree/main/modulos/queimadas_pb">
+      Como este painel foi feito ↗
+    </a>
+  </header>
+
+  <!-- Carregando / erro -->
+  <section v-if="estado !== 'pronto'" role="status" aria-live="polite"
+           class="rounded-xl bg-white p-4 text-sm shadow-sm ring-1"
+           :class="estado === 'erro' ? 'ring-red-200' : 'ring-stone-200'">
+    <template v-if="estado === 'carregando'">
+      <p class="font-medium">Carregando os dados do painel…</p>
+      <ul class="mt-2 space-y-1 text-stone-600">
+        <li v-for="a in arquivos" :key="a.arquivo">
+          <span aria-hidden="true">{{ a.ok ? '✓' : '…' }}</span> {{ a.descricao }}
+          <span class="text-stone-500">({{ a.arquivo }})</span>
+        </li>
+      </ul>
+    </template>
+    <template v-else>
+      <p class="font-semibold text-red-800">{{ erro.titulo }}</p>
+      <p class="mt-1 text-stone-700">{{ erro.detalhe }}</p>
+      <button @click="carregar" class="mt-3 rounded-md bg-orange-700 px-4 py-2 font-medium text-white hover:bg-orange-800
+                     focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-700">
+        Tentar novamente</button>
+    </template>
+  </section>
+
+  <!-- Filtros de recorte (o tempo fica na faixa abaixo do mapa) -->
+  <section class="rounded-xl bg-white px-4 py-3 shadow-sm ring-1 ring-stone-200" aria-labelledby="titulo-filtros">
+    <h2 id="titulo-filtros" class="sr-only">Filtros</h2>
+    <div class="flex flex-wrap items-end gap-4">
+      <div class="flex flex-col gap-1">
+        <label for="filtro-municipio" class="text-xs font-medium text-stone-600">
+          Município <span v-if="estado === 'pronto'" class="font-normal">({{ municipiosComFoco.length }} com focos; digite para buscar)</span></label>
+        <!-- o Tom Select transforma este select numa busca; as opções vêm do app.js -->
+        <div class="w-72 max-w-full">
+          <select id="filtro-municipio" ref="municipioEl" :disabled="estado !== 'pronto'"></select>
+        </div>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span id="rotulo-bioma" class="text-xs font-medium text-stone-600">Bioma</span>
+        <div class="flex rounded-md ring-1 ring-stone-300" role="group" aria-labelledby="rotulo-bioma">
+          <button v-for="b in ['', 'Caatinga', 'Mata Atlântica']" :key="b" @click="bioma = b"
+                  :aria-pressed="bioma === b" :class="botao(bioma === b)">{{ b || 'Todos' }}</button>
+        </div>
+      </div>
+      <!-- filtros ativos, removíveis -->
+      <div v-if="municipio || bioma" class="flex flex-wrap items-center gap-2 sm:ml-auto" aria-label="Filtros ativos">
+        <button v-if="municipio" @click="municipio = ''" :class="etiqueta" :aria-label="`Remover filtro de município: ${municipio}`">
+          Município: {{ municipio }} <span aria-hidden="true">✕</span></button>
+        <button v-if="bioma" @click="bioma = ''" :class="etiqueta" :aria-label="`Remover filtro de bioma: ${bioma}`">
+          Bioma: {{ bioma }} <span aria-hidden="true">✕</span></button>
+        <button @click="municipio = ''; bioma = ''"
+                class="min-h-9 px-1 text-sm font-medium text-stone-600 underline underline-offset-4 hover:text-stone-900">
+          Limpar tudo</button>
+      </div>
+    </div>
+    <p class="mt-2 text-xs text-stone-600">
+      Os filtros valem para o mapa, os indicadores, a série temporal e a tabela. Nos gráficos de municípios e de bioma,
+      a categoria escolhida fica destacada entre as demais, para comparação.
+    </p>
+  </section>
+
+  <!-- Indicadores da seleção: faixa rolável no celular, grade na tela larga -->
+  <section aria-labelledby="titulo-indicadores">
+    <h2 id="titulo-indicadores" class="mb-2 text-xs font-medium text-stone-600">
+      Indicadores da seleção: <span class="text-stone-900">{{ descricaoSelecao }}</span>
+    </h2>
+    <div class="-mx-3 flex snap-x gap-3 overflow-x-auto px-3 pb-1 md:mx-0 md:grid md:grid-cols-5 md:overflow-visible md:px-0">
+      <div v-for="k in indicadores" :key="k.rotulo"
+           class="min-w-40 snap-start rounded-xl bg-white p-3 shadow-sm ring-1 ring-stone-200 sm:p-4 md:min-w-0">
+        <p class="text-xs font-medium text-stone-600">{{ k.rotulo }}</p>
+        <p class="mt-1 text-2xl font-bold">{{ k.valor }}</p>
+        <p class="mt-0.5 truncate text-xs text-stone-600" :title="k.detalhe">{{ k.detalhe }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mapa + municípios -->
+  <section class="grid gap-4 lg:grid-cols-3">
+    <div ref="cartaoMapaEl" class="cartao-mapa overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-stone-200 lg:col-span-2">
+      <div class="flex flex-wrap items-center justify-between gap-2 px-4 pt-3">
+        <div>
+          <h2 class="font-semibold">Distribuição espacial</h2>
+          <!-- o período que o mapa mostra, sempre à vista -->
+          <p class="mt-1 inline-flex items-center gap-1.5 rounded-full bg-orange-50 px-2.5 py-0.5 text-sm font-medium text-orange-900 ring-1 ring-orange-200">
+            <span aria-hidden="true">◷</span> {{ etiquetaTempo }}
+          </p>
+        </div>
+        <div class="flex w-full items-start gap-2 sm:w-auto">
+          <!-- 2 × 2 no celular, uma linha na tela larga -->
+          <div class="grid flex-1 grid-cols-2 gap-px overflow-hidden rounded-md bg-stone-300 ring-1 ring-stone-300 sm:flex sm:flex-none"
+               role="group" aria-label="Visualização do mapa">
+            <button v-for="v in VISUAIS" :key="v.valor" @click="visual = v.valor"
+                    :aria-pressed="visual === v.valor" :class="botao(visual === v.valor, false)">{{ v.rotulo }}</button>
+          </div>
+          <button @click="telaCheia" :aria-label="emTelaCheia ? 'Sair da tela cheia' : 'Mapa em tela cheia'"
+                  :title="emTelaCheia ? 'Sair da tela cheia' : 'Tela cheia'"
+                  class="min-h-9 rounded-md px-2.5 text-stone-700 ring-1 ring-stone-300 hover:bg-stone-100
+                         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-700">
+            <span aria-hidden="true">{{ emTelaCheia ? '✕' : '⛶' }}</span>
+          </button>
+        </div>
+      </div>
+      <p class="px-4 pt-2 text-xs text-stone-600">{{ visualAtual.ajuda }}</p>
+
+      <div class="relative">
+        <div ref="mapaEl" class="area-mapa mt-2 h-[400px] w-full sm:h-[480px] lg:h-[620px]"
+             role="region" aria-label="Mapa dos focos de queimadas"></div>
+        <p v-if="estado === 'carregando'" class="absolute inset-0 z-[500] flex items-center justify-center bg-white/70 text-sm text-stone-700">
+          Carregando o mapa…</p>
+        <p v-if="avisoMapaBase" role="status"
+           class="absolute inset-x-3 top-3 z-[1000] rounded-md bg-amber-50 px-3 py-2 text-xs text-amber-900 shadow ring-1 ring-amber-300 sm:right-auto sm:max-w-md">
+          {{ avisoMapaBase }}
+        </p>
+      </div>
+
+      <!-- Faixa do tempo: controle do TimeDimension, passo, modo e legenda -->
+      <div class="faixa-tempo space-y-3 border-t border-stone-200 px-4 py-3">
+        <div ref="tempoEl" aria-label="Animação no tempo"></div>
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="flex flex-wrap items-center gap-3 text-xs font-medium text-stone-600">
+            <span id="rotulo-passo">Passo</span>
+            <div class="flex rounded-md ring-1 ring-stone-300" role="group" aria-labelledby="rotulo-passo">
+              <button v-for="p in PASSOS" :key="p.valor" @click="passo = p.valor"
+                      :aria-pressed="passo === p.valor" :class="botao(passo === p.valor)">{{ p.rotulo }}</button>
+            </div>
+            <div class="flex rounded-md ring-1 ring-stone-300" role="group" aria-label="O que o mapa acumula">
+              <button @click="modo = 'janela'" :aria-pressed="modo === 'janela'" :class="botao(modo === 'janela')">Só o passo atual</button>
+              <button @click="modo = 'acumulado'" :aria-pressed="modo === 'acumulado'" :class="botao(modo === 'acumulado')">Acumulado</button>
+            </div>
+          </div>
+
+          <!-- Legenda: muda com a visualização -->
+          <div class="text-xs text-stone-700" aria-live="polite">
+            <div v-if="visual === 'agrupados'" class="flex flex-wrap items-center gap-3">
+              <span class="font-semibold">Focos por agrupamento</span>
+              <span v-for="f in FAIXAS_CLUSTER" :key="f.rotulo" class="flex items-center gap-1.5">
+                <span class="inline-block rounded-full ring-1 ring-stone-400"
+                      :style="{ background: f.cor, width: f.lado / 2 + 'px', height: f.lado / 2 + 'px' }"></span>{{ f.rotulo }}
+              </span>
+            </div>
+            <div v-else-if="visual === 'densidade'" class="flex items-center gap-2">
+              <span class="font-semibold">Densidade relativa</span>
+              <span>menos</span>
+              <span class="inline-block h-2.5 w-32 rounded ring-1 ring-stone-300"
+                    style="background: linear-gradient(90deg, #fde68a, #f59e0b, #ea580c, #7f1d1d)"></span>
+              <span>mais focos</span>
+            </div>
+            <div v-else-if="visual === 'intensidade'" class="flex flex-wrap items-center gap-3">
+              <span class="font-semibold">FRP (MW)</span>
+              <span v-for="c in CLASSES_FRP" :key="c.rotulo" class="flex items-center gap-1.5">
+                <span class="inline-block rounded-full ring-1 ring-stone-400"
+                      :style="{ background: c.cor, width: 2 * c.raio + 'px', height: 2 * c.raio + 'px' }"></span>{{ c.rotulo }}
+              </span>
+            </div>
+            <div v-else class="flex flex-wrap items-center gap-3">
+              <span class="font-semibold">Focos no município · {{ etiquetaTempo }}</span>
+              <span v-for="c in CLASSES_MUNICIPIO" :key="c.rotulo" class="flex items-center gap-1.5">
+                <span class="inline-block size-3 rounded-sm ring-1 ring-stone-400" :style="{ background: c.cor }"></span>{{ c.rotulo }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col rounded-xl bg-white p-4 shadow-sm ring-1 ring-stone-200">
+      <h2 class="font-semibold">Os 15 municípios com mais focos</h2>
+      <p class="text-xs text-stone-600">{{ etiquetaTempo }}{{ bioma ? ` · ${bioma}` : '' }} · clique numa barra para filtrar</p>
+      <div ref="municipiosEl" class="h-[460px] lg:h-[700px]"></div>
+      <details class="mt-2 text-sm">
+        <summary class="cursor-pointer font-medium text-orange-800 hover:text-orange-950">
+          Ver todos os municípios com focos ({{ todosMunicipios.length }})
+        </summary>
+        <ol class="mt-2 max-h-72 overflow-y-auto pr-1">
+          <li v-for="m in todosMunicipios" :key="m.nome">
+            <button @click="municipio = municipio === m.nome ? '' : m.nome" :aria-pressed="municipio === m.nome"
+                    class="flex w-full justify-between rounded px-2 py-1 text-left hover:bg-orange-50
+                           focus-visible:outline-2 focus-visible:outline-orange-700"
+                    :class="municipio === m.nome ? 'bg-orange-100 font-semibold' : ''">
+              <span>{{ m.nome }}</span><span class="tabular-nums text-stone-600">{{ m.n }}</span>
+            </button>
+          </li>
+        </ol>
+      </details>
+    </div>
+  </section>
+
+  <!-- Série temporal -->
+  <section class="rounded-xl bg-white p-4 shadow-sm ring-1 ring-stone-200">
+    <h2 class="font-semibold">Focos por {{ rotuloPasso }}</h2>
+    <p class="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-stone-600">
+      <span class="flex items-center gap-1.5">
+        <span class="inline-block size-3 rounded-sm" style="background:#9e3812"></span>
+        no mapa agora: <b class="text-stone-900">{{ etiquetaTempo }}</b></span>
+      <span class="flex items-center gap-1.5">
+        <span class="inline-block size-3 rounded-sm" style="background:#f39466"></span>demais períodos</span>
+      <span>Clique numa coluna para levar o mapa até ela.</span>
+    </p>
+    <div ref="periodoEl" class="h-72"></div>
+  </section>
+
+  <!-- Bioma, horário e focos mais intensos -->
+  <section class="grid gap-4 lg:grid-cols-3">
+    <div class="rounded-xl bg-white p-4 shadow-sm ring-1 ring-stone-200">
+      <h2 class="font-semibold">Focos por bioma</h2>
+      <p class="text-xs text-stone-600">
+        {{ etiquetaTempo }}{{ municipio ? ` · ${municipio}` : '' }} · clique numa barra para filtrar.
+        <template v-if="bioma">Os dois biomas continuam visíveis para comparação.</template>
+      </p>
+      <div ref="biomaEl" class="h-44"></div>
+    </div>
+    <div class="rounded-xl bg-white p-4 shadow-sm ring-1 ring-stone-200">
+      <h2 class="font-semibold">Hora da detecção</h2>
+      <p class="text-xs text-stone-600">Horário da Paraíba (UTC−3), período todo · duas passagens do satélite por dia</p>
+      <div ref="horaEl" class="h-44"></div>
+    </div>
+    <div class="rounded-xl bg-white p-4 shadow-sm ring-1 ring-stone-200">
+      <h2 class="font-semibold">Focos mais intensos</h2>
+      <p class="text-xs text-stone-600">Maior FRP (potência radiativa do fogo) na seleção · clique para ver no mapa</p>
+      <table class="mt-2 w-full text-sm tabular-nums">
+        <caption class="sr-only">Os 10 focos com maior FRP na seleção atual</caption>
+        <thead class="text-left text-xs text-stone-600">
+          <tr><th scope="col" class="py-1 font-medium">Município</th><th scope="col" class="font-medium">Data</th>
+              <th scope="col" class="text-right font-medium">FRP (MW)</th></tr>
+        </thead>
+        <tbody>
+          <tr v-for="f in maisIntensos" :key="f.id" @click="mostrarNoMapa(f)"
+              class="cursor-pointer border-t border-stone-100 hover:bg-orange-50">
+            <td class="py-0.5 pr-2">
+              <button @click.stop="mostrarNoMapa(f)"
+                      :aria-label="`Ver no mapa: ${decimal(f.frp)} MW em ${f.municipio}, ${formatarData(f.t)}`"
+                      class="-mx-1 rounded px-1 py-0.5 text-left underline decoration-stone-300 underline-offset-2
+                             hover:decoration-orange-700 focus-visible:outline-2 focus-visible:outline-orange-700">
+                {{ f.municipio }}</button>
+            </td>
+            <td class="pr-2 text-stone-600">{{ formatarData(f.t) }}</td>
+            <td class="text-right font-semibold">{{ decimal(f.frp) }}</td>
+          </tr>
+          <tr v-if="!maisIntensos.length"><td colspan="3" class="py-3 text-stone-600">Nenhum foco na seleção.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="space-y-1 pb-6 text-xs leading-relaxed text-stone-600">
+    <p>
+      <b>Fonte:</b> {{ meta.fonte }}, <a class="underline" href="https://terrabrasilis.dpi.inpe.br/queimadas/bdqueimadas/">consulta e
+      download no portal</a>; limites municipais do IBGE.
+      <template v-if="estado === 'pronto'">
+        <b>Cobertura:</b> do primeiro foco, em {{ formatarDataHora(cobertura.primeiro) }}, ao último, em
+        {{ formatarDataHora(cobertura.ultimo) }} (horário da Paraíba). <b>Arquivo gerado em</b>
+        {{ formatarDataHora(Date.parse(meta.gerado_em)) }}.
+      </template>
+    </p>
+    <p>
+      <b>Dados deste painel:</b>
+      <a class="underline" :href="ARQUIVOS.focos.arquivo">focos (GeoJSON)</a> ·
+      <a class="underline" :href="ARQUIVOS.municipios.arquivo">municípios</a> ·
+      <a class="underline" :href="ARQUIVOS.limite.arquivo">limite estadual</a> ·
+      <a class="underline" href="https://github.com/marcellobenigno/automatizando-qgis-python-ia/blob/main/modulos/queimadas_pb/queimadas_pb.py">script que os gerou</a>.
+    </p>
+    <p>
+      Cada ponto é um foco de calor detectado pelo satélite de referência ({{ meta.satelite }}): um indício de fogo, não a
+      área queimada. Focos vizinhos podem ser o mesmo incêndio, e fogo que começa e termina entre duas passagens, ou que
+      fica sob nuvens, não aparece. A FRP (potência radiativa do fogo, em MW) indica a intensidade, não o tamanho da área
+      queimada. Valores −999 do BDQueimadas foram tratados como "sem dado".
+    </p>
+    <p>Material do minicurso <em>Automatizando o QGIS com Python e IA</em> — 2º GeoTEC, IFPB Campus João Pessoa (CC BY 4.0).</p>
+  </footer>
+</div>
+
+<script>
+  // Sem as bibliotecas da CDN, mostra o motivo em vez de uma página vazia
+  const faltando = [["Leaflet", window.L], ["Highcharts", window.Highcharts], ["Vue", window.Vue],
+    ["Leaflet.TimeDimension", window.L && L.TimeDimension], ["Leaflet.markercluster", window.L && L.markerClusterGroup],
+    ["Leaflet.heat", window.L && L.heatLayer], ["Tom Select", window.TomSelect]].filter(([, ok]) => !ok).map(([nome]) => nome);
+  if (faltando.length) {
+    document.getElementById("falha-cdn-lista").textContent = faltando.join(", ");
+    document.getElementById("falha-cdn").hidden = false;
+  }
+</script>
+<script src="app.js"></script>
+</body>
+</html>

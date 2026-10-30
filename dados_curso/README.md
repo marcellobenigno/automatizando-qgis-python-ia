@@ -45,6 +45,7 @@ Todas em **WGS 84 (EPSG:4326)**.
 | `malha_viaria` | MultiLineString | 674 | `rodovia_nome` (ex.: `PB-200`), `codigo`, `descricao`, `jurisdicao`, `extensao`, `km_inicial`, `km_final`, `sit_fisica` |
 | `uso_ocupacao_solo` | MultiPolygon | ~1,06 milhão | `val`, `descricao` (classe), `cor` |
 | `aptidao_agricola_pb` | MultiPolygon | 3.789 | `descricao`, `val`, `cod_ibge_m` |
+| `bdqueimadas_2026-01-01_2026-10-30` | Point | 2.445 | Focos de queimadas do BDQueimadas (INPE), satélite NOAA-20: `DataHora` (UTC), `Municipio`, `Bioma`, `FRP`, `RiscoFogo`, `DiaSemChuva`, `Precipitacao` (`-999` = sem dado) |
 | `layer_styles` | tabela | — | Estilos salvos de cada camada (carregados automaticamente pelo QGIS) |
 
 #### Classes de uso e ocupação do solo (`descricao`)
