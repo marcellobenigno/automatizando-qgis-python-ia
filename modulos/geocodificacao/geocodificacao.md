@@ -1,3 +1,6 @@
+<!-- navegação -->
+[⬅️ 📘 Introdução](../introducao/introducao.md) · [🏠 Início](../../README.md) · [🛣️ Duplicação da PB-200 ➡️](../pb200/pb200.md)
+
 # Do endereço ao ponto: Geocodificação no QGIS com IA
 
 > Exercício do minicurso **Automatizando o QGIS com Python e IA**.
@@ -206,7 +209,7 @@ Todos estes erros **rodam sem mensagem de erro**. Sempre faça a conferência do
 
 ```
 modulos/geocodificacao/
-├── README.md                          ← este roteiro
+├── geocodificacao.md                  ← este roteiro
 ├── geocodificar_endereco.py           ← Parte 2: um endereço
 └── geocodificar_lista.py              ← Parte 3: lista de endereços (CSV)
 
@@ -214,3 +217,8 @@ imgs/geocodificacao/                   ← capturas de tela
 dados_curso/geocodificacao/            ← dados (baixe do Google Drive)
 └── enderecos.csv                      ← 5 locais de João Pessoa
 ```
+
+---
+
+<!-- navegação -->
+[⬅️ 📘 Introdução](../introducao/introducao.md) · [🏠 Início](../../README.md) · [🛣️ Duplicação da PB-200 ➡️](../pb200/pb200.md)

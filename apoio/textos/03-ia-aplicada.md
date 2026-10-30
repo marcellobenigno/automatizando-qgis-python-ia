@@ -1,8 +1,8 @@
 # Módulo 3 — Inteligência Artificial aplicada ao geoprocessamento
 
-⏱ 30 min · [← Módulo 2](02-fundamentos-pyqgis.md) · [Prática →](../../modulos/pb200/README.md)
+⏱ 30 min · [← Módulo 2](02-fundamentos-pyqgis.md) · [Prática →](../../modulos/pb200/pb200.md)
 
-Assistentes de IA generativa (ChatGPT, Claude, Gemini, GitHub Copilot...) aceleram muito a escrita de scripts PyQGIS — desde que usados como **assistentes**, e não como oráculos. Neste módulo vemos como pedir, como entender o que veio e como verificar. A aplicação completa está na [Parte 3 da prática](../../modulos/pb200/README.md#parte-3--a-ia-na-criação-do-algoritmo).
+Assistentes de IA generativa (ChatGPT, Claude, Gemini, GitHub Copilot...) aceleram muito a escrita de scripts PyQGIS — desde que usados como **assistentes**, e não como oráculos. Neste módulo vemos como pedir, como entender o que veio e como verificar. A aplicação completa está na [Parte 3 da prática](../../modulos/pb200/pb200.md#parte-3--a-ia-na-criação-do-algoritmo).
 
 ## O que a IA faz bem e onde ela erra
 

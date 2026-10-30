@@ -1,3 +1,6 @@
+<!-- navegação -->
+[🏠 Início](../../README.md)
+
 # Exercício 1 — Arrumando a casa: de shapefiles bagunçados a um GeoPackage padronizado
 
 > Primeiro exercício do minicurso **Automatizando o QGIS com Python e IA**.
@@ -581,7 +584,7 @@ Isso acelera muito o ciclo *diagnosticar → corrigir → conferir*, mas as regr
 
 ```
 modulos/dados_vetoriais/
-├── README.md                  ← este roteiro
+├── dados_vetoriais.md         ← este roteiro
 ├── diagnostico_camadas.py     ← Parte 5.1: inventário de uma pasta de shapefiles
 └── solucao_area_estudo.py     ← Parte 5.2: solução completa em PyQGIS
 
@@ -591,4 +594,7 @@ dados_curso/dados_vetoriais/   ← dados (baixe do Google Drive)
 └── resultados/                ← areas_especies_sertao.gpkg (gerado)
 ```
 
+---
 
+<!-- navegação -->
+[🏠 Início](../../README.md)

@@ -1,3 +1,6 @@
+<!-- navegação -->
+[⬅️ ⛰️ Perfil da PB-200](../perfil_pb200/perfil_pb200.md) · [🏠 Início](../../README.md) · [🔥 Focos de queimadas ➡️](../queimadas_pb/queimadas_pb.md)
+
 # Análise de acessibilidade: até onde se chega a partir do IFPB (800 m a pé × 4 km de carro)
 
 > **Exercício prático do minicurso:** Automatizando o QGIS com Python e IA
@@ -349,3 +352,8 @@ O script faz isso automaticamente (`COMPARAR_COM_QGIS = True`), sobre os mesmos 
 ## 8. Para levar
 
 > 💡 **A IA escreve o script em minutos, e o NetworkX calcula o alcance em milissegundos.** Mas são os fundamentos de geoprocessamento que garantem que o resultado está certo: a diferença entre a distância em linha reta e a distância pela rede, o uso de um sistema de coordenadas métrico e o efeito das restrições de tráfego. **Conferir o resultado continua sendo responsabilidade sua.**
+
+---
+
+<!-- navegação -->
+[⬅️ ⛰️ Perfil da PB-200](../perfil_pb200/perfil_pb200.md) · [🏠 Início](../../README.md) · [🔥 Focos de queimadas ➡️](../queimadas_pb/queimadas_pb.md)

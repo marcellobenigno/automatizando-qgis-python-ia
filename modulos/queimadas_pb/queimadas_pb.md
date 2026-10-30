@@ -1,7 +1,11 @@
+<!-- navegação -->
+[⬅️ 🚶 Alcance a partir do IFPB](../alcance_ifpb/alcance_ifpb.md) · [🏠 Início](../../README.md)
+
 # Focos de queimadas na Paraíba: do Controlador Temporal do QGIS a um dashboard na web
 
 > **Exercício prático do minicurso:** Automatizando o QGIS com Python e IA
 > **Área temática:** análise espaço-temporal, monitoramento de queimadas e comunicação de dados
+> **Dashboard publicado:** 🌐 [marcellobenigno.github.io/automatizando-qgis-python-ia/queimadas_pb/](https://marcellobenigno.github.io/automatizando-qgis-python-ia/queimadas_pb/)
 > **Ferramentas:** QGIS 3.44 (Controlador Temporal) e PyQGIS; Leaflet com os plugins TimeDimension, heat e markercluster; Vue.js, Tom Select, Highcharts e Tailwind CSS; GitHub Pages; IA generativa
 
 ---
@@ -409,7 +413,7 @@ e abra `http://localhost:8000/queimadas_pb/`.
 
 1. Faça *commit* e *push* da pasta `docs/` para a branch `main` do seu repositório.
 2. No GitHub: **Settings → Pages → Build and deployment → Source: Deploy from a branch**; **Branch: `main`**, pasta **`/docs`**; **Save**.
-3. Em um ou dois minutos, o painel estará em `https://<seu-usuario>.github.io/<repositorio>/queimadas_pb/`.
+3. Em um ou dois minutos, o painel estará em `https://<seu-usuario>.github.io/<repositorio>/queimadas_pb/`. O deste curso está em [marcellobenigno.github.io/automatizando-qgis-python-ia/queimadas_pb/](https://marcellobenigno.github.io/automatizando-qgis-python-ia/queimadas_pb/).
 
 O arquivo vazio `docs/.nojekyll` diz ao GitHub para servir os arquivos como estão, sem passar pelo Jekyll.
 
@@ -529,3 +533,8 @@ month("DataHora" - make_interval(hours:=3)) = 10
 ## 8. Para levar
 
 > 💡 **O QGIS é onde a análise acontece; a web é onde ela é vista.** O Controlador Temporal e o dashboard mostram os mesmos 2.445 focos, mas um exige que o leitor saiba GIS e o outro só exige um link. Em qualquer dos dois, os cuidados são os mesmos: tirar o `-999`, respeitar o fuso e **conferir os números antes de publicar**. E, na web, um cuidado a mais: o leitor não tem você do lado para explicar; o painel tem de dizer sozinho o que está mostrando.
+
+---
+
+<!-- navegação -->
+[⬅️ 🚶 Alcance a partir do IFPB](../alcance_ifpb/alcance_ifpb.md) · [🏠 Início](../../README.md)

@@ -1,6 +1,6 @@
 # Exercício extra: a mesma análise com GeoPandas (fora do QGIS)
 
-> Versão alternativa do [exercício principal](README.md), para fazer em Python puro (Colab/Jupyter). Atenção: aqui se sugere EPSG:5880; na prática do QGIS mostramos que, na Paraíba, ela superestima áreas em alguns por cento — compare os resultados usando EPSG:31984.
+> Versão alternativa do [exercício principal](pb200.md), para fazer em Python puro (Colab/Jupyter). Atenção: aqui se sugere EPSG:5880; na prática do QGIS mostramos que, na Paraíba, ela superestima áreas em alguns por cento — compare os resultados usando EPSG:31984.
 
 ## Estudo de Caso: Licenciamento Ambiental da Duplicação da Rodovia PB-200 (PB)
 

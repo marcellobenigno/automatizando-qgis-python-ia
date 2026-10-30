@@ -45,13 +45,13 @@ Os exercícios formam uma **trilha progressiva**, em ordem crescente de complexi
 
 | Módulo | Nível | O que você vai praticar |
 | --- | :---: | --- |
-| 📘 [**Introdução**](modulos/introducao/README.md) | 🟢 Iniciante | Conceitos de automação, as peças do quebra-cabeça (QGIS, PyQGIS, Processing, Console e IA), como escrever bons prompts, por que validar e o método de trabalho usado em todos os exercícios. Leitura de cerca de 15 min. |
-| 📍 [**Geocodificação urbana em João Pessoa**](modulos/geocodificacao/README.md) | 🟢 Iniciante | Ler um CSV com Python, consultar o Nominatim (OpenStreetMap) respeitando o limite de requisições e criar uma camada de pontos. |
-| 🛣️ [**Impacto ambiental da duplicação da PB-200**](modulos/pb200/README.md) | 🟡 Intermediário | Fazer a análise à mão e traduzir cada passo em `processing.run(...)`: buffer de 3 km, municípios atingidos e uso do solo em hectares. |
-| 🗺️ [**Grade interativa SRTM/TOPODATA**](modulos/grade_topodata/README.md) | 🟡 Intermediário | Investigar uma página web com IA, gerar uma grade vetorial e criar ações em Python que baixam o MDE da célula clicada. |
-| ⛰️ [**Perfil topográfico da PB-200**](modulos/perfil_pb200/README.md) | 🟡 Intermediário | Unir os trechos da rodovia numa linha só, amostrar o MDE TOPODATA a cada 30 m, desenhar o perfil com matplotlib e atualizar com IA um tutorial escrito para uma versão antiga do QGIS. |
-| 🚶 [**Alcance a partir do IFPB**](modulos/alcance_ifpb/README.md) | 🔴 Avançado | Baixar uma vez a malha viária de João Pessoa com o OSMnx e, offline, calcular com PyQGIS e NetworkX até onde se chega pelas ruas: 800 m a pé e 4 km de carro, respeitando a mão única. |
-| 🔥 [**Focos de queimadas na Paraíba**](modulos/queimadas_pb/README.md) | 🔴 Avançado | Animar os focos de 2026 com o Controlador Temporal, automatizar com PyQGIS e publicar no GitHub Pages um dashboard interativo (Leaflet, Vue.js e Highcharts) que qualquer pessoa abre no navegador. |
+| 📘 [**Introdução**](modulos/introducao/introducao.md) | 🟢 Iniciante | Conceitos de automação, as peças do quebra-cabeça (QGIS, PyQGIS, Processing, Console e IA), como escrever bons prompts, por que validar e o método de trabalho usado em todos os exercícios. Leitura de cerca de 15 min. |
+| 📍 [**Geocodificação urbana em João Pessoa**](modulos/geocodificacao/geocodificacao.md) | 🟢 Iniciante | Ler um CSV com Python, consultar o Nominatim (OpenStreetMap) respeitando o limite de requisições e criar uma camada de pontos. |
+| 🛣️ [**Impacto ambiental da duplicação da PB-200**](modulos/pb200/pb200.md) | 🟡 Intermediário | Fazer a análise à mão e traduzir cada passo em `processing.run(...)`: buffer de 3 km, municípios atingidos e uso do solo em hectares. |
+| 🗺️ [**Grade interativa SRTM/TOPODATA**](modulos/grade_topodata/grade_topodata.md) | 🟡 Intermediário | Investigar uma página web com IA, gerar uma grade vetorial e criar ações em Python que baixam o MDE da célula clicada. |
+| ⛰️ [**Perfil topográfico da PB-200**](modulos/perfil_pb200/perfil_pb200.md) | 🟡 Intermediário | Unir os trechos da rodovia numa linha só, amostrar o MDE TOPODATA a cada 30 m, desenhar o perfil com matplotlib e atualizar com IA um tutorial escrito para uma versão antiga do QGIS. |
+| 🚶 [**Alcance a partir do IFPB**](modulos/alcance_ifpb/alcance_ifpb.md) | 🔴 Avançado | Baixar uma vez a malha viária de João Pessoa com o OSMnx e, offline, calcular com PyQGIS e NetworkX até onde se chega pelas ruas: 800 m a pé e 4 km de carro, respeitando a mão única. |
+| 🔥 [**Focos de queimadas na Paraíba**](modulos/queimadas_pb/queimadas_pb.md) | 🔴 Avançado | Animar os focos de 2026 com o Controlador Temporal, automatizar com PyQGIS e publicar no GitHub Pages um dashboard interativo (Leaflet, Vue.js e Highcharts) que qualquer pessoa abre no navegador. 🌐 [**Abrir o dashboard**](https://marcellobenigno.github.io/automatizando-qgis-python-ia/queimadas_pb/) |
 | 🚧 **Próximos módulos** | — | Em produção. |
 
 ### Material complementar
@@ -86,7 +86,7 @@ Introdução à automação de tarefas de geoprocessamento no QGIS. Apresentaç�
 ```
 ├── README.md          ← você está aqui
 ├── LICENSE
-├── modulos/           ← um módulo por pasta: roteiro (README.md) e scripts
+├── modulos/           ← um módulo por pasta: roteiro (<módulo>.md) e scripts
 │   ├── introducao/
 │   ├── geocodificacao/
 │   ├── pb200/
@@ -104,7 +104,7 @@ Introdução à automação de tarefas de geoprocessamento no QGIS. Apresentaç�
 
 ## Precisa de ajuda?
 
-- **Travou num módulo?** Cada pasta de `modulos/` tem um `README.md` com o passo a passo e o script de solução.
+- **Travou num módulo?** Cada pasta de `modulos/` tem um roteiro com o nome do módulo (ex.: `modulos/pb200/pb200.md`), com o passo a passo e o script de solução.
 - **Encontrou um erro no material?** Abra uma *issue* neste repositório ou escreva para mim ([marcello@ifpb.edu.br](mailto:marcello@ifpb.edu.br)).
 
 ## Referências

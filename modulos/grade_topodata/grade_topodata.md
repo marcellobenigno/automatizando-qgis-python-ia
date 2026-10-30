@@ -1,3 +1,6 @@
+<!-- navegação -->
+[⬅️ 🛣️ Duplicação da PB-200](../pb200/pb200.md) · [🏠 Início](../../README.md) · [⛰️ Perfil da PB-200 ➡️](../perfil_pb200/perfil_pb200.md)
+
 # Grade interativa SRTM/TOPODATA
 
 > Exercício do minicurso **Automatizando o QGIS com Python e IA**.
@@ -373,3 +376,8 @@ Na 2ª execução, nada é baixado. Repare que ela rodou com um **raster como ca
 ![Relatório da 2ª execução](../../imgs/grade_topodata/12-relatorio-segunda-execucao.png)
 
 > **Cuidado com o tamanho:** cada folha de altitude tem ~70 MB em média. As 556 folhas do Brasil somam **~40 GB**.
+
+---
+
+<!-- navegação -->
+[⬅️ 🛣️ Duplicação da PB-200](../pb200/pb200.md) · [🏠 Início](../../README.md) · [⛰️ Perfil da PB-200 ➡️](../perfil_pb200/perfil_pb200.md)

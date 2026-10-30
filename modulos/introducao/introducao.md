@@ -1,3 +1,6 @@
+<!-- navegação -->
+[🏠 Início](../../README.md) · [📍 Geocodificação urbana ➡️](../geocodificacao/geocodificacao.md)
+
 # Automatizando o QGIS com Python e IA
 
 Pense na última vez que você repetiu a mesma sequência de ferramentas no QGIS: abrir a camada, reprojetar, gerar um buffer, recortar, calcular a área, exportar… e depois fazer tudo de novo para o próximo arquivo, o próximo município, a próxima rodovia.
@@ -233,7 +236,7 @@ Nos exercícios seguintes, este fluxo será aplicado a cenários reais de análi
   - criar uma camada temporária de pontos no QGIS;
   - desconfiar de um ponto "encontrado": verificar se ele caiu na rua correta.
 
-👉 [Abrir o exercício](../geocodificacao/README.md)
+👉 [Abrir o exercício](../geocodificacao/geocodificacao.md)
 
 #### 🛣️ Exercício 2 — Impacto ambiental da duplicação da PB-200
 
@@ -245,7 +248,7 @@ Nos exercícios seguintes, este fluxo será aplicado a cenários reais de análi
   - calcular áreas em hectares num SRC métrico adequado (UTM / SIRGAS 2000);
   - comparar o resultado do script com o do fluxo manual.
 
-👉 [Abrir o exercício](../pb200/README.md)
+👉 [Abrir o exercício](../pb200/pb200.md)
 
 #### 🗺️ Exercício 3 — Grade interativa SRTM/TOPODATA
 
@@ -257,7 +260,7 @@ Nos exercícios seguintes, este fluxo será aplicado a cenários reais de análi
   - descobrir a regra de formação dos links de download de cada quadrícula;
   - criar **ações personalizadas** em Python no QGIS para baixar arquivos sob demanda, com barra de progresso.
 
-👉 [Abrir o exercício](../grade_topodata/README.md)
+👉 [Abrir o exercício](../grade_topodata/grade_topodata.md)
 
 #### ⛰️ Exercício 4 — Perfil topográfico da PB-200
 
@@ -270,7 +273,7 @@ Nos exercícios seguintes, este fluxo será aplicado a cenários reais de análi
   - desenhar o perfil com matplotlib e conferir com a ferramenta nativa Perfil de Elevação;
   - interpretar o resultado: exagero vertical, ruído do SRTM e o que o dado permite (ou não) afirmar.
 
-👉 [Abrir o exercício](../perfil_pb200/README.md)
+👉 [Abrir o exercício](../perfil_pb200/perfil_pb200.md)
 
 #### 🚶 Exercício 5 — Alcance a partir do IFPB
 
@@ -283,7 +286,7 @@ Nos exercícios seguintes, este fluxo será aplicado a cenários reais de análi
   - comparar o alcance pela rede com o círculo em linha reta;
   - conferir o resultado com a Área de serviço nativa do QGIS e desconfiar de números que não fecham.
 
-👉 [Abrir o exercício](../alcance_ifpb/README.md)
+👉 [Abrir o exercício](../alcance_ifpb/alcance_ifpb.md)
 
 #### 🔥 Exercício 6 — Focos de queimadas na Paraíba
 
@@ -296,7 +299,7 @@ Nos exercícios seguintes, este fluxo será aplicado a cenários reais de análi
   - revisar o painel como um leitor: o que ele mostra, quais filtros valem, acessibilidade e falhas de rede;
   - conferir que o dashboard mostra os mesmos números do QGIS.
 
-👉 [Abrir o exercício](../queimadas_pb/README.md)
+👉 [Abrir o exercício](../queimadas_pb/queimadas_pb.md) · 🌐 [Abrir o dashboard publicado](https://marcellobenigno.github.io/automatizando-qgis-python-ia/queimadas_pb/)
 
 #### 🚧 Próximos exercícios
 
@@ -326,3 +329,8 @@ Em produção.
 - [Documentação da API do QGIS para Python](https://qgis.org/pyqgis/)
 
 Consulte sempre a documentação da **versão instalada**: classes, métodos e parâmetros mudam entre versões.
+
+---
+
+<!-- navegação -->
+[🏠 Início](../../README.md) · [📍 Geocodificação urbana ➡️](../geocodificacao/geocodificacao.md)

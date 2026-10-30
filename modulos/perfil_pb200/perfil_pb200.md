@@ -1,7 +1,10 @@
+<!-- navegação -->
+[⬅️ 🗺️ Grade SRTM/TOPODATA](../grade_topodata/grade_topodata.md) · [🏠 Início](../../README.md) · [🚶 Alcance a partir do IFPB ➡️](../alcance_ifpb/alcance_ifpb.md)
+
 # Perfil topográfico da PB-200
 
 > Exercício do minicurso **Automatizando o QGIS com Python e IA**.
-> Este exercício junta os dois anteriores: a **PB-200** do [exercício de licenciamento](../pb200/README.md) e o **MDE TOPODATA** da [grade interativa](../grade_topodata/README.md). O resultado é o perfil topográfico da rodovia inteira, do km 0 ao km 104. Partimos de um tutorial publicado na web, escrito para uma versão antiga do QGIS, e usamos a IA para atualizá-lo. O ponto principal do exercício é **conferir o que ela entrega**.
+> Este exercício junta os dois anteriores: a **PB-200** do [exercício de licenciamento](../pb200/pb200.md) e o **MDE TOPODATA** da [grade interativa](../grade_topodata/grade_topodata.md). O resultado é o perfil topográfico da rodovia inteira, do km 0 ao km 104. Partimos de um tutorial publicado na web, escrito para uma versão antiga do QGIS, e usamos a IA para atualizá-lo. O ponto principal do exercício é **conferir o que ela entrega**.
 
 ![Perfil topográfico da PB-200](../../imgs/perfil_pb200/1-apresentacao.png)
 
@@ -22,7 +25,7 @@ A referência é o tutorial [*Python QGIS Tutorial: Create Elevation Profile*](h
 | Dado | Origem | Observação |
 | --- | --- | --- |
 | `malha_viaria` em `minicurso_dados.gpkg` | [`dados_curso/README.md`](../../dados_curso/README.md) | campo `rodovia_nome = 'PB-200'`: **6 trechos** |
-| `07S375ZN.tif` | ação de clique da [grade TOPODATA](../grade_topodata/README.md#parte-4--ação-de-clique-uma-célula) | EPSG:4326, pixel de 1″ (~30 m), altitude em metros (EGM96), NoData = −9999 |
+| `07S375ZN.tif` | ação de clique da [grade TOPODATA](../grade_topodata/grade_topodata.md#parte-4--ação-de-clique-uma-célula) | EPSG:4326, pixel de 1″ (~30 m), altitude em metros (EGM96), NoData = −9999 |
 
 ## O que deve ser entregue
 
@@ -171,7 +174,7 @@ Conferência: a linha única deve ter **~104,27 km**, contra **104,25 km** da so
 
 1. Carregue a `grade_topodata` e a camada da PB-200 no mesmo projeto.
 2. Veja que a rodovia (lat −7,07° a −7,79°) fica inteira na célula **`07S375`**, que vai de −7° a −8°.
-3. Use a **ação de clique** do exercício anterior ([Parte 4 da grade TOPODATA](../grade_topodata/README.md#parte-4--ação-de-clique-uma-célula)) e clique nessa célula. Se ela já foi baixada, a ação só reaproveita o arquivo.
+3. Use a **ação de clique** do exercício anterior ([Parte 4 da grade TOPODATA](../grade_topodata/grade_topodata.md#parte-4--ação-de-clique-uma-célula)) e clique nessa célula. Se ela já foi baixada, a ação só reaproveita o arquivo.
 4. Anote o caminho do `07S375ZN.tif`: ele vai na constante `MDE` do script.
 
 ![A PB-200 sobre a célula 07S375](../../imgs/perfil_pb200/3-celula-07S375.png)
@@ -331,3 +334,8 @@ Compare com o gráfico do script:
    Com a janela de 11 pontos, a máxima cai de **602 para 594 m** e a mínima sobe de **461 para 463 m**. Suavizar tira o ruído, mas também "achata" picos e vales reais e estreitos. Por isso o script guarda os valores originais no CSV, e a média móvel entra só no gráfico.
 
    </details>
+
+---
+
+<!-- navegação -->
+[⬅️ 🗺️ Grade SRTM/TOPODATA](../grade_topodata/grade_topodata.md) · [🏠 Início](../../README.md) · [🚶 Alcance a partir do IFPB ➡️](../alcance_ifpb/alcance_ifpb.md)

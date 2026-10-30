@@ -1,3 +1,6 @@
+<!-- navegação -->
+[🏠 Início](../../README.md)
+
 # Automatizando Composições RGB de Landsat e Sentinel no QGIS
 
 ![Fluxo do exercício](../../imgs/composicao_rgb/fluxo-do-exercicio.png)
@@ -195,7 +198,7 @@ Todos estes erros **geram uma imagem**, e é por isso que passam despercebidos.
 
 ```
 modulos/composicao_rgb/
-├── README.md                    ← este roteiro
+├── composicao_rgb.md            ← este roteiro
 └── composicoes_rgb.py           ← Parte 3: as quatro composições de uma vez
 
 imgs/composicao_rgb/             ← infográficos e capturas de tela
@@ -205,3 +208,8 @@ dados_curso/composicao_rgb/      ← dados (baixe do Google Drive)
 ├── S2A_MSIL2A_…/                ← bandas do Sentinel-2 (recortadas)
 └── cenas_completas/             ← cenas originais, sem recorte (1,7 GB, opcional)
 ```
+
+---
+
+<!-- navegação -->
+[🏠 Início](../../README.md)

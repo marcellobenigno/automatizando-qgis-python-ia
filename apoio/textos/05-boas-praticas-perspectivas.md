@@ -1,6 +1,6 @@
 # Módulo 5 — Boas práticas e perspectivas
 
-⏱ 15 min · [← Prática](../../modulos/pb200/README.md) · [Início](../../README.md)
+⏱ 15 min · [← Prática](../../modulos/pb200/pb200.md) · [Início](../../README.md)
 
 ## Reutilização de scripts
 
