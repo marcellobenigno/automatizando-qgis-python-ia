@@ -285,6 +285,19 @@ Nos exercícios seguintes, este fluxo será aplicado a cenários reais de análi
 
 👉 [Abrir o exercício](../alcance_ifpb/README.md)
 
+#### 🔥 Exercício 6 — Focos de queimadas na Paraíba
+
+- **Nível:** 🔴 Avançado
+- **O desafio:** mostrar *quando* e *onde* o fogo apareceu na Paraíba em 2026, a partir dos 2.445 focos do BDQueimadas (INPE). Primeiro, com o Controlador Temporal do QGIS; depois, num dashboard publicado no GitHub Pages, que qualquer pessoa abre no navegador ou no celular, sem instalar o QGIS.
+- **O que você irá aprender:**
+  - configurar as propriedades temporais de uma camada e animar o mapa, à mão e com PyQGIS;
+  - limpar dados para a web: valores `-999`, fuso horário (UTC × horário da Paraíba) e tamanho dos arquivos;
+  - montar um dashboard com Leaflet (TimeDimension, heat e markercluster), Vue.js e Highcharts, com uma representação cartográfica por vez;
+  - revisar o painel como um leitor: o que ele mostra, quais filtros valem, acessibilidade e falhas de rede;
+  - conferir que o dashboard mostra os mesmos números do QGIS.
+
+👉 [Abrir o exercício](../queimadas_pb/README.md)
+
 #### 🚧 Próximos exercícios
 
 Em produção.

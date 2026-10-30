@@ -51,6 +51,7 @@ Os exercícios formam uma **trilha progressiva**, em ordem crescente de complexi
 | 🗺️ [**Grade interativa SRTM/TOPODATA**](modulos/grade_topodata/README.md) | 🟡 Intermediário | Investigar uma página web com IA, gerar uma grade vetorial e criar ações em Python que baixam o MDE da célula clicada. |
 | ⛰️ [**Perfil topográfico da PB-200**](modulos/perfil_pb200/README.md) | 🟡 Intermediário | Unir os trechos da rodovia numa linha só, amostrar o MDE TOPODATA a cada 30 m, desenhar o perfil com matplotlib e atualizar com IA um tutorial escrito para uma versão antiga do QGIS. |
 | 🚶 [**Alcance a partir do IFPB**](modulos/alcance_ifpb/README.md) | 🔴 Avançado | Baixar uma vez a malha viária de João Pessoa com o OSMnx e, offline, calcular com PyQGIS e NetworkX até onde se chega pelas ruas: 800 m a pé e 4 km de carro, respeitando a mão única. |
+| 🔥 [**Focos de queimadas na Paraíba**](modulos/queimadas_pb/README.md) | 🔴 Avançado | Animar os focos de 2026 com o Controlador Temporal, automatizar com PyQGIS e publicar no GitHub Pages um dashboard interativo (Leaflet, Vue.js e Highcharts) que qualquer pessoa abre no navegador. |
 | 🚧 **Próximos módulos** | — | Em produção. |
 | 🛰️ [**Composições RGB de Landsat e Sentinel**](modulos/composicao_rgb/README.md) | a definir | Montar composições em cor natural e falsa-cor como rasters virtuais e automatizar as quatro de uma vez com um script. |
 
@@ -93,8 +94,10 @@ Introdução à automação de tarefas de geoprocessamento no QGIS. Apresentaç�
 │   ├── grade_topodata/
 │   ├── perfil_pb200/
 │   ├── alcance_ifpb/
+│   ├── queimadas_pb/
 │   ├── composicao_rgb/
 │   └── dados_vetoriais/
+├── docs/              ← páginas publicadas no GitHub Pages (dashboard de queimadas)
 ├── apoio/             ← textos de apoio, scripts de exemplo e biblioteca de prompts
 ├── imgs/              ← figuras e capturas de tela, uma subpasta por tópico
 └── dados_curso/       ← dados do Google Drive (fora do git; só o README é versionado)
