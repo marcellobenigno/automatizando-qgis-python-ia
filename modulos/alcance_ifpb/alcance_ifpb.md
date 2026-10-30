@@ -1,57 +1,72 @@
 <!-- navegação -->
 [⬅️ ⛰️ Perfil da PB-200](../perfil_pb200/perfil_pb200.md) · [🏠 Início](../../README.md) · [🔥 Focos de queimadas ➡️](../queimadas_pb/queimadas_pb.md)
 
-# Análise de acessibilidade: até onde se chega a partir do IFPB (800 m a pé × 4 km de carro)
+# Até onde se chega a partir do IFPB: análise de redes com PyQGIS e NetworkX
 
-> **Exercício prático do minicurso:** Automatizando o QGIS com Python e IA
-> **Área temática:** análise de redes, mobilidade urbana e acessibilidade
-> **Ferramentas:** QGIS 3.44, PyQGIS e NetworkX (análise, offline); OSMnx (download da malha, feito uma vez); IA generativa
+> **Roteiro de aula:** prático, guiado e com aprofundamento técnico
+> **Público:** estudantes de geotecnologias, planejamento urbano e mobilidade · **Nível:** 🔴 Avançado
+> **Duração:** 35 minutos de aula prática (seções 1 a 5) + aprofundamento técnico para estudo posterior (seções 6 e 7)
+> **Tema:** análise de redes, acessibilidade urbana e área de serviço (isodistância)
+> **Tecnologias:** QGIS 3.44, PyQGIS e NetworkX (análise, offline); OSMnx (download da malha, feito uma vez); matplotlib; IA generativa
 
 ---
 
-### 📋 Visão geral do exercício
+## 🧭 1. A proposta da aula
 
-Para avaliar o alcance de um equipamento público, como uma escola, um hospital ou um campus, é comum desenhar um buffer circular em linha reta (*distância euclidiana*). Mas **pessoas e veículos não andam em linha reta**: eles seguem a malha viária, com quarteirões, barreiras físicas, sentidos de tráfego (mão única) e restrições de acesso.
+Para avaliar o alcance de um equipamento público, como uma escola, um hospital ou um campus, é comum desenhar um **círculo em linha reta** (um buffer). Mas **pessoas e veículos não andam em linha reta**: seguem as ruas, contornam quarteirões e barreiras e, de carro, respeitam a mão única.
 
-Neste exercício, você vai calcular a **área de serviço** (*service area*, ou isodistância) a partir do **IFPB Campus João Pessoa**, ou seja, quais ruas e avenidas são alcançáveis:
+Nesta aula, calculamos a **área de serviço** (*service area*, ou isodistância) do **IFPB Campus João Pessoa**:
 
-* 🚶 **A pé:** até **800 m** (~10 minutos de caminhada a 4,8 km/h).
-* 🚗 **De carro:** até **4 km**, respeitando a mão única das vias.
+- 🚶 **a pé:** até **800 m**, cerca de 10 minutos de caminhada a 4,8 km/h;
+- 🚗 **de carro:** até **4 km**, respeitando a mão única.
 
-```
-┌────────────────────────┐     ┌────────────────────────┐     ┌────────────────────────┐
-│ 1. DADOS OFFLINE       │ ──> │ 2. ANÁLISE DE REDES    │ ──> │ 3. VALIDAÇÃO           │
-│ • malha em GeoPackage  │     │ • PyQGIS + NetworkX    │     │ • linha reta × rede    │
-│ • nós e arcos          │     │ • Dijkstra com limite  │     │ • efeito da mão única  │
-│ • sem depender da API  │     │ • corte das ruas       │     │ • comparação com QGIS  │
-└────────────────────────┘     └────────────────────────┘     └────────────────────────┘
-```
+A pergunta que guia a atividade:
 
-**Ao final deste exercício, você será capaz de:**
-
-1. diferenciar **distância euclidiana** (buffer) de **distância pela rede** (*network distance*);
-2. montar um fluxo **offline e reprodutível**: baixar os dados uma vez e não depender de servidores públicos a cada análise;
-3. montar e consultar **grafos dirigidos com peso** (*directed weighted graphs*) com o **NetworkX**;
-4. filtrar as vias por **modo de transporte** (pedestre × automóvel) e tratar o **sentido de circulação** (`oneway`);
-5. validar o resultado do script com o algoritmo nativo **Área de serviço** do *Processing Framework* do QGIS.
+> **Até onde se chega, de verdade, a partir do campus, e quanto o círculo em linha reta engana?**
 
 ![Alcance a pé e de carro a partir do campus](../../imgs/alcance_ifpb/1-alcance-ifpb.png)
 
-### O que deve ser entregue
+### 🎯 Objetivos de aprendizagem
 
-1. `alcance_ifpb.gpkg`, com as camadas `alcance_faixas` (um anel por faixa de distância, com os km de vias), `alcance_poligonos` (polígono do alcance e círculo de cada análise) e `campus`.
-2. `alcance_ifpb.png`, os dois mapas lado a lado.
-3. A comparação com a ferramenta nativa **Área de serviço** do QGIS.
+Ao final da aula, a turma será capaz de:
 
-Tudo em `dados_curso/alcance_ifpb/resultados/`.
+1. **diferenciar** a distância em linha reta (buffer) da distância pela rede (área de serviço);
+2. **reconhecer** uma malha viária como um **grafo dirigido**: nós, arcos e o sentido de cada arco;
+3. **interpretar** o alcance a pé e de carro, e o efeito da mão única no alcance de carro;
+4. **explicar** por que baixar a malha uma vez e analisar offline torna o trabalho mais rápido e reprodutível;
+5. **validar** o resultado do script com a ferramenta nativa **Área de serviço** do QGIS.
 
 ---
 
-## 1. Fundamentação: análise de redes e acessibilidade urbana
+## 📋 2. Preparação e roteiro de tempo
 
-### 1.1 Linha reta (buffer) × área de serviço (isodistância)
+### 🛠️ Antes da aula, o(a) professor(a) confere
 
-No planejamento urbano, a ideia de **cidade caminhável** (*walkable city*) costuma usar **~800 m** (10 minutos a pé) como raio de influência em volta de escolas, estações e serviços.
+- [ ] **QGIS** 3.34 LTR ou mais recente (material testado no 3.44) em todos os computadores.
+- [ ] **NetworkX** no Python do QGIS: no Console Python, `import networkx` não pode dar erro. Se der, veja a seção 6.1 do *Guia OSMnx + QGIS no Windows* (PDF no Google Drive do curso). O OSMnx **não** precisa estar instalado: ele só serviu para baixar a malha.
+- [ ] **matplotlib** no Python do QGIS, para os mapas lado a lado (opcional: sem ele, o script só não desenha a figura).
+- [ ] **Dados:** `malha_joao_pessoa_all.gpkg` (27 MB) em `dados_curso/alcance_ifpb/` (veja [`dados_curso/`](../../dados_curso/README.md)).
+- [ ] **Rede da sala:** não é preciso internet. A análise roda inteira offline.
+
+> 💡 **Dica para quem conduz a aula:** rode o script uma vez antes da aula e deixe o resultado (`alcance_ifpb.gpkg` e `alcance_ifpb.png`) à mão. Se algum computador não tiver o NetworkX, a turma acompanha a Atividade 2 pelo resultado pronto, e o tempo da aula não vai para instalação.
+
+### ⏱️ Planejamento minuto a minuto (35 min)
+
+| Intervalo | Etapa | Foco da turma |
+| :--- | :--- | :--- |
+| **0–5 min** | Pergunta e contexto | Linha reta × pelas ruas. Por que 800 m e 4 km? |
+| **5–13 min** | Atividade 1: a malha no QGIS | Abrir os arcos, ler os campos e ver o sentido das ruas com setas. |
+| **13–23 min** | Atividade 2: o alcance pela rede | Rodar o script e ler o resultado: km de vias, polígono × círculo, mão única. |
+| **23–31 min** | Atividade 3: validação cruzada | Refazer o alcance a pé com a Área de serviço nativa do QGIS e comparar. |
+| **31–35 min** | Síntese e fechamento | Check-out oral e mensagem final. |
+
+---
+
+## 💡 3. Fundamentação
+
+### 3.1 Linha reta (buffer) × pelas ruas (área de serviço)
+
+No planejamento urbano, a ideia de **cidade caminhável** (*walkable city*) costuma usar **~800 m**, ou 10 minutos a pé, como raio de influência em volta de escolas, estações e serviços.
 
 ```
    [ Buffer circular ]                        [ Área de serviço ]
@@ -62,70 +77,60 @@ No planejamento urbano, a ideia de **cidade caminhável** (*walkable city*) cost
                                               muros, mão única e acessos
 ```
 
-* **O que o buffer erra:** ele supõe que o pedestre atravessa prédios, terrenos fechados, rios e matas.
-* **O que a rede mostra:** o alcance real segue as ruas. Barreiras como a **Mata do Buraquinho**, em João Pessoa, ou quadras longas sem travessia forçam desvios e reduzem bastante a área acessível.
+> 🗣️ **Como explicar para a turma:**
+> *"O círculo é o alcance de um pássaro: ele voa em linha reta por cima de muros e prédios. A área de serviço é o alcance de quem anda pela calçada: precisa dar a volta no quarteirão e não atravessa a Mata do Buraquinho."*
 
 ![Dentro do círculo não quer dizer dentro do alcance](../../imgs/alcance_ifpb/3-reta-x-rede.png)
 
-Dois exemplos reais, calculados neste exercício:
+Dois exemplos reais, calculados nesta aula:
 
-* **A pé:** um ponto a **337 m** ao sul do campus, em linha reta, está a **812 m** pela rede, fora do alcance de 800 m. Não há passagem direta pelo lado sul do terreno; é preciso dar a volta pelo oeste.
-* **De carro:** um ponto a **2,4 km** a leste, do outro lado da Mata do Buraquinho, está a **6,3 km** pela rede.
+- **A pé:** um ponto a **337 m** ao sul do campus, em linha reta, está a **812 m** pela rede, fora do alcance de 800 m. Não há passagem direta pelo lado sul do terreno; é preciso dar a volta pelo oeste.
+- **De carro:** um ponto a **2,4 km** a leste, do outro lado da Mata do Buraquinho, está a **6,3 km** pela rede.
 
----
-
-### 1.2 A malha como grafo: nós e arcos dirigidos
+### 3.2 A malha como grafo: nós e arcos com sentido
 
 Uma malha viária é modelada como um **grafo** $G = (V, E)$:
 
-* **Nós** ($V$): cruzamentos e pontas de rua. Cada nó tem coordenadas (`x`, `y`) e um identificador do OpenStreetMap (`osmid`).
-* **Arcos** ($E$): trechos de rua que ligam dois nós, **de `u` para `v`**. Cada arco guarda o comprimento em metros (`length`), o tipo de via (`highway`) e o sentido de circulação (`oneway`).
+- **nós** ($V$): cruzamentos e pontas de rua, com coordenadas e um identificador do OpenStreetMap (`osmid`);
+- **arcos** ($E$): trechos de rua que ligam dois nós, **de `u` para `v`**, com o comprimento em metros (`length`), o tipo de via (`highway`) e o sentido (`oneway`).
 
 ```
     [ nó u ] ───────────── arco u → v ─────────────> [ nó v ]
   (cruzamento 1)        comprimento: 120 m        (cruzamento 2)
 ```
 
-> ⚠️ **Mão única e mão dupla:**
-> Numa rua de **mão dupla**, a camada tem **dois arcos**: um de `u` para `v` e outro de `v` para `u`. Numa rua de **mão única**, só **um** (`u → v`, no sentido do tráfego). Se o cálculo para carro ignorar essa orientação, o veículo "anda na contramão" e o alcance sai maior do que o real.
+> 🗣️ **Como explicar para a turma:**
+> *"Numa rua de mão dupla, a camada tem duas setas, uma para cada lado. Numa rua de mão única, só uma. Para o carro, a rua de mão única é uma porta que só abre para um lado."*
 
----
+> ⚠️ **Se o cálculo de carro ignorar o sentido**, o veículo "anda na contramão", e o alcance sai maior do que o real.
 
-### 1.3 Online × offline: por que baixar uma vez só
+### 3.3 Online × offline: por que baixar a malha uma vez só
 
-APIs públicas como o **Overpass** (do OpenStreetMap) são recursos compartilhados, com limite de uso e sujeitos a sobrecarga. Na preparação deste exercício, em 21/10/2026, várias tentativas seguidas de baixar a malha de João Pessoa receberam `502 Bad Gateway … server is currently at capacity`, no QGIS e fora dele.
+APIs públicas como o **Overpass** (do OpenStreetMap) são recursos compartilhados, com limite de uso e sujeitos a sobrecarga. Na preparação desta aula, em 21/10/2026, várias tentativas seguidas de baixar a malha de João Pessoa receberam `502 Bad Gateway … server is currently at capacity`, no QGIS e fora dele.
 
 ![Online × offline](../../imgs/alcance_ifpb/2-online-offline.png)
 
-| Dimensão | Online (direto na API) | Offline (recomendado) |
+| | Online (direto na API) | Offline (o que fazemos) |
 | :--- | :--- | :--- |
 | **Execução** | cada aluno baixa a malha na aula | o professor baixa a malha **uma vez**, com o OSMnx |
 | **Conexão** | internet estável para todos, ao mesmo tempo | **0 bytes** de internet durante a aula |
 | **Velocidade** | minutos, quando o servidor responde | **~0,9 s** para ler a malha e **< 0,5 s** por análise |
 | **Reprodutibilidade** | o OSM muda todo dia | GeoPackage fixo: resultados iguais para toda a turma |
 
-A malha é baixada com o script [`apoio/osmnx/malha_urbana_osmnx.py`](../../apoio/osmnx/malha_urbana_osmnx.py), com a rede **`all`** (todas as vias). Os alunos recebem o arquivo pronto pelo [Google Drive do curso](../../dados_curso/README.md).
+### 3.4 Os dados e as regras de cada modo
 
-> **Pré-requisito:** o NetworkX no Python do QGIS. Confira no Console Python com `import networkx`. Se der erro, veja a seção 6.1 do *Guia OSMnx + QGIS no Windows* (PDF no Google Drive do curso). O OSMnx **não** precisa estar instalado no QGIS: ele só é usado para baixar a malha.
+O `malha_joao_pessoa_all.gpkg` (27 MB, **EPSG:4326**) foi baixado com o script [`apoio/osmnx/malha_urbana_osmnx.py`](../../apoio/osmnx/malha_urbana_osmnx.py), com a rede **`all`** (todas as vias). Tem 4 camadas:
 
----
-
-## 2. Os dados e as regras de cada modo
-
-O arquivo `malha_joao_pessoa_all.gpkg` (27 MB) reúne a malha viária do município num **GeoPackage** com 4 camadas, em **EPSG:4326**:
-
-1. `nodes` (22.647 nós): cruzamentos e pontas de rua.
-2. `edges` (33.577 trechos): uma linha por trecho de rua, para o mapa.
-3. `arcos` (59.603 arcos): uma linha por **sentido de circulação**, para o roteamento.
-4. `limite`: o polígono do município de João Pessoa.
+| Camada | Feições | O que é |
+| --- | ---: | --- |
+| `nodes` | 22.647 | cruzamentos e pontas de rua |
+| `edges` | 33.577 | uma linha por trecho de rua, para o mapa |
+| `arcos` | 59.603 | uma linha por **sentido de circulação**, para o roteamento |
+| `limite` | 1 | o município de João Pessoa |
 
 As contas fecham: 7.551 trechos de mão única (1 arco cada) + 26.026 de mão dupla (2 arcos cada) = 59.603 arcos.
 
-> **Por que a camada `arcos`?** O *Guia OSMnx + QGIS no Windows* avisa (seção 8.1): gravado com `directed=False`, o grafo perde o sentido das vias, e uma rota pode entrar na contramão. A camada `arcos` guarda o grafo **dirigido**. Para o carro, é ela que garante a mão única.
-
-### Regras de filtragem por modo de transporte
-
-O campo `highway` da camada `arcos` diz o tipo de via (`residential`, `footway`, `primary`, `service`…). Quando o OSMnx junta trechos de tipos diferentes, ele grava uma **lista como texto**, por exemplo `['footway', 'residential']`.
+**A pé e de carro, as regras são diferentes.** O campo `highway` diz o tipo de via; quando o OSMnx junta trechos de tipos diferentes, grava uma lista como texto, por exemplo `['footway', 'residential']`.
 
 ```
    ┌────────────────────────────────────────────────────────────────────────┐
@@ -145,22 +150,231 @@ Nos dois modos, os arcos com `access` = `private` (2.315) ou `no` (151) ficam de
 
 ---
 
-## 3. Inspeção manual no QGIS
+## 🛠️ 4. Trilha prática guiada
 
-1. Arraste a camada `arcos` do arquivo `malha_joao_pessoa_all.gpkg` para o mapa do QGIS.
-2. Abra a **Tabela de atributos** e confira os campos:
-   * `u`, `v`: nós de início e de fim do arco (o arco vai de `u` para `v`);
-   * `length`: comprimento geodésico do trecho, em **metros**, calculado pelo OSMnx;
-   * `highway`: tipo de via (às vezes, uma lista);
-   * `oneway`: `1` = mão única, `0` = mão dupla;
-   * `access`: restrição de acesso (`private` e `no` ficam de fora).
-3. Use a simbologia **Seta (Arrow)** para ver o sentido dos arcos numa rua de mão única e numa de mão dupla.
+### 📍 Atividade 1: a malha no QGIS (8 min)
+
+**Objetivo:** ver com os próprios olhos o que é um arco e o sentido de uma rua.
+
+1. Arraste a camada `arcos` do `malha_joao_pessoa_all.gpkg` para o mapa.
+2. Abra a **Tabela de atributos** e localize os campos:
+   - `u`, `v`: os nós de início e de fim (o arco vai de `u` para `v`);
+   - `length`: o comprimento do trecho, em **metros**, calculado pelo OSMnx;
+   - `highway`: o tipo de via (às vezes, uma lista);
+   - `oneway`: `1` = mão única, `0` = mão dupla;
+   - `access`: restrição de acesso (`private` e `no` ficam de fora).
+3. Em **Propriedades da camada → Simbologia**, troque a linha simples por **Seta** (*Arrow*).
+4. Aproxime o mapa do campus e compare uma rua de mão única com uma de mão dupla.
+
+> 💬 **Pausa para reflexão com a turma:**
+> - *Por que uma rua de mão dupla aparece com duas setas sobrepostas?*
+> - *Se somarmos o comprimento de todos os arcos, teremos o comprimento das ruas de João Pessoa?*
+
+<details>
+<summary>Respostas esperadas</summary>
+
+- Porque a camada `arcos` guarda **um arco por sentido**: a mão dupla tem a ida (`u → v`) e a volta (`v → u`), com a mesma geometria em sentidos opostos.
+- Não: a mão dupla seria contada **duas vezes**. Para medir ruas, é preciso juntar a ida e a volta do mesmo trecho físico. É exatamente o cuidado que o script toma ao somar os km de vias alcançadas.
+
+</details>
 
 ---
 
-## 4. Automação com PyQGIS, NetworkX e IA
+### 📍 Atividade 2: o alcance pela rede (10 min)
 
-### 4.1 O prompt
+**Objetivo:** calcular o alcance a pé e de carro e ler o que os números dizem.
+
+1. Abra [`alcance_ifpb.py`](alcance_ifpb.py) no **Editor do Console Python** do QGIS.
+2. Ajuste `MALHA` e `PASTA_SAIDA` para a sua pasta `dados_curso/alcance_ifpb/` e clique em **Executar script**.
+3. Em poucos segundos, aparecem no mapa as camadas `alcance_faixas`, `alcance_poligonos` e `campus`, e a figura com os dois mapas lado a lado.
+4. Leia o resultado com a turma:
+
+| Faixa a pé | km de vias | Faixa de carro | km de vias |
+| --- | ---: | --- | ---: |
+| até 200 m | 0,4 | até 1 km | 17,8 |
+| 200 a 400 m | 2,2 | 1 a 2 km | 51,9 |
+| 400 a 600 m | 6,6 | 2 a 3 km | 113,2 |
+| 600 a 800 m | 7,0 | 3 a 4 km | 156,5 |
+| **total** | **16,2** | **total** | **339,4** |
+
+| | A pé, 800 m | De carro, 4 km |
+| --- | ---: | ---: |
+| círculo | 2,01 km² | 50,25 km² |
+| polígono do alcance | 0,81 km² | 20,92 km² |
+| **polígono ÷ círculo** | **40%** | **42%** |
+
+> 🗣️ **Como explicar para a turma:**
+> *"O círculo promete que 100% da área está a 10 minutos a pé. Pelas ruas, só 40% está. Numa malha em grade perfeita, seria uns 64%. A diferença é o preço dos quarteirões longos, do próprio terreno do campus e, de carro, da Mata do Buraquinho, o vazio a sudeste do mapa."*
+
+5. **O efeito da mão única.** O script refaz a análise de carro **ignorando** a mão única, só para comparar:
+
+![O que a mão única tira do alcance](../../imgs/alcance_ifpb/4-mao-unica.png)
+
+- **respeitando a mão única:** **339,4 km** de vias;
+- **ignorando a mão única:** **388,3 km**, **49 km (14%) a mais**. Os trechos em vermelho só seriam alcançados andando na contramão; eles se concentram nas bordas, onde o caminho permitido é mais longo.
+
+> 💬 **Pausa para reflexão:** *nenhum ponto alcançado a pé fica além de 800 m em linha reta (o mais distante está a 747 m). Isso é coincidência?*
+
+<details>
+<summary>Resposta esperada</summary>
+
+Não. A rede **nunca** é mais curta que a linha reta: se um ponto está a 800 m pela rede, está a no máximo 800 m em linha reta. Por isso o alcance pela rede cabe sempre dentro do círculo. É uma verificação de coerência simples: se o script devolvesse um ponto a 850 m em linha reta, haveria um erro.
+
+</details>
+
+---
+
+### 📍 Atividade 3: validação cruzada com o QGIS (8 min)
+
+O QGIS tem a mesma análise pronta: **Caixa de Ferramentas de Processamento → Análise de redes → Área de serviço (a partir de ponto)** (*Network analysis → Service area (from point)*, `native:serviceareafrompoint`). Duas implementações independentes devem dar a mesma resposta.
+
+1. Reprojete a camada `arcos` para **EPSG:31985** (*Reprojetar camada*): a ferramenta precisa de metros.
+2. Abra a **Área de serviço (a partir de ponto)**:
+   - **Tipo de caminho:** Mais curto;
+   - **Ponto inicial:** clique no campus;
+   - **Custo:** **800** (a pé).
+3. Em **Parâmetros avançados → Direção padrão**, escolha **Ambas as direções** (*Both directions*): a pé, a mão única não vale. Para o carro, seria **Direção para frente** (*Forward direction*): cada arco já está desenhado no sentido do tráfego.
+4. Execute e compare, no mapa, a saída com a camada `alcance_faixas` do script.
+
+O script faz essa mesma comparação sozinho (`COMPARAR_COM_QGIS = True`), sobre os mesmos arcos:
+
+![NetworkX × QGIS](../../imgs/alcance_ifpb/5-networkx-x-qgis.png)
+
+| Modo e distância | NetworkX (script) | QGIS nativo | Diferença | |
+| :--- | :---: | :---: | :---: | :---: |
+| 🚶 A pé (800 m) | **16,2 km** | **16,1 km** | −0,2% | ✅ |
+| 🚗 De carro (4 km) | **339,4 km** | **339,1 km** | −0,1% | ✅ |
+
+> 💡 **Por que não dá exatamente igual?** Por causa do **ponto de partida**: o QGIS parte do ponto da rua mais próximo do campus; o script parte do **nó** mais próximo (a 35 m a pé e a 80 m de carro). A concordância não prova que o script está certo em tudo, mas mostra que ele reproduz uma ferramenta já testada.
+
+> ⚠️ **Não some o comprimento da saída do QGIS.** A Área de serviço devolve a ida e a volta de uma rua de mão dupla como **duas linhas sobrepostas**: somar o `$length` contaria a rua duas vezes (a mesma armadilha da Atividade 1). O script mede pela área de uma faixa de 1 m em volta das linhas, que conta cada rua uma vez só.
+
+---
+
+## 🎓 5. Fechamento: checagem de aprendizagem
+
+### 💬 Check-out oral
+
+Peça que a turma complete as frases:
+
+1. *"Um buffer de 800 m superestima o alcance a pé porque…"*
+2. *"Para o carro, a camada `arcos` e um grafo dirigido são indispensáveis porque…"*
+3. *"Baixar a malha uma vez e analisar offline é melhor para a aula porque…"*
+
+<details>
+<summary>Respostas esperadas</summary>
+
+1. … supõe que se anda em linha reta, atravessando quarteirões, muros e a Mata do Buraquinho. Pelas ruas, o alcance a pé cobre só 40% do círculo.
+2. … guardam o **sentido** de cada rua: sem eles, o carro "anda na contramão" e o alcance sai 14% maior.
+3. … não depende de um servidor público que pode estar fora do ar, roda em menos de um segundo e dá o mesmo resultado para toda a turma.
+
+</details>
+
+### 🏁 Mensagem final
+
+> *"A IA escreve o script em minutos, e o NetworkX calcula o alcance em milissegundos. Mas são os fundamentos de geoprocessamento que garantem que o resultado está certo: a diferença entre a linha reta e a rede, um sistema de coordenadas métrico e o efeito da mão única. Conferir o resultado continua sendo responsabilidade sua."*
+
+---
+
+## 💻 6. Aprofundamento técnico: o script e a IA
+
+### 6.1 O fluxo do exercício
+
+```
+┌────────────────────────┐     ┌────────────────────────┐     ┌────────────────────────┐
+│ 1. DADOS OFFLINE       │ ──> │ 2. ANÁLISE DE REDES    │ ──> │ 3. VALIDAÇÃO           │
+│ • malha em GeoPackage  │     │ • PyQGIS + NetworkX    │     │ • linha reta × rede    │
+│ • nós e arcos          │     │ • Dijkstra com limite  │     │ • efeito da mão única  │
+│ • sem depender da API  │     │ • corte das ruas       │     │ • comparação com QGIS  │
+└────────────────────────┘     └────────────────────────┘     └────────────────────────┘
+```
+
+**O que o script entrega**, em `dados_curso/alcance_ifpb/resultados/`:
+
+1. `alcance_ifpb.gpkg`, com as camadas `alcance_faixas` (um anel por faixa de distância, com os km de vias), `alcance_poligonos` (o polígono do alcance e o círculo de cada análise) e `campus`;
+2. `alcance_ifpb.png`, os dois mapas lado a lado;
+3. a comparação com a **Área de serviço** nativa do QGIS, impressa no console.
+
+> **Por que a camada `arcos`, e não `edges`?** O *Guia OSMnx + QGIS no Windows* avisa (seção 8.1): gravado com `directed=False`, o grafo perde o sentido das vias, e uma rota pode entrar na contramão. A camada `arcos` guarda o grafo **dirigido**. Para o carro, é ela que garante a mão única.
+
+### 6.2 A lógica do script (`alcance_ifpb.py`)
+
+Os trechos centrais, copiados do script:
+
+**Montar o grafo de cada modo.** A mão dupla já tem os dois arcos na camada; a pé, só a mão única ganha o arco de volta:
+
+```python
+def montar_grafo(arcos, analise, mao_unica):
+    grafo = nx.MultiDiGraph()
+    usados = []
+    for i, a in enumerate(arcos):
+        if a["access"] in ACESSO_PROIBIDO:
+            continue
+        if analise["mao_unica"]:
+            # carro: todos os tipos do trecho têm de ser de automóvel
+            if not a["tipos"] <= analise["vias"]:
+                continue
+        elif not a["tipos"] & analise["vias"]:
+            continue  # a pé: basta um tipo por onde se anda
+        grafo.add_edge(a["u"], a["v"], key=i, length=a["length"], arco=i)
+        if a["oneway"] and not mao_unica:
+            # a volta usa a geometria invertida (índice negativo)
+            grafo.add_edge(a["v"], a["u"], key=-i - 1, length=a["length"], arco=-i - 1)
+        usados.append(i)
+    return grafo, usados
+```
+
+**Partir do campus e calcular as distâncias.** O nó de partida sai da **maior componente fortemente conexa**: de lá se chega a toda a rede. O Dijkstra devolve a distância pela rede até cada nó alcançável (o mesmo cálculo do `nx.ego_graph(..., distance="length")`):
+
+```python
+principal = max(nx.strongly_connected_components(grafo), key=len)
+origem, snap = no_mais_proximo(nos, principal, ponto)
+distancias = nx.single_source_dijkstra_path_length(
+    grafo, origem, cutoff=raio, weight="length")
+aneis, km, total = faixas_de_alcance(grafo, arcos, distancias, faixas)
+```
+
+**Cortar as ruas nas faixas.** Um ponto a `s` metros do início do arco `u → v` está a `dist[u] + s` do campus. Um nó a 700 m "sobra" 100 m para os 800 m a pé: a rua que sai dele é percorrida só até 100 m. A função `faixas_de_alcance()` faz esse corte **por trecho físico**: junta a ida e a volta da mesma rua, soma o que se alcança por cada ponta e nunca conta a rua duas vezes.
+
+> **Nota: o que conferir no código**
+>
+> | Trecho | Por que é assim |
+> | --- | --- |
+> | `nx.MultiDiGraph()` | **Multi**: pode haver duas ruas diferentes entre os mesmos nós. **Di**: o sentido importa |
+> | `a["tipos"] <= analise["vias"]` (carro) × `a["tipos"] & analise["vias"]` (a pé) | todos os tipos × pelo menos um tipo |
+> | geometrias em EPSG:31985 | o corte das ruas e o polígono saem em metros |
+> | `strongly_connected_components` | evita partir de uma rua sem saída de mão única |
+> | contagem por trecho físico | ida e volta da mesma rua não somam duas vezes |
+
+**Saída esperada no console:**
+
+```text
+[1] 22647 nós e 59603 arcos lidos de malha_joao_pessoa_all.gpkg em 0.9 s, sem internet
+
+[1] A pé: grafo com 21713 nós e 64134 arcos
+[2] Partida no nó 4666479308, a 35 m do campus
+[3] 137 nós a até 800 m pela rede (0.0 s)
+[4] 16.2 km de vias alcançadas; ponto mais distante a 747 m em linha reta
+      polígono do alcance: 0.81 km² = 40% do círculo de 800 m (2.01 km²)
+[5] QGIS (Área de serviço): 16.1 km × NetworkX 16.2 km (-0.2%)
+
+[1] De carro: grafo com 18173 nós e 46262 arcos
+[2] Partida no nó 799966499, a 80 m do campus
+[3] 2953 nós a até 4000 m pela rede (0.1 s)
+[4] 339.4 km de vias alcançadas; ponto mais distante a 3520 m em linha reta
+      polígono do alcance: 20.92 km² = 42% do círculo de 4000 m (50.25 km²)
+      ignorando a mão única: 388.3 km (+49.0 km, 14% a mais)
+[5] QGIS (Área de serviço): 339.1 km × NetworkX 339.4 km (-0.1%)
+
+[6] Resultados em …/alcance_ifpb/resultados/alcance_ifpb.gpkg
+      Mapas: …/alcance_ifpb/resultados/alcance_ifpb.png
+```
+
+### 6.3 A IA não valida por você
+
+A primeira versão deste script unia as geometrias de todos os pedaços alcançados e media o comprimento da união. Deu **17,5 km** a pé: um número plausível, que passaria despercebido. Mas a soma das faixas dava **18,9 km**. A pista veio de uma conferência simples: **a soma das partes tem de dar o todo**. Contando por trecho físico, o valor certo é **16,2 km**, e as duas contas passaram a fechar.
+
+### 6.4 O prompt usado com a IA
 
 ```text
 Atue como especialista em PyQGIS e análise de redes.
@@ -192,166 +406,45 @@ serviço (isodistância) a partir do IFPB Campus João Pessoa
 Comentários em português.
 ```
 
-### 4.2 A lógica do script (`alcance_ifpb.py`)
-
-A versão revisada é [`alcance_ifpb.py`](alcance_ifpb.py). Os trechos centrais:
-
-**Montar o grafo de cada modo.** A mão dupla já tem os dois arcos na camada; a pé, só a mão única ganha o arco de volta.
-
-```python
-def montar_grafo(arcos, analise, mao_unica):
-    grafo = nx.MultiDiGraph()
-    for i, a in enumerate(arcos):
-        if a["access"] in ACESSO_PROIBIDO:
-            continue
-        if analise["mao_unica"]:
-            # carro: todos os tipos do trecho têm de ser de automóvel
-            if not a["tipos"] <= analise["vias"]:
-                continue
-        elif not a["tipos"] & analise["vias"]:
-            continue  # a pé: basta um tipo por onde se anda
-        grafo.add_edge(a["u"], a["v"], key=i, length=a["length"], arco=i)
-        if a["oneway"] and not mao_unica:
-            # a volta usa a geometria invertida (índice negativo)
-            grafo.add_edge(a["v"], a["u"], key=-i - 1, length=a["length"], arco=-i - 1)
-    ...
-```
-
-**Partir do campus e calcular as distâncias.** O nó de partida sai da maior componente fortemente conexa: de lá se chega a toda a rede. O Dijkstra devolve a distância pela rede até cada nó alcançável (é o mesmo cálculo do `nx.ego_graph(..., distance="length")`).
-
-```python
-principal = max(nx.strongly_connected_components(grafo), key=len)
-origem, snap = no_mais_proximo(nos, principal, ponto)
-distancias = nx.single_source_dijkstra_path_length(
-    grafo, origem, cutoff=raio, weight="length")
-aneis, km, total = faixas_de_alcance(grafo, arcos, distancias, faixas)
-```
-
-**Cortar as ruas nas faixas.** Um ponto a `s` metros do início do arco `u → v` está a `dist[u] + s` do campus. Um nó a 700 m "sobra" 100 m para os 800 m a pé: a rua que sai dele é percorrida só até 100 m. A função `faixas_de_alcance()` faz esse corte **por trecho físico**: junta a ida e a volta da mesma rua, soma o que se alcança por cada ponta e nunca conta a rua duas vezes.
-
-> **Nota: o que conferir no código**
->
-> | Trecho | Por que é assim |
-> | --- | --- |
-> | `nx.MultiDiGraph()` | **Multi**: pode haver duas ruas diferentes entre os mesmos nós. **Di**: o sentido importa |
-> | `a["tipos"] <= analise["vias"]` (carro) × `a["tipos"] & analise["vias"]` (a pé) | todos os tipos × pelo menos um tipo |
-> | geometrias em EPSG:31985 | o corte das ruas e o polígono saem em metros |
-> | `strongly_connected_components` | evita partir de uma rua sem saída de mão única |
-> | contagem por trecho físico | ida e volta da mesma rua não somam duas vezes |
-
-### 4.3 Rodar o script
-
-Abra `alcance_ifpb.py` no **Editor do Console Python** do QGIS, ajuste `MALHA` e `PASTA_SAIDA` e clique em **Executar script**. Saída esperada:
-
-```text
-[1] 22647 nós e 59603 arcos lidos de malha_joao_pessoa_all.gpkg em 0.9 s, sem internet
-
-[1] A pé: grafo com 21713 nós e 64134 arcos
-[2] Partida no nó 4666479308, a 35 m do campus
-[3] 137 nós a até 800 m pela rede (0.0 s)
-[4] 16.2 km de vias alcançadas; ponto mais distante a 747 m em linha reta
-      polígono do alcance: 0.81 km² = 40% do círculo de 800 m (2.01 km²)
-[5] QGIS (Área de serviço): 16.1 km × NetworkX 16.2 km (-0.2%)
-
-[1] De carro: grafo com 18173 nós e 46262 arcos
-[2] Partida no nó 799966499, a 80 m do campus
-[3] 2953 nós a até 4000 m pela rede (0.1 s)
-[4] 339.4 km de vias alcançadas; ponto mais distante a 3520 m em linha reta
-      polígono do alcance: 20.92 km² = 42% do círculo de 4000 m (50.25 km²)
-      ignorando a mão única: 388.3 km (+49.0 km, 14% a mais)
-[5] QGIS (Área de serviço): 339.1 km × NetworkX 339.4 km (-0.1%)
-
-[6] Resultados em …/alcance_ifpb/resultados/alcance_ifpb.gpkg
-      Mapas: …/alcance_ifpb/resultados/alcance_ifpb.png
-```
+> 💡 O item 4 termina com "conte cada rua uma vez só": é a lição da seção 6.3 virando instrução. Quando a conferência acha um erro, o prompt seguinte deve dizer como evitá-lo.
 
 ---
 
-## 5. Validação e leitura dos resultados
+## 🛡️ 7. Resolução de problemas e dicionário
 
-### 5.1 O alcance real: 800 m a pé × 4 km de carro
+### ⚠️ Armadilhas comuns
 
-| Faixa a pé | km de vias | Faixa de carro | km de vias |
-| --- | ---: | --- | ---: |
-| até 200 m | 0,4 | até 1 km | 17,8 |
-| 200 a 400 m | 2,2 | 1 a 2 km | 51,9 |
-| 400 a 600 m | 6,6 | 2 a 3 km | 113,2 |
-| 600 a 800 m | 7,0 | 3 a 4 km | 156,5 |
-| **total** | **16,2** | **total** | **339,4** |
+| Sintoma | Causa | Como corrigir |
+| :--- | :--- | :--- |
+| **comprimentos minúsculos, em "graus"** | `$length` ou `.length()` medidos em EPSG:4326 | usar o `length` do OSMnx ou reprojetar para um SRC métrico (EPSG:31985) |
+| **alcance quase vazio a partir do campus** | o nó de partida está numa rua sem saída de mão única | partir do nó mais próximo dentro da **maior componente fortemente conexa** |
+| **km de vias inflados (de 1% a 19%, conforme a faixa)** | as geometrias de ida e de volta, sobrepostas, foram somadas | contar por **trecho físico**, juntando ida e volta |
+| **alcance de carro 14% maior** | a rede foi tratada como não dirigida (`directed=False`) | usar a camada `arcos` e um `MultiDiGraph` |
+| **carro passando por calçadões, ou pedestre sem as escadarias** | o mesmo filtro de `highway` para os dois modos | regras separadas: "algum tipo" a pé, "todos os tipos" de carro |
+| **`ModuleNotFoundError: networkx`** | o NetworkX não está no Python do QGIS | seção 6.1 do *Guia OSMnx + QGIS no Windows* (PDF no Google Drive do curso) |
+| **`502 Bad Gateway … at capacity`** ao baixar a malha | o servidor Overpass está sobrecarregado | baixar uma vez, fora da aula, e trabalhar offline (seção 3.3) |
+| **"o alcance sai do limite da malha"** no console | a malha é pequena demais para a distância pedida | baixar uma malha maior, que cubra todo o alcance |
 
-| | A pé, 800 m | De carro, 4 km |
-| --- | ---: | ---: |
-| círculo | 2,01 km² | 50,25 km² |
-| polígono do alcance | 0,81 km² | 20,92 km² |
-| **polígono ÷ círculo** | **40%** | **42%** |
+### 📖 Dicionário para estudantes
 
-* **O que a proporção mede:** numa malha em grade perfeita, o alcance pela rede seria um losango dentro do círculo, com ~64% da área dele. Os **40% a 42%** em volta do IFPB refletem os quarteirões longos, o próprio terreno do campus e, de carro, a **Mata do Buraquinho**, o vazio a sudeste no mapa.
-* **Verificação de coerência:** nenhum ponto alcançado fica além do raio em linha reta (747 m < 800 m; 3520 m < 4000 m). A rede nunca é mais curta que a reta.
-
----
-
-### 5.2 O efeito da mão única para o carro
-
-O script refaz a análise de carro **ignorando** a mão única, só para comparar:
-
-![O que a mão única tira do alcance](../../imgs/alcance_ifpb/4-mao-unica.png)
-
-* **Respeitando a mão única:** **339,4 km** de vias.
-* **Ignorando a mão única:** **388,3 km** de vias, **49 km (14%) a mais**.
-* **Leitura:** os trechos em vermelho só seriam alcançados andando na contramão. Eles se concentram nas bordas do alcance, onde o caminho permitido é mais longo. Ignorar o `oneway` superestima a acessibilidade de carro.
+- **Buffer:** área a uma distância fixa em linha reta de um objeto; aqui, o círculo em volta do campus.
+- **Área de serviço (isodistância):** tudo o que se alcança até uma distância **pela rede**.
+- **Grafo:** um conjunto de **nós** ligados por **arcos**; o modelo matemático da malha viária.
+- **Grafo dirigido:** cada arco tem um sentido (de `u` para `v`); é o que representa a mão única.
+- **Dijkstra:** o algoritmo clássico que acha o menor caminho de um nó até todos os outros.
+- **Componente fortemente conexa:** um pedaço do grafo em que se vai de qualquer nó a qualquer outro, respeitando os sentidos.
+- **OSMnx:** biblioteca Python que baixa a malha viária do OpenStreetMap já como grafo.
+- **NetworkX:** biblioteca Python para criar e analisar grafos.
+- **Overpass:** a API pública que entrega os dados do OpenStreetMap; compartilhada e sujeita a sobrecarga.
 
 ---
 
-### 5.3 Validação cruzada: NetworkX × QGIS
-
-O QGIS tem a mesma análise pronta: **Caixa de Ferramentas de Processamento → Análise de redes → Área de serviço (a partir de ponto)** (*Network analysis → Service area (from point)*, `native:serviceareafrompoint`). Para conferir à mão:
-
-1. Reprojete a camada `arcos` para **EPSG:31985** (*Reprojetar camada*).
-2. Abra a **Área de serviço (a partir de ponto)**: tipo de caminho = **Mais curto**; ponto inicial = clique no campus; custo = **800** (a pé) ou **4000** (carro).
-3. Em **Parâmetros avançados**, a **Direção padrão** decide o sentido. Para o carro, use **Direção para frente** (*Forward direction*): cada arco já está desenhado no sentido do tráfego, então "para frente" é exatamente a mão única. A pé, use **Ambas as direções** (*Both directions*).
-
-O script faz isso automaticamente (`COMPARAR_COM_QGIS = True`), sobre os mesmos arcos usados no grafo:
-
-![NetworkX × QGIS](../../imgs/alcance_ifpb/5-networkx-x-qgis.png)
-
-| Modo e distância | NetworkX (script) | QGIS nativo | Diferença |
-| :--- | :---: | :---: | :---: |
-| 🚶 A pé (800 m) | **16,2 km** | **16,1 km** | −0,2% |
-| 🚗 De carro (4 km) | **339,4 km** | **339,1 km** | −0,1% |
-
-> 💡 **Duas implementações independentes, a mesma resposta.**
-> A pequena diferença vem principalmente do **ponto de partida**: o QGIS parte do ponto da rua mais próximo do campus, e o script parte do **nó** mais próximo (a 35 m a pé e a 80 m de carro). A concordância não prova que o script está certo em tudo, mas mostra que ele reproduz uma ferramenta já testada.
-
-> **Como o QGIS foi medido.** A Área de serviço devolve a ida e a volta de uma rua de mão dupla como **duas linhas sobrepostas**. Somar o comprimento delas contaria a rua duas vezes. O script mede pela área de uma faixa de 1 m em volta das linhas, que conta cada rua uma vez só.
-
----
-
-## 6. Armadilhas comuns em análise de redes
-
-| Erro comum (seu ou da IA) | Sintoma | Causa | Solução |
-| :--- | :--- | :--- | :--- |
-| **Medir comprimento em EPSG:4326** | valores minúsculos, em "graus" | usar `$length` ou `.length()` com coordenadas geográficas | usar o `length` do OSMnx ou reprojetar para um SRC métrico (EPSG:31985) |
-| **Partir de uma rua sem saída** | alcance quase vazio a partir do campus | o nó de partida está numa rua sem saída de mão única | escolher o nó mais próximo dentro da **maior componente fortemente conexa** |
-| **Contar a mesma rua duas vezes** | km de vias inflados (de 1% a 19%, conforme a faixa) | somar as geometrias de ida e de volta, que se sobrepõem | contar por **trecho físico**, juntando ida e volta |
-| **Ignorar a mão única no carro** | alcance de carro 14% maior | tratar a rede como não dirigida (`directed=False`) | usar a camada `arcos` e um `MultiDiGraph` |
-| **Usar o mesmo filtro para os dois modos** | carro passando por calçadões, ou pedestre sem as escadarias | não diferenciar `highway` por modo | regras separadas: "algum tipo" a pé, "todos os tipos" de carro |
-
-> **A IA não valida por você.** A primeira versão deste script unia as geometrias de todos os pedaços e media o comprimento da união. Deu 17,5 km a pé, um número plausível, mas a soma das faixas dava 18,9 km. A pista veio de uma conferência simples, **a soma das partes tem de dar o todo**. Contando por trecho físico, o valor certo é **16,2 km**.
-
----
-
-## 7. Desafios
+## 🚀 8. Desafios para depois da aula
 
 1. **Em minutos.** A camada `arcos` já tem `travel_time` (segundos, calculado pelo OSMnx a partir da velocidade de cada tipo de via). Troque o peso para `travel_time` e calcule o alcance de **10 minutos de carro**. A pé, use 4,8 km/h: 5, 10 e 15 minutos.
 2. **Outro ponto de partida.** Troque `CENTRO` por outro lugar de João Pessoa (a Reitoria do IFPB, uma estação, sua casa) e compare a proporção polígono ÷ círculo. Onde a rede é mais "caminhável"?
 3. **O que está a até 10 minutos?** Conte quantas paradas de ônibus ficam a até 800 m pela rede. Dica: ligue cada parada ao nó mais próximo e leia a distância em `distancias`.
 4. **Outra cidade, uma vez.** Baixe com `malha_urbana_osmnx.py` a malha de Cabedelo e calcule o alcance do IFPB Campus Cabedelo. Se o alcance de 4 km sair do município, o script avisa: o que fazer?
-
----
-
-## 8. Para levar
-
-> 💡 **A IA escreve o script em minutos, e o NetworkX calcula o alcance em milissegundos.** Mas são os fundamentos de geoprocessamento que garantem que o resultado está certo: a diferença entre a distância em linha reta e a distância pela rede, o uso de um sistema de coordenadas métrico e o efeito das restrições de tráfego. **Conferir o resultado continua sendo responsabilidade sua.**
 
 ---
 
