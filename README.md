@@ -53,7 +53,6 @@ Os exercícios formam uma **trilha progressiva**, em ordem crescente de complexi
 | 🚶 [**Alcance a partir do IFPB**](modulos/alcance_ifpb/README.md) | 🔴 Avançado | Baixar uma vez a malha viária de João Pessoa com o OSMnx e, offline, calcular com PyQGIS e NetworkX até onde se chega pelas ruas: 800 m a pé e 4 km de carro, respeitando a mão única. |
 | 🔥 [**Focos de queimadas na Paraíba**](modulos/queimadas_pb/README.md) | 🔴 Avançado | Animar os focos de 2026 com o Controlador Temporal, automatizar com PyQGIS e publicar no GitHub Pages um dashboard interativo (Leaflet, Vue.js e Highcharts) que qualquer pessoa abre no navegador. |
 | 🚧 **Próximos módulos** | — | Em produção. |
-| 🛰️ [**Composições RGB de Landsat e Sentinel**](modulos/composicao_rgb/README.md) | a definir | Montar composições em cor natural e falsa-cor como rasters virtuais e automatizar as quatro de uma vez com um script. |
 
 ### Material complementar
 
