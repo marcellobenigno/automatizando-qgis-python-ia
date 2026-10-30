@@ -61,4 +61,4 @@ As camadas estão em coordenadas geográficas (graus). Para buffers e áreas, re
 | EPSG:31984 — SIRGAS 2000 / UTM 24S | Oeste e centro da Paraíba (inclui a PB-200) |
 | EPSG:31985 — SIRGAS 2000 / UTM 25S | Faixa litorânea (a leste de 36° W) |
 
-Veja a discussão sobre a Brasil Policônica (EPSG:5880) na [Parte 3 da prática](../modulos/pb200/pb200.md#35-validar--a-ia-não-valida-por-você).
+Veja a discussão sobre a Brasil Policônica (EPSG:5880) na [seção 6.4 da prática da PB-200](../modulos/pb200/pb200.md#64-validar-a-ia-não-valida-por-você).

@@ -45,7 +45,7 @@ Os exercícios formam uma **trilha progressiva**, em ordem crescente de complexi
 
 | Módulo | Nível | O que você vai praticar |
 | --- | :---: | --- |
-| 📘 [**Introdução**](modulos/introducao/introducao.md) | 🟢 Iniciante | Conceitos de automação, as peças do quebra-cabeça (QGIS, PyQGIS, Processing, Console e IA), como escrever bons prompts, por que validar e o método de trabalho usado em todos os exercícios. Leitura de cerca de 15 min. |
+| 📘 [**Introdução**](modulos/introducao/introducao.md) | 🟢 Iniciante | Conceitos de automação, as peças do quebra-cabeça (QGIS, PyQGIS, Processing, Console e IA), como escrever bons prompts, por que validar e o método de trabalho usado em todos os exercícios. Aula de abertura de 35 min. |
 | 📍 [**Geocodificação urbana em João Pessoa**](modulos/geocodificacao/geocodificacao.md) | 🟢 Iniciante | Ler um CSV com Python, consultar o Nominatim (OpenStreetMap) respeitando o limite de requisições e criar uma camada de pontos. |
 | 🛣️ [**Impacto ambiental da duplicação da PB-200**](modulos/pb200/pb200.md) | 🟡 Intermediário | Fazer a análise à mão e traduzir cada passo em `processing.run(...)`: buffer de 3 km, municípios atingidos e uso do solo em hectares. |
 | 🗺️ [**Grade interativa SRTM/TOPODATA**](modulos/grade_topodata/grade_topodata.md) | 🟡 Intermediário | Investigar uma página web com IA, gerar uma grade vetorial e criar ações em Python que baixam o MDE da célula clicada. |

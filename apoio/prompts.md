@@ -1,6 +1,6 @@
 # Biblioteca de prompts
 
-Prompts usados no [Módulo 3](textos/03-ia-aplicada.md) e na [Parte 3 da prática](../modulos/pb200/pb200.md#parte-3--a-ia-na-criação-do-algoritmo). Substitua o que está entre `< >`. Funcionam em qualquer assistente (ChatGPT, Claude, Gemini, Copilot...).
+Prompts usados no [Módulo 3](textos/03-ia-aplicada.md) e na [seção 6.3 da prática da PB-200](../modulos/pb200/pb200.md#63-a-ia-na-criação-do-algoritmo). Substitua o que está entre `< >`. Funcionam em qualquer assistente (ChatGPT, Claude, Gemini, Copilot...).
 
 > Lembre-se: **nunca** cole dados pessoais ou sigilosos. Descreva a estrutura dos dados (camadas, campos, CRS), não o conteúdo.
 
