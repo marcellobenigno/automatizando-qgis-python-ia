@@ -43,8 +43,8 @@ Ao final da aula, a turma será capaz de:
 
 - [ ] **QGIS** 3.34 LTR ou mais recente (material testado no 3.44).
 - [ ] **Rede da sala:** acesso a `map4s3.com.br`, `cdn.map4s3.com.br` e `data.inpe.br`.
-- [ ] **A folha `07S375ZN.tif` já copiada** numa pasta `TOPODATA` em cada computador (é a folha da PB-200, usada também no [perfil topográfico](../perfil_pb200/perfil_pb200.md)). Na Atividade 3, a ação vai **reaproveitá-la** em vez de baixar de novo.
-- [ ] **Grade pronta (plano B):** [`grade_topodata.geojson`](https://drive.google.com/file/d/1pVxgALFs4eoI1mf_Q2bghkD6BVA3jiWS/view?usp=sharing) ([📥 pasta no Drive](https://drive.google.com/drive/folders/1lN2DfblMS2tecaPPsPpQB8tRMuXIdipx?usp=sharing)), para quem não concluir a conversão da Atividade 1 a tempo.
+- [ ] **A folha `07S375ZN.tif` ([📥 baixar do Drive](https://drive.google.com/file/d/1I9LjkX1F0Z08jXRkLbOpKo4pYqBjQnNu/view?usp=sharing)) já copiada** numa pasta `TOPODATA` em cada computador (é a folha da PB-200, usada também no [perfil topográfico](../perfil_pb200/perfil_pb200.md)). Na Atividade 3, a ação vai **reaproveitá-la** em vez de baixar de novo.
+- [ ] **Grade pronta (plano B):** [`grade_topodata.geojson`](https://drive.google.com/file/d/1qJGdYJoa5Cc2FYMUyVcbLXGoBrLGDpFV/view?usp=sharing) ([📥 pasta no Drive](https://drive.google.com/drive/folders/1EaqyV0aaCFmxmxR3NnACL1rRs2t9DuYq?usp=sharing)), para quem não concluir a conversão da Atividade 1 a tempo.
 - [ ] **Espaço em disco:** ~70 MB por folha de altitude (até ~105 MB).
 - [ ] **Assistente de IA** aberto no navegador.
 

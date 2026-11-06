@@ -39,8 +39,8 @@ Requisitos:
 
 | Dado | Onde está |
 | --- | --- |
-| Os três shapefiles | `dados_curso/dados_vetoriais/entrada/` ([📥 baixar do Drive](https://drive.google.com/drive/folders/1cnUG8amunnNd1k4qZn-c8ynEAWU4yG6x?usp=sharing)) |
-| Camada `municipios` (IBGE, EPSG:4326) | `minicurso_dados.gpkg` ([📥 baixar do Drive](https://drive.google.com/file/d/1Ot_0LSC1BQBNH3qXEsKofkvD9VmXG1aj/view?usp=sharing)) — veja [`dados_curso/README.md`](../../dados_curso/README.md) |
+| Os três shapefiles | `dados_curso/dados_vetoriais/entrada/` ([📥 baixar do Drive](https://drive.google.com/drive/folders/1I-V0V_dQjDD9pB8zMpLOssW9xFTjuh0D?usp=sharing)) |
+| Camada `municipios` (IBGE, EPSG:4326) | `minicurso_dados.gpkg` ([📥 baixar do Drive](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing)) — veja [`dados_curso/README.md`](../../dados_curso/README.md) |
 
 ## Roteiro
 
@@ -275,7 +275,7 @@ Pronto: a área do José aparece no lugar certo, e as duplicatas ficam evidentes
 2. Em **Camada de entrada**, escolha **`Cleaned`**.
 3. Na tabela **Mapeamento de campos**, selecione todas as linhas e apague-as.
 4. Clique em **Adicionar novo campo** três vezes e preencha conforme a tabela abaixo (copie a expressão de cada linha para a coluna **Expressão**).
-5. Em **Refatorado (Refactored)**, clique em `…` → **Salvar no GeoPackage (Save to GeoPackage)**: arquivo `dados_curso/dados_vetoriais/resultados/areas_especies_sertao.gpkg`, nome da camada **`area_estudo`**.
+5. Em **Refatorado (Refactored)**, clique em `…` → **Salvar no GeoPackage (Save to GeoPackage)**: arquivo `dados_curso/dados_vetoriais/resultados/areas_especies_sertao.gpkg` (crie a pasta `resultados/`, que não vem no download), nome da camada **`area_estudo`**.
 6. Clique em **Executar**.
 
 | Nome | Tipo | Tamanho | Precisão | Expressão |
