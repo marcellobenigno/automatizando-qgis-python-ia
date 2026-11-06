@@ -42,7 +42,7 @@ Ao final da aula, a turma será capaz de:
 ### 🛠️ Antes da aula, o(a) professor(a) confere
 
 - [ ] **QGIS** 3.34 LTR ou mais recente (material testado no 3.44) em todos os computadores.
-- [ ] **Dados:** o `minicurso_dados.gpkg`, com a camada `bdqueimadas_2026-01-01_2026-10-30`, na pasta `dados_curso/` (veja [`dados_curso/`](../../dados_curso/README.md)).
+- [ ] **Dados:** o `minicurso_dados.gpkg` ([📥 baixar do Drive](https://drive.google.com/file/d/1Ot_0LSC1BQBNH3qXEsKofkvD9VmXG1aj/view?usp=sharing)), com a camada `bdqueimadas_2026-01-01_2026-10-30`, na pasta `dados_curso/` (veja [`dados_curso/`](../../dados_curso/README.md)).
 - [ ] **Dashboard:** abre no [GitHub Pages](https://marcellobenigno.github.io/automatizando-qgis-python-ia/queimadas_pb/). Sem internet, rode-o localmente (seção 6.6).
 - [ ] **Rede da sala:** carrega os mapas de fundo e as bibliotecas da CDN (`cdn.jsdelivr.net`, `server.arcgisonline.com`). Se a rede bloquear algum desses endereços, o painel avisa o que faltou.
 

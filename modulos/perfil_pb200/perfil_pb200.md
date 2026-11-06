@@ -41,7 +41,7 @@ Ao final da aula, a turma será capaz de:
 
 - [ ] **QGIS** 3.34 LTR ou mais recente (material testado no 3.44).
 - [ ] **matplotlib** no Python do QGIS, para o gráfico (opcional: sem ele, o script grava o GeoPackage e o CSV, mas não desenha o perfil).
-- [ ] **Dados:** o `minicurso_dados.gpkg`, com a camada `malha_viaria` (veja [`dados_curso/`](../../dados_curso/README.md)).
+- [ ] **Dados:** o `minicurso_dados.gpkg` ([📥 baixar do Drive](https://drive.google.com/file/d/1Ot_0LSC1BQBNH3qXEsKofkvD9VmXG1aj/view?usp=sharing)), com a camada `malha_viaria` (veja [`dados_curso/`](../../dados_curso/README.md)).
 - [ ] **MDE:** a folha TOPODATA **`07S375ZN.tif`** já baixada. A PB-200 (lat −7,07° a −7,79°) fica inteira nessa célula, que vai de −7° a −8°. Use a **ação de clique** do exercício anterior ([Atividade 3 da grade TOPODATA](../grade_topodata/grade_topodata.md#-atividade-3-a-ação-de-clique-12-min)); se a folha já foi baixada, a ação só reaproveita o arquivo.
 - [ ] **Rede da sala:** não é preciso internet se o MDE já estiver baixado.
 
@@ -82,7 +82,7 @@ Para montar o perfil, precisamos de três coisas:
 
 | Dado | Origem | Observação |
 | --- | --- | --- |
-| `malha_viaria` em `minicurso_dados.gpkg` | [`dados_curso/README.md`](../../dados_curso/README.md) | campo `rodovia_nome = 'PB-200'`: **6 trechos** |
+| `malha_viaria` em `minicurso_dados.gpkg` | [📥 baixar do Drive](https://drive.google.com/file/d/1Ot_0LSC1BQBNH3qXEsKofkvD9VmXG1aj/view?usp=sharing) ([`dados_curso/README.md`](../../dados_curso/README.md)) | campo `rodovia_nome = 'PB-200'`: **6 trechos** |
 | `07S375ZN.tif` | ação de clique da [grade TOPODATA](../grade_topodata/grade_topodata.md#-atividade-3-a-ação-de-clique-12-min) | EPSG:4326, pixel de 1″ (~30 m), altitude em metros (EGM96), NoData = −9999 |
 
 > ⚠️ **O MDE mede a superfície, não o chão.** O TOPODATA deriva do SRTM, um radar que registra o topo do que está no terreno: vegetação, construções, taludes. Ele tem um ruído próprio de alguns metros. Guarde isso para a Atividade 2.
@@ -267,7 +267,7 @@ Peça que a turma complete as frases:
 └────────────────────────┘     └────────────────────────┘     └────────────────────────┘
 ```
 
-Em `dados_curso/perfil_pb200/resultados/`:
+Em `dados_curso/perfil_pb200/resultados/` (há uma cópia [na pasta do Drive](https://drive.google.com/drive/folders/1NLJYONJGQ9ubQ0QR_8fm6kmg_s5MlcnS?usp=sharing), para conferir):
 
 1. `pb200_perfil.gpkg`, com a camada `pb200_linha_unica` (1 feição, ~104 km, EPSG:31984) e a camada `pb200_pontos_z` (pontos a cada 30 m com `distance` e `z_1`);
 2. `pb200_perfil.csv`, com as colunas `km`, `lon`, `lat` e `altitude_m`;
