@@ -40,7 +40,7 @@ Ao final da aula, a turma será capaz de:
 ### 🛠️ Antes da aula, o(a) professor(a) confere
 
 - [ ] **QGIS** 3.34 LTR ou mais recente (material testado no 3.44), com o Console Python.
-- [ ] **Dados:** `dados_curso/geocodificacao/enderecos.csv`, com 5 locais de João Pessoa (veja [`dados_curso/`](../../dados_curso/README.md)).
+- [ ] **Dados:** `dados_curso/geocodificacao/enderecos.csv`, com 5 locais de João Pessoa ([📥 baixar do Drive](https://drive.google.com/file/d/14R47rwmZKDksQlSMz4j_9im0KeBxRH-e/view?usp=sharing); veja [`dados_curso/`](../../dados_curso/README.md)).
 - [ ] **Rede da sala:** acesso a `nominatim.openstreetmap.org`. O serviço é gratuito e não exige cadastro nem chave.
 - [ ] **Assistente de IA** aberto no navegador (ChatGPT, Claude, Gemini, Copilot ou similar).
 

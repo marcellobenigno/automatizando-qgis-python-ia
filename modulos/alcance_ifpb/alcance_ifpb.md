@@ -43,9 +43,9 @@ Ao final da aula, a turma será capaz de:
 ### 🛠️ Antes da aula, o(a) professor(a) confere
 
 - [ ] **QGIS** 3.34 LTR ou mais recente (material testado no 3.44) em todos os computadores.
-- [ ] **NetworkX** no Python do QGIS: no Console Python, `import networkx` não pode dar erro. Se der, veja a seção 6.1 do *Guia OSMnx + QGIS no Windows* (PDF no Google Drive do curso). O OSMnx **não** precisa estar instalado: ele só serviu para baixar a malha.
+- [ ] **NetworkX** no Python do QGIS: no Console Python, `import networkx` não pode dar erro. Se der, veja a seção 6.1 do *Guia OSMnx + QGIS no Windows* ([📥 baixar o PDF do Drive](https://drive.google.com/file/d/1D2I37F_BtkKuaqLJOfnzgtFQ8Ek9-Adx/view?usp=sharing)). O OSMnx **não** precisa estar instalado: ele só serviu para baixar a malha.
 - [ ] **matplotlib** no Python do QGIS, para os mapas lado a lado (opcional: sem ele, o script só não desenha a figura).
-- [ ] **Dados:** `malha_joao_pessoa_all.gpkg` (27 MB) em `dados_curso/alcance_ifpb/` (veja [`dados_curso/`](../../dados_curso/README.md)).
+- [ ] **Dados:** `malha_joao_pessoa_all.gpkg` (27 MB) em `dados_curso/alcance_ifpb/` ([📥 baixar do Drive](https://drive.google.com/file/d/1Qjuhr4lyzxUSnzepES6j3fdZM8s9gNS-/view?usp=sharing); veja [`dados_curso/`](../../dados_curso/README.md)).
 - [ ] **Rede da sala:** não é preciso internet. A análise roda inteira offline.
 
 > 💡 **Dica para quem conduz a aula:** rode o script uma vez antes da aula e deixe o resultado (`alcance_ifpb.gpkg` e `alcance_ifpb.png`) à mão. Se algum computador não tiver o NetworkX, a turma acompanha a Atividade 2 pelo resultado pronto, e o tempo da aula não vai para instalação.
@@ -421,7 +421,7 @@ Comentários em português.
 | **km de vias inflados (de 1% a 19%, conforme a faixa)** | as geometrias de ida e de volta, sobrepostas, foram somadas | contar por **trecho físico**, juntando ida e volta |
 | **alcance de carro 14% maior** | a rede foi tratada como não dirigida (`directed=False`) | usar a camada `arcos` e um `MultiDiGraph` |
 | **carro passando por calçadões, ou pedestre sem as escadarias** | o mesmo filtro de `highway` para os dois modos | regras separadas: "algum tipo" a pé, "todos os tipos" de carro |
-| **`ModuleNotFoundError: networkx`** | o NetworkX não está no Python do QGIS | seção 6.1 do *Guia OSMnx + QGIS no Windows* (PDF no Google Drive do curso) |
+| **`ModuleNotFoundError: networkx`** | o NetworkX não está no Python do QGIS | seção 6.1 do *Guia OSMnx + QGIS no Windows* ([📥 baixar o PDF do Drive](https://drive.google.com/file/d/1D2I37F_BtkKuaqLJOfnzgtFQ8Ek9-Adx/view?usp=sharing)) |
 | **`502 Bad Gateway … at capacity`** ao baixar a malha | o servidor Overpass está sobrecarregado | baixar uma vez, fora da aula, e trabalhar offline (seção 3.3) |
 | **"o alcance sai do limite da malha"** no console | a malha é pequena demais para a distância pedida | baixar uma malha maior, que cubra todo o alcance |
 

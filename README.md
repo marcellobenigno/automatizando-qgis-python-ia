@@ -61,7 +61,7 @@ Os exercícios formam uma **trilha progressiva**, em ordem crescente de complexi
 | 📚 | [`apoio/textos/`](apoio/textos/) | Textos de apoio: [automação no QGIS](apoio/textos/01-introducao-automacao.md), [fundamentos de PyQGIS](apoio/textos/02-fundamentos-pyqgis.md), [IA aplicada](apoio/textos/03-ia-aplicada.md) e [boas práticas](apoio/textos/05-boas-praticas-perspectivas.md). |
 | 🐍 | [`apoio/scripts/`](apoio/scripts/) | Scripts PyQGIS de exemplo usados nos textos de apoio. |
 | 💬 | [`apoio/prompts.md`](apoio/prompts.md) | Biblioteca de prompts usados no curso. |
-| 🗂️ | [`dados_curso/`](dados_curso/README.md) | Onde baixar os dados (Google Drive) e como organizá-los. |
+| 🗂️ | [`dados_curso/`](dados_curso/README.md) | Onde baixar os dados ([Google Drive](https://drive.google.com/drive/folders/1rqgB9Fe6D7ApSjebBoSYNgK5c1ZJoipq?usp=sharing)) e como organizá-los. |
 | 🖼️ | [`imgs/`](imgs/) | Figuras, capturas de tela e logomarcas, uma subpasta por tópico. |
 
 ---
@@ -77,7 +77,7 @@ Introdução à automação de tarefas de geoprocessamento no QGIS. Apresentaç�
 ## Antes do curso
 
 - **QGIS 3.34 LTR ou mais recente** (material testado no 3.44), com o Console Python habilitado.
-- Os dados do curso, baixados do Google Drive para a pasta `dados_curso/` — veja [`dados_curso/README.md`](dados_curso/README.md).
+- Os dados do curso, baixados do [Google Drive](https://drive.google.com/drive/folders/1rqgB9Fe6D7ApSjebBoSYNgK5c1ZJoipq?usp=sharing) para a pasta `dados_curso/` — veja [`dados_curso/README.md`](dados_curso/README.md).
 - Noções básicas de QGIS: camadas, tabela de atributos e SRC. **Não é necessário saber Python.**
 - Acesso a um assistente de IA generativa (ChatGPT, Claude, Gemini, Copilot ou similar).
 

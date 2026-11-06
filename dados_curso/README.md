@@ -2,21 +2,41 @@
 
 Os dados **não ficam no git**: estão numa pasta do **Google Drive**. Baixe a pasta inteira e coloque o conteúdo aqui, em `dados_curso/`, na raiz do repositório:
 
-> 📥 **<link do Google Drive — a definir>**
+> 📥 **[Pasta `dados_curso` no Google Drive](https://drive.google.com/drive/folders/1rqgB9Fe6D7ApSjebBoSYNgK5c1ZJoipq?usp=sharing)**
 
 Tudo nesta pasta, exceto este `README.md`, é ignorado pelo git (veja o `.gitignore`). Os scripts trazem caminhos de exemplo como `/caminho/para/dados_curso/...`: ajuste-os para o local onde você salvou a pasta.
+
+## O que baixar para cada módulo
+
+Se não quiser baixar tudo, pegue só o que o módulo usa:
+
+| Módulo | Dados no Drive |
+| --- | --- |
+| [Introdução](../modulos/introducao/introducao.md) | [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing) |
+| [Geocodificação](../modulos/geocodificacao/geocodificacao.md) | [`geocodificacao/`](https://drive.google.com/drive/folders/1sMk6E18Lu9LnYXmv_o3ELq2YchB26NiH?usp=sharing) |
+| [PB-200](../modulos/pb200/pb200.md) | [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing) e, para conferir, [`pb200/resultados/`](https://drive.google.com/drive/folders/1KdjPupDrzpn4-qIDxIJtdmXwXIf4ETzv?usp=sharing) |
+| [Grade TOPODATA](../modulos/grade_topodata/grade_topodata.md) | [`grade_topodata/`](https://drive.google.com/drive/folders/1EaqyV0aaCFmxmxR3NnACL1rRs2t9DuYq?usp=sharing), com a folha [`07S375ZN.tif`](https://drive.google.com/file/d/1I9LjkX1F0Z08jXRkLbOpKo4pYqBjQnNu/view?usp=sharing) |
+| [Perfil da PB-200](../modulos/perfil_pb200/perfil_pb200.md) | [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing) e, para conferir, [`perfil_pb200/resultados/`](https://drive.google.com/drive/folders/1T8M9rUB1jAWbrI4MB6kLhXyoDxp2P2vm?usp=sharing); a folha [`07S375ZN.tif`](https://drive.google.com/file/d/1I9LjkX1F0Z08jXRkLbOpKo4pYqBjQnNu/view?usp=sharing) é o MDE |
+| [Alcance a partir do IFPB](../modulos/alcance_ifpb/alcance_ifpb.md) | [`alcance_ifpb/`](https://drive.google.com/drive/folders/1N9YNpuLcsy-DmibgXSA9uLUqzpck7Oi_?usp=sharing) |
+| [Queimadas na Paraíba](../modulos/queimadas_pb/queimadas_pb.md) | [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing) |
+| [Composição RGB](../modulos/composicao_rgb/composicao_rgb.md) | [`composicao_rgb/`](https://drive.google.com/drive/folders/1s1_s0s2mqa_WXL7tElY-EFEzUS5jPFKV?usp=sharing) |
+| [Dados vetoriais](../modulos/dados_vetoriais/dados_vetoriais.md) | [`dados_vetoriais/entrada/`](https://drive.google.com/drive/folders/1I-V0V_dQjDD9pB8zMpLOssW9xFTjuh0D?usp=sharing) e [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing) |
+| Material de apoio | [`material_apoio/`](https://drive.google.com/drive/folders/1RNGJsYnxZyGzq5CVr_Fwq4XlaUi9XmW9?usp=sharing), com o [PyQGIS Developer Cookbook (PDF)](https://drive.google.com/file/d/1tkHn5JVJSlkSB8RE90MOZzo4XKLegCjT/view?usp=sharing) e o [Guia OSMnx + QGIS no Windows (PDF)](https://drive.google.com/file/d/1D2I37F_BtkKuaqLJOfnzgtFQ8Ek9-Adx/view?usp=sharing) |
 
 ## Estrutura esperada
 
 ```
 dados_curso/
-├── minicurso_dados.gpkg        ← GeoPackage principal (~570 MB), usado por vários módulos
+├── minicurso_dados.gpkg        ← GeoPackage principal (~548 MB), usado por vários módulos
 ├── geocodificacao/
 │   └── enderecos.csv
 ├── pb200/
 │   └── resultados/             ← saídas do fluxo manual e dos scripts
 ├── grade_topodata/
-│   └── grade_topodata.geojson
+│   ├── grade_topodata.geojson
+│   └── 07S375ZN.tif            ← folha da PB-200 (67 MB), usada na grade e no perfil
+├── perfil_pb200/
+│   └── resultados/             ← perfil pronto, para conferir
 ├── alcance_ifpb/
 │   ├── malha_joao_pessoa_all.gpkg  ← malha do OSM baixada uma vez com o OSMnx (27 MB)
 │   └── resultados/             ← alcance a pé e de carro
@@ -27,8 +47,8 @@ dados_curso/
 │   └── cenas_completas/        ← cenas originais, sem recorte (1,7 GB, opcional)
 ├── dados_vetoriais/
 │   ├── entrada/                ← os três shapefiles problemáticos
-│   └── resultados/
-└── material_apoio/             ← PyQGIS Developer Cookbook (PDF) e arquivos de teste
+│   └── resultados/             ← criada ao fazer o exercício; não vem no download
+└── material_apoio/             ← PyQGIS Developer Cookbook e Guia OSMnx + QGIS no Windows (PDFs), arquivos de teste
 ```
 
 ## O GeoPackage `minicurso_dados.gpkg`

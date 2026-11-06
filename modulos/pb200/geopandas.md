@@ -10,14 +10,14 @@ A rodovia estadual **PB-200** passará por um processo de duplicação. Como ana
 
 ### **Fonte de Dados**
 
-Todos os dados estão consolidados no arquivo GeoPackage: `/content/drive/MyDrive/pb.gpkg`.
+Todos os dados estão consolidados no arquivo GeoPackage: `/content/drive/MyDrive/minicurso_dados.gpkg` ([📥 baixar do Drive](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing) e copiar para o seu Drive).
 
 | Camada | Tipo Geométrico | Descrição | 
 | ----- | ----- | ----- | 
 | `limite_pb` | MultiPolygon | Limite estadual da Paraíba | 
 | `municipios` | MultiPolygon | Limites dos 223 municípios paraibanos com dados populacionais | 
 | `malha_viaria` | MultiLineString | Rodovias do estado (coluna `rodovia_nome` ou `codigo`) | 
-| `uso_ocupacao_2023` | MultiPolygon | Mapeamento de uso e cobertura do solo (`val`, `descricao`, `cor`) | 
+| `uso_ocupacao_solo` | MultiPolygon | Mapeamento de uso e cobertura do solo (`val`, `descricao`, `cor`) | 
 | `outorgas` / `pocos` | Point / MultiPoint | Pontos de captação e usos d'água na região | 
 
 > **Atenção quanto ao CRS (Sistema de Referência de Coordenadas):**
@@ -32,7 +32,7 @@ Todos os dados estão consolidados no arquivo GeoPackage: `/content/drive/MyDriv
 
 #### **Etapa 1: Leitura e Preparação dos Dados**
 
-1. Carregue as camadas `municipios`, `malha_viaria` e `uso_ocupacao_2023` contidas em `pb.gpkg`.
+1. Carregue as camadas `municipios`, `malha_viaria` e `uso_ocupacao_solo` contidas em `minicurso_dados.gpkg`.
 2. Filtre o GeoDataFrame da malha viária para obter apenas a rodovia **PB-200**.
 3. Reprojete todas as camadas para o CRS **EPSG:5880** (`.to_crs(epsg=5880)`).
 
@@ -54,7 +54,7 @@ Todos os dados estão consolidados no arquivo GeoPackage: `/content/drive/MyDriv
 
 #### **Etapa 5: Análise do Uso e Ocupação do Solo**
 
-1. Realize o recorte / interseção (`gpd.overlay`) entre a camada `uso_ocupacao_2023` e o buffer de **3 km (AII)**.
+1. Realize o recorte / interseção (`gpd.overlay`) entre a camada `uso_ocupacao_solo` e o buffer de **3 km (AII)**.
 2. Calcule a área total (em $km^2$ ou hectares) de cada classe de uso do solo (`descricao`) dentro da AII.
 
 #### **Etapa 6: Elaboração de Mapas Temáticos (Matplotlib)**
@@ -104,10 +104,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # 1. Caminho do arquivo e leitura das camadas
-gpkg_path = "/content/drive/MyDrive/pb.gpkg"
+gpkg_path = "/content/drive/MyDrive/minicurso_dados.gpkg"
 municipios = gpd.read_file(gpkg_path, layer="municipios")
 malha = gpd.read_file(gpkg_path, layer="malha_viaria")
-uso_solo = gpd.read_file(gpkg_path, layer="uso_ocupacao_2023")
+uso_solo = gpd.read_file(gpkg_path, layer="uso_ocupacao_solo")
 
 # 2. Filtro da rodovia PB-200
 pb200 = malha[malha['rodovia_nome'] == 'PB-200']

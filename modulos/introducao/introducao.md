@@ -41,7 +41,7 @@ Ao final da aula, a turma será capaz de:
 ### 🛠️ Antes da aula, o(a) professor(a) confere
 
 - [ ] **QGIS** 3.34 LTR ou mais recente (material testado no 3.44), com o Console Python.
-- [ ] **Dados:** o `minicurso_dados.gpkg`, com a camada `municipios` carregada no projeto (veja [`dados_curso/`](../../dados_curso/README.md)).
+- [ ] **Dados:** o `minicurso_dados.gpkg` ([📥 baixar do Drive](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing)), com a camada `municipios` carregada no projeto (veja [`dados_curso/`](../../dados_curso/README.md)).
 - [ ] **Projetor**, para mostrar as figuras e os passos enquanto a turma acompanha no próprio QGIS.
 - [ ] **Assistente de IA** aberto no navegador (ChatGPT, Claude, Gemini, Copilot ou similar).
 
