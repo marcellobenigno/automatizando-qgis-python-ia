@@ -3,14 +3,6 @@
 
 # Automatizando o QGIS com Python e IA
 
-> **Roteiro de aula:** a aula de abertura do minicurso, prática e guiada
-> **Público:** estudantes e profissionais de geotecnologias; **não é preciso saber Python** · **Nível:** 🟢 Iniciante
-> **Duração:** 35 minutos de aula (seções 1 a 5) + material de referência para todo o curso (seções 6 a 8)
-> **Tema:** o que é automatizar no QGIS, as peças do quebra-cabeça (QGIS, Python, PyQGIS, Processing e IA), bons prompts e validação
-> **Tecnologias:** QGIS 3.44 (Caixa de Ferramentas, Histórico de Processamento, Console Python); IA generativa
-
----
-
 ## 🧭 1. A proposta da aula
 
 Pense na última vez que você repetiu a mesma sequência de ferramentas no QGIS: abrir a camada, reprojetar, gerar um buffer, recortar, calcular a área, exportar… e depois fazer tudo de novo para o próximo arquivo, o próximo município, a próxima rodovia.
@@ -45,7 +37,6 @@ Ao final da aula, a turma será capaz de:
 - [ ] **Projetor**, para mostrar as figuras e os passos enquanto a turma acompanha no próprio QGIS.
 - [ ] **Assistente de IA** aberto no navegador (ChatGPT, Claude, Gemini, Copilot ou similar).
 
-> 💡 **Dica para quem conduz a aula:** esta é a aula que dá o vocabulário de todo o curso. Ninguém precisa sair dela sabendo Python; precisa sair sabendo **onde o código mora** (Histórico, Console), **como pedir** (prompt) e **por que conferir** (unidades e SRC). As seções 6 a 8 são material de consulta para o curso inteiro: não tente cobri-las na aula.
 
 ### ⏱️ Planejamento minuto a minuto (35 min)
 
