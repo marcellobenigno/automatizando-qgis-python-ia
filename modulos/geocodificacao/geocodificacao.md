@@ -26,8 +26,6 @@ Ao final da aula, a turma será capaz de:
 4. **transformar** uma lista de endereços (CSV) numa camada de pontos, sem descartar nenhuma linha;
 5. **conferir** o resultado no mapa e na tabela, e achar os erros que rodam sem dar erro.
 
----
-
 
 ## 💡 3. Fundamentação
 
