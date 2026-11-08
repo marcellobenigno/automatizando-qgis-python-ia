@@ -3,13 +3,6 @@
 
 # Do endereço ao ponto: geocodificação no QGIS com IA
 
-> **Roteiro de aula:** prático, guiado e com aprofundamento técnico
-> **Público:** estudantes de geotecnologias, sem experiência em programação · **Nível:** 🟢 Iniciante
-> **Duração:** 35 minutos de aula prática (seções 1 a 5) + aprofundamento técnico para estudo posterior (seções 6 e 7)
-> **Tema:** geocodificação de endereços com o Nominatim (OpenStreetMap) e conferência do resultado
-> **Tecnologias:** QGIS 3.44 e Console Python (PyQGIS); Nominatim; IA generativa
-
----
 
 ## 🧭 1. A proposta da aula
 
