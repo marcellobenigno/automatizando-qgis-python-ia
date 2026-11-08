@@ -28,28 +28,6 @@ Ao final da aula, a turma será capaz de:
 
 ---
 
-## 📋 2. Preparação e roteiro de tempo
-
-### 🛠️ Antes da aula, o(a) professor(a) confere
-
-- [ ] **QGIS** 3.34 LTR ou mais recente (material testado no 3.44), com o Console Python.
-- [ ] **Dados:** `dados_curso/geocodificacao/enderecos.csv`, com 5 locais de João Pessoa ([📥 baixar do Drive](https://drive.google.com/file/d/14R47rwmZKDksQlSMz4j_9im0KeBxRH-e/view?usp=sharing); veja [`dados_curso/`](../../dados_curso/README.md)).
-- [ ] **Rede da sala:** acesso a `nominatim.openstreetmap.org`. O serviço é gratuito e não exige cadastro nem chave.
-- [ ] **Assistente de IA** aberto no navegador (ChatGPT, Claude, Gemini, Copilot ou similar).
-
-> 💡 **Dica para quem conduz a aula:** o Nominatim aceita **no máximo uma consulta por segundo** por aplicação. Uma turma inteira rodando ao mesmo tempo, da mesma rede, pode ser bloqueada. Se a turma for grande, faça a Atividade 2 em duplas ou rode você a lista uma vez, no projetor, e a turma confere.
-
-### ⏱️ Planejamento minuto a minuto (35 min)
-
-| Intervalo | Etapa | Foco da turma |
-| :--- | :--- | :--- |
-| **0–5 min** | Pergunta e contexto | O que é geocodificação? O que o serviço devolve, e o que ele não garante. |
-| **5–15 min** | Atividade 1: um endereço | Pedir o script à IA, rodar e conferir o ponto. |
-| **15–27 min** | Atividade 2: uma lista | Do CSV à camada, sem perder nenhuma linha. Achar o ponto que foi parar na Espanha. |
-| **27–32 min** | Atividade 3: onde a geocodificação erra | Os cinco erros que rodam sem mensagem de erro. |
-| **32–35 min** | Síntese e fechamento | Check-out oral e mensagem final. |
-
----
 
 ## 💡 3. Fundamentação
 
