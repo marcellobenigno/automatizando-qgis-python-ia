@@ -37,18 +37,6 @@ Ao final da aula, a turma será capaz de:
 - [ ] **Projetor**, para mostrar as figuras e os passos enquanto a turma acompanha no próprio QGIS.
 - [ ] **Assistente de IA** aberto no navegador (ChatGPT, Claude, Gemini, Copilot ou similar).
 
-
-### ⏱️ Planejamento minuto a minuto (35 min)
-
-| Intervalo | Etapa | Foco da turma |
-| :--- | :--- | :--- |
-| **0–5 min** | Pergunta e contexto | O que é automatizar? As peças do quebra-cabeça. |
-| **5–13 min** | Atividade 1: todo clique tem um código | Rodar uma ferramenta à mão e achar o código dela. |
-| **13–20 min** | Atividade 2: o Console Python | Quatro linhas para conhecer uma camada. |
-| **20–28 min** | Atividade 3: bons prompts | Transformar um prompt fraco num prompt bom. |
-| **28–32 min** | Atividade 4: rodou sem erro ≠ está certo | O buffer em graus. Atribuir × reprojetar. |
-| **32–35 min** | Síntese e fechamento | Check-out oral e mensagem final. |
-
 ---
 
 ## 💡 3. Fundamentação
