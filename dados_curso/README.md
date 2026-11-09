@@ -38,8 +38,9 @@ dados_curso/
 ├── perfil_pb200/
 │   └── resultados/             ← perfil pronto, para conferir
 ├── alcance_ifpb/
-│   ├── malha_joao_pessoa_all.gpkg  ← malha do OSM baixada uma vez com o OSMnx (27 MB)
-│   └── resultados/             ← alcance a pé e de carro
+│   ├── malha_joao_pessoa_all.gpkg    ← todas as vias, baixada uma vez com o OSMnx (27 MB): a pé
+│   ├── malha_joao_pessoa_drive.gpkg  ← vias de carro, baixada com o plugin OSMnx Routing & Isochrones (20 MB)
+│   └── resultados/             ← saídas do script NetworkX (aprofundamento)
 ├── composicao_rgb/
 │   ├── area_interese.geojson
 │   ├── LC08_L1TP_216065_…/     ← bandas Landsat 8 recortadas
