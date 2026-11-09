@@ -45,7 +45,6 @@ No planejamento urbano, a ideia de **cidade caminhável** (*walkable city*) cost
                                               muros, mão única e acessos
 ```
 
-> 🗣️ **Como explicar para a turma:**
 > *"O círculo é o alcance de um pássaro: ele voa em linha reta por cima de muros e prédios. A isócrona é o alcance de quem anda pela calçada: precisa dar a volta no quarteirão e não atravessa a Mata do Buraquinho."*
 
 Uma **isócrona** (do grego *iso*, igual, e *chronos*, tempo) é a área que se alcança **no mesmo tempo**. A pé, o plugin usa velocidade constante: 10 minutos a 4,8 km/h são exatamente os 800 m da cidade caminhável. De carro, cada rua tem a sua velocidade (seção 2.4).
