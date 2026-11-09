@@ -7,6 +7,10 @@
 
 Este exercício junta os dois anteriores: a **PB-200** do [exercício de licenciamento](../pb200/pb200.md) e o **MDE TOPODATA** da [grade interativa](../grade_topodata/grade_topodata.md). O resultado é o **perfil topográfico** da rodovia inteira, do km 0 (Juazeirinho) ao km 104 (Congo).
 
+> ⚠️ **Para que serve, e para que não serve, este perfil.** A utilização de Modelos Digitais de Elevação (MDE) derivados de imagens **SRTM** (*Shuttle Radar Topography Mission*), como o TOPODATA, é uma alternativa tecnicamente justificável para a **elaboração preliminar** de perfis topográficos de rodovias, especialmente em estudos de **reconhecimento, planejamento e análise de alternativas de traçado**.
+>
+> A justificativa central é que o SRTM permite obter uma representação inicial do comportamento do relevo ao longo de um corredor rodoviário, sem exigir, nessa etapa, levantamentos topográficos de alta precisão. Entretanto, os resultados representam uma **aproximação da superfície do terreno** e **não devem ser interpretados como substitutos de levantamentos topográficos** destinados ao **projeto geométrico executivo**.
+
 Partimos de um tutorial publicado na web em 2021, escrito para uma versão antiga do QGIS, e usamos a IA para atualizá-lo. O ponto principal da aula é **conferir o que ela entrega**.
 
 A pergunta que guia a atividade:
