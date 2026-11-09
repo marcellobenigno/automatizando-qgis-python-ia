@@ -61,9 +61,6 @@ Uma malha viária é modelada como um **grafo**: um conjunto de **nós** ligados
   (cruzamento 1)        comprimento: 120 m        (cruzamento 2)
 ```
 
-> 🗣️ **Como explicar para a turma:**
-> *"Numa rua de mão dupla, a camada tem duas setas, uma para cada lado. Numa rua de mão única, só uma. Para o carro, a rua de mão única é uma porta que só abre para um lado."*
-
 O plugin roteia sobre a camada de **arcos**, que tem um registro por sentido de circulação. O carro só usa os arcos que existem; o pedestre anda nos dois sentidos.
 
 ### 2.3 Baixar uma vez, analisar offline
@@ -101,10 +98,11 @@ Medido nesta aula (10 minutos a partir do campus):
 
 ## 🛠️ 3. Trilha prática guiada
 
-### 📦 Antes da aula (professor)
+### 📦 Instalação do Plugin OSMnx Routing & Isochrones
 
 1. Instale o **OSMnx no Python do QGIS** (*Complementos → Console Python*), reinicie o QGIS e instale o plugin **OSMnx Routing & Isochrones** pelo *Gerenciador de complementos* (marque *Mostrar também os complementos experimentais*). O passo a passo está na [página de instalação do plugin](https://marcellobenigno.github.io/osmnx-routing-isochrones/pt-br/#install).
-2. Distribua a pasta `dados_curso/alcance_ifpb/` com as duas malhas. A `drive` foi baixada com *Caixa de Ferramentas → OSMnx Routing & Isochrones → 1. Baixar malha viária (OSM)*, lugar `João Pessoa, Paraíba, Brasil`, tipo `drive`.
+   
+2. Baixe os dados do drive (`dados_curso/alcance_ifpb/`) com as duas malhas. A `drive` foi baixada com *Caixa de Ferramentas → OSMnx Routing & Isochrones → 1. Baixar malha viária (OSM)*, lugar `João Pessoa, Paraíba, Brasil`, tipo `drive`.
 
 ---
 
