@@ -3,14 +3,6 @@
 
 # Grade interativa SRTM/TOPODATA: de um mapa na web a um clique no QGIS
 
-> **Roteiro de aula:** prático, guiado e com aprofundamento técnico
-> **Público:** estudantes de geotecnologias e ciências da terra · **Nível:** 🟡 Intermediário
-> **Duração:** 35 minutos de aula prática (seções 1 a 5) + aprofundamento técnico para estudo posterior (seções 6 e 7)
-> **Tema:** extrair dados de uma página web com IA e criar ações em Python no QGIS para baixar o MDE de cada célula
-> **Tecnologias:** QGIS 3.44 (Ações de camada), PyQGIS, GDAL; navegador (código-fonte da página); IA generativa
-
----
-
 ## 🧭 1. A proposta da aula
 
 O [TOPODATA](http://www.dsr.inpe.br/topodata/) (INPE) oferece dados geomorfométricos de todo o Brasil (altitude, declividade, orientação, curvaturas…) derivados do SRTM, com resolução de 1″ (~30 m). Os dados são divididos em **556 folhas** de 1° de latitude × 1,5° de longitude.
@@ -37,36 +29,9 @@ Ao final da aula, a turma será capaz de:
 
 ---
 
-## 📋 2. Preparação e roteiro de tempo
+## 💡 2. Fundamentação
 
-### 🛠️ Antes da aula, o(a) professor(a) confere
-
-- [ ] **QGIS** 3.34 LTR ou mais recente (material testado no 3.44).
-- [ ] **Rede da sala:** acesso a `map4s3.com.br`, `cdn.map4s3.com.br` e `data.inpe.br`.
-- [ ] **A folha `07S375ZN.tif` ([📥 baixar do Drive](https://drive.google.com/file/d/1I9LjkX1F0Z08jXRkLbOpKo4pYqBjQnNu/view?usp=sharing)) já copiada** numa pasta `TOPODATA` em cada computador (é a folha da PB-200, usada também no [perfil topográfico](../perfil_pb200/perfil_pb200.md)). Na Atividade 3, a ação vai **reaproveitá-la** em vez de baixar de novo.
-- [ ] **Grade pronta (plano B):** [`grade_topodata.geojson`](https://drive.google.com/file/d/1qJGdYJoa5Cc2FYMUyVcbLXGoBrLGDpFV/view?usp=sharing) ([📥 pasta no Drive](https://drive.google.com/drive/folders/1EaqyV0aaCFmxmxR3NnACL1rRs2t9DuYq?usp=sharing)), para quem não concluir a conversão da Atividade 1 a tempo.
-- [ ] **Espaço em disco:** ~70 MB por folha de altitude (até ~105 MB).
-- [ ] **Assistente de IA** aberto no navegador.
-
-> 💡 **Dica para quem conduz a aula:** com uma turma inteira baixando folhas de 70 MB ao mesmo tempo, a rede da sala pode travar. Por isso a folha `07S375` fica pré-copiada: a turma vê a ação funcionando (e reaproveitando o arquivo) sem depender da rede. Se a rede aguentar, cada um baixa mais **uma** célula, de preferência a da própria cidade.
-
-> As capturas de tela estão com o QGIS 3.44 em inglês; no texto aparecem os nomes em português e, entre parênteses, em inglês.
-
-### ⏱️ Planejamento minuto a minuto (35 min)
-
-| Intervalo | Etapa | Foco da turma |
-| :--- | :--- | :--- |
-| **0–5 min** | Pergunta e contexto | O TOPODATA, as 556 folhas e o problema de achar o código de cada uma. |
-| **5–13 min** | Atividade 1: de onde vem a grade? | Ler o código-fonte da página, achar o arquivo de dados e carregar a grade no QGIS. |
-| **13–20 min** | Atividade 2: a regra do endereço | Montar a URL de uma folha a partir do código e testar no navegador. |
-| **20–32 min** | Atividade 3: a ação de clique | Criar a ação na camada e clicar numa célula. |
-| **32–35 min** | Síntese e fechamento | Check-out oral e mensagem final. |
-
----
-
-## 💡 3. Fundamentação
-
-### 3.1 Todo mapa web carrega os dados de algum lugar
+### 2.1 Todo mapa web carrega os dados de algum lugar
 
 Um mapa web (Leaflet, OpenLayers…) precisa receber a geometria de algum lugar: um arquivo `.geojson`, um serviço WFS, uma API, ou um **arquivo JavaScript com os dados embutidos**. O mapa índice do Map4s3 mostra a grade, mas não oferece um arquivo para baixar: a grade está **dentro do código da página**.
 
@@ -75,7 +40,7 @@ Um mapa web (Leaflet, OpenLayers…) precisa receber a geometria de algum lugar:
 
 ![O mapa índice TOPODATA no Map4s3](../../imgs/grade_topodata/2-site-topodata.png)
 
-### 3.2 O que é uma ação de camada
+### 2.2 O que é uma ação de camada
 
 Uma **ação** é um comando guardado na própria camada do QGIS, que roda quando você clica numa feição. Uma ação do tipo **Python** pode baixar arquivos, abrir janelas e carregar camadas. Antes de executá-la, o QGIS **substitui** cada expressão `[% … %]` pelo valor da feição clicada. Para a célula `07S375`:
 
@@ -87,7 +52,7 @@ scene = '[% "scene" %]'.strip()   # o QGIS executa: scene = '07S375'.strip()
 
 ---
 
-## 🛠️ 4. Trilha prática guiada
+## 🛠️ 3. Trilha prática guiada
 
 ### 📍 Atividade 1: de onde vem a grade? (8 min)
 
@@ -99,7 +64,7 @@ scene = '[% "scene" %]'.strip()   # o QGIS executa: scene = '07S375'.strip()
    e extraia a grade GeoJSON do mapa índice TOPODATA.
    ```
    Na conversa que originou este exercício, a IA **não conseguiu**: as ferramentas de navegação dos chatbots costumam receber só o HTML "cru", não executam o JavaScript e às vezes recusam arquivos `.js`. Em vez de inventar uma resposta, ela pediu ajuda, e esse é o comportamento que queremos.
-2. **Ajude a IA:** no navegador, abra a página, clique com o botão direito → **Exibir código-fonte da página** (`Ctrl+U`), copie tudo e mande para a IA (o prompt completo está na seção 6.2). Ela aponta o suspeito, carregado por uma tag `<script>`:
+2. **Ajude a IA:** no navegador, abra a página, clique com o botão direito → **Exibir código-fonte da página** (`Ctrl+U`), copie tudo e mande para a IA (o prompt completo está na seção 5.2). Ela aponta o suspeito, carregado por uma tag `<script>`:
    ```html
    <script type="text/javascript"
            src="https://cdn.map4s3.com.br/js/maps/topodata/topodata-dataset.js"></script>
@@ -112,7 +77,7 @@ scene = '[% "scene" %]'.strip()   # o QGIS executa: scene = '07S375'.strip()
 var pol_topodata = {"type": "FeatureCollection","features":[{"type":"Feature","properties":{"scene":"00S465"},"geometry":{"type":"Polygon", ...
 ```
 
-4. **Carregue a grade:** rode no Editor do Console Python o script da seção 6.3, que baixa o arquivo, tira a variável JavaScript, salva o GeoJSON e carrega a grade no mapa. Confira: **556 feições**, EPSG:4326, campo `scene` preenchido em todas as linhas, e a grade sem deslocamento em relação ao litoral.
+4. **Carregue a grade:** rode no Editor do Console Python o script da seção 5.3, que baixa o arquivo, tira a variável JavaScript, salva o GeoJSON e carrega a grade no mapa. Confira: **556 feições**, EPSG:4326, campo `scene` preenchido em todas as linhas, e a grade sem deslocamento em relação ao litoral.
 
 > 💬 **Pausa para reflexão com a turma:**
 > - *Por que foi bom a IA dizer "não consigo ler a página", em vez de responder qualquer coisa?*
@@ -148,7 +113,7 @@ https://data.inpe.br/bdc/data/topodata/v001/{pasta}/{folha}/{scene}ZN.tif
 
 Três detalhes que importam:
 
-- **`ZN` é a altimetria:** o MDE refinado, em metros, referenciado ao geoide EGM96. Os outros planos de informação (declividade, orientação, curvaturas…) seguem o mesmo padrão, trocando só o sufixo (seção 6.4).
+- **`ZN` é a altimetria:** o MDE refinado, em metros, referenciado ao geoide EGM96. Os outros planos de informação (declividade, orientação, curvaturas…) seguem o mesmo padrão, trocando só o sufixo (seção 5.4).
 - **O `_` faz parte do código:** quando a longitude tem só dois dígitos (`42` → 42°), o código é completado com `_` para ter sempre 6 caracteres.
 - **Não há separador antes de `ZN`:** `07S375ZN.tif`, e não `07S375_ZN.tif`.
 
@@ -173,7 +138,7 @@ Três detalhes que importam:
    - **Descrição (Description):** `Baixar TOPODATA (altitude)`;
    - **Nome curto (Short name):** `TOPODATA`;
    - **Escopos (Action scopes):** **Tela (Canvas)** e **Feição (Feature)**;
-   - **Texto da ação (Action text):** o conteúdo de [`acao_baixar_celula.py`](acao_baixar_celula.py), a versão revisada do script que a IA gerou (o prompt está na seção 6.5).
+   - **Texto da ação (Action text):** o conteúdo de [`acao_baixar_celula.py`](acao_baixar_celula.py), a versão revisada do script que a IA gerou (o prompt está na seção 5.5).
 3. **OK** e **OK**.
 
 ![Editando a ação Python](../../imgs/grade_topodata/5-editar-acao-python.png)
@@ -205,7 +170,7 @@ Para que um download interrompido (internet que cai, Cancelar, servidor que fech
 
 ---
 
-## 🎓 5. Fechamento: checagem de aprendizagem
+## 🎓 4. Fechamento: checagem de aprendizagem
 
 ### 💬 Check-out oral
 
@@ -230,13 +195,13 @@ Peça que a turma complete as frases:
 
 ---
 
-## 💻 6. Aprofundamento técnico: os prompts e as ações
+## 💻 5. Aprofundamento técnico: os prompts e as ações
 
-### 6.1 O que deve ser entregue
+### 5.1 O que deve ser entregue
 
 1. `dados_curso/grade_topodata/grade_topodata.geojson`: a grade com as 556 células, em **EPSG:4326**, com o atributo `scene` (código da folha).
 2. Uma **ação de clique** na camada: clicou numa célula → escolhe a pasta → baixa (ou reaproveita) o GeoTIFF → carrega no projeto.
-3. Uma **ação para várias células selecionadas**, com barra de progresso e relatório final (seção 6.6).
+3. Uma **ação para várias células selecionadas**, com barra de progresso e relatório final (seção 5.6).
 
 Requisitos das duas ações:
 
@@ -245,7 +210,7 @@ Requisitos das duas ações:
 - se o raster **já estiver no projeto**, não é adicionado duas vezes;
 - download incompleto ou cancelado **não deixa arquivo quebrado** na pasta.
 
-### 6.2 Os prompts para achar e converter a grade
+### 5.2 Os prompts para achar e converter a grade
 
 **Mandar o código-fonte** (Atividade 1, passo 2):
 
@@ -288,7 +253,7 @@ Converta os POLÍGONOS da grade em um arquivo GeoJSON:
 
 Saída esperada: **556 polígonos**, extensão de **−75° a −34,5°** de longitude e **−34° a 6°** de latitude, nenhum `scene` repetido.
 
-### 6.3 Você nem precisava da IA para a conversão (mas precisava saber disso)
+### 5.3 Você nem precisava da IA para a conversão (mas precisava saber disso)
 
 O conteúdo depois do `=` **já é GeoJSON**. Toda a conversão cabe em poucas linhas, e é um ótimo exercício pedir à IA para explicar este código. Ajuste `SAIDA` e rode no Editor do Console Python do QGIS: o script salva o GeoJSON e já carrega a grade no mapa.
 
@@ -328,7 +293,7 @@ else:
 
 > ⚠️ **Use sempre caminho completo.** No QGIS, a "pasta atual" do Python não é a pasta do projeto. No Windows ela costuma ser a pasta de instalação do QGIS (`C:\Program Files\QGIS …`), onde não se pode gravar. Um `open("grade_topodata.geojson", "w")` falha com `PermissionError` (ou, no macOS, `Read-only file system`).
 
-### 6.4 Os planos de informação do TOPODATA
+### 5.4 Os planos de informação do TOPODATA
 
 | Sufixo | Plano de informação | Unidade / classes |
 | --- | --- | --- |
@@ -344,7 +309,7 @@ else:
 | `FT` | Forma do terreno (curvatura vertical × horizontal) | 9 classes |
 | `DD` | Delineamento de microbacias (talvegues e divisores) | apoio à digitalização da drenagem |
 
-### 6.5 A ação de clique: o prompt e o que conferir
+### 5.5 A ação de clique: o prompt e o que conferir
 
 Na mesma conversa das etapas anteriores:
 
@@ -390,7 +355,7 @@ Comentários em português.
 
 **Levar a ação para outros projetos:** **Propriedades** → **Estilo (Style)** → **Salvar estilo (Save Style)**, com a categoria **Ações (Actions)** marcada. O estilo salvo (`.qml`) leva junto a simbologia e as ações: ao carregar a grade em outro projeto, carregue o estilo e a ação já vem pronta.
 
-### 6.6 A ação para várias células selecionadas
+### 5.6 A ação para várias células selecionadas
 
 Na mesma conversa, com o script da ação de clique como referência:
 
@@ -444,7 +409,7 @@ Na 2ª execução, nada é baixado. Repare que ela rodou com um **raster como ca
 
 ---
 
-## 🛡️ 7. Resolução de problemas e dicionário
+## 🛡️ 6. Resolução de problemas e dicionário
 
 ### ⚠️ Armadilhas comuns
 
@@ -476,10 +441,10 @@ Na 2ª execução, nada é baixado. Repare que ela rodou com um **raster como ca
 
 ---
 
-## 🚀 8. Desafios para depois da aula
+## 🚀 7. Desafios para depois da aula
 
 1. **Outro plano de informação.** Crie uma segunda ação que baixe a **declividade** (`SN`) em vez da altitude. O que muda no script? (Dica: o sufixo `ZN` aparece em dois lugares, na URL e no nome do arquivo.)
-2. **Várias células.** Configure a ação da seção 6.6 e baixe as 4 células em volta da sua cidade. Rode duas vezes e confira o relatório.
+2. **Várias células.** Configure a ação da seção 5.6 e baixe as 4 células em volta da sua cidade. Rode duas vezes e confira o relatório.
 3. **O mosaico.** Com as 4 folhas carregadas, crie um mosaico virtual (`gdal:buildvirtualraster`) e use-o no [perfil topográfico](../perfil_pb200/perfil_pb200.md) de uma rodovia que cruze mais de uma folha.
 4. **Outro mapa índice.** Escolha outro mapa web que mostre uma grade ou camada sem oferecer download, e repita a investigação da Atividade 1. Onde estavam os dados?
 

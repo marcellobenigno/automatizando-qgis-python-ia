@@ -3,14 +3,6 @@
 
 # Até onde se chega a partir do IFPB: análise de redes com PyQGIS e NetworkX
 
-> **Roteiro de aula:** prático, guiado e com aprofundamento técnico
-> **Público:** estudantes de geotecnologias, planejamento urbano e mobilidade · **Nível:** 🔴 Avançado
-> **Duração:** 35 minutos de aula prática (seções 1 a 5) + aprofundamento técnico para estudo posterior (seções 6 e 7)
-> **Tema:** análise de redes, acessibilidade urbana e área de serviço (isodistância)
-> **Tecnologias:** QGIS 3.44, PyQGIS e NetworkX (análise, offline); OSMnx (download da malha, feito uma vez); matplotlib; IA generativa
-
----
-
 ## 🧭 1. A proposta da aula
 
 Para avaliar o alcance de um equipamento público, como uma escola, um hospital ou um campus, é comum desenhar um **círculo em linha reta** (um buffer). Mas **pessoas e veículos não andam em linha reta**: seguem as ruas, contornam quarteirões e barreiras e, de carro, respeitam a mão única.
@@ -38,33 +30,9 @@ Ao final da aula, a turma será capaz de:
 
 ---
 
-## 📋 2. Preparação e roteiro de tempo
+## 💡 2. Fundamentação
 
-### 🛠️ Antes da aula, o(a) professor(a) confere
-
-- [ ] **QGIS** 3.34 LTR ou mais recente (material testado no 3.44) em todos os computadores.
-- [ ] **NetworkX** no Python do QGIS: no Console Python, `import networkx` não pode dar erro. Se der, veja a seção 6.1 do *Guia OSMnx + QGIS no Windows* ([📥 baixar o PDF do Drive](https://drive.google.com/file/d/1D2I37F_BtkKuaqLJOfnzgtFQ8Ek9-Adx/view?usp=sharing)). O OSMnx **não** precisa estar instalado: ele só serviu para baixar a malha.
-- [ ] **matplotlib** no Python do QGIS, para os mapas lado a lado (opcional: sem ele, o script só não desenha a figura).
-- [ ] **Dados:** `malha_joao_pessoa_all.gpkg` (27 MB) em `dados_curso/alcance_ifpb/` ([📥 baixar do Drive](https://drive.google.com/file/d/1Qjuhr4lyzxUSnzepES6j3fdZM8s9gNS-/view?usp=sharing); veja [`dados_curso/`](../../dados_curso/README.md)).
-- [ ] **Rede da sala:** não é preciso internet. A análise roda inteira offline.
-
-> 💡 **Dica para quem conduz a aula:** rode o script uma vez antes da aula e deixe o resultado (`alcance_ifpb.gpkg` e `alcance_ifpb.png`) à mão. Se algum computador não tiver o NetworkX, a turma acompanha a Atividade 2 pelo resultado pronto, e o tempo da aula não vai para instalação.
-
-### ⏱️ Planejamento minuto a minuto (35 min)
-
-| Intervalo | Etapa | Foco da turma |
-| :--- | :--- | :--- |
-| **0–5 min** | Pergunta e contexto | Linha reta × pelas ruas. Por que 800 m e 4 km? |
-| **5–13 min** | Atividade 1: a malha no QGIS | Abrir os arcos, ler os campos e ver o sentido das ruas com setas. |
-| **13–23 min** | Atividade 2: o alcance pela rede | Rodar o script e ler o resultado: km de vias, polígono × círculo, mão única. |
-| **23–31 min** | Atividade 3: validação cruzada | Refazer o alcance a pé com a Área de serviço nativa do QGIS e comparar. |
-| **31–35 min** | Síntese e fechamento | Check-out oral e mensagem final. |
-
----
-
-## 💡 3. Fundamentação
-
-### 3.1 Linha reta (buffer) × pelas ruas (área de serviço)
+### 2.1 Linha reta (buffer) × pelas ruas (área de serviço)
 
 No planejamento urbano, a ideia de **cidade caminhável** (*walkable city*) costuma usar **~800 m**, ou 10 minutos a pé, como raio de influência em volta de escolas, estações e serviços.
 
@@ -87,7 +55,7 @@ Dois exemplos reais, calculados nesta aula:
 - **A pé:** um ponto a **337 m** ao sul do campus, em linha reta, está a **812 m** pela rede, fora do alcance de 800 m. Não há passagem direta pelo lado sul do terreno; é preciso dar a volta pelo oeste.
 - **De carro:** um ponto a **2,4 km** a leste, do outro lado da Mata do Buraquinho, está a **6,3 km** pela rede.
 
-### 3.2 A malha como grafo: nós e arcos com sentido
+### 2.2 A malha como grafo: nós e arcos com sentido
 
 Uma malha viária é modelada como um **grafo** $G = (V, E)$:
 
@@ -104,7 +72,7 @@ Uma malha viária é modelada como um **grafo** $G = (V, E)$:
 
 > ⚠️ **Se o cálculo de carro ignorar o sentido**, o veículo "anda na contramão", e o alcance sai maior do que o real.
 
-### 3.3 Online × offline: por que baixar a malha uma vez só
+### 2.3 Online × offline: por que baixar a malha uma vez só
 
 APIs públicas como o **Overpass** (do OpenStreetMap) são recursos compartilhados, com limite de uso e sujeitos a sobrecarga. Na preparação desta aula, em 21/10/2026, várias tentativas seguidas de baixar a malha de João Pessoa receberam `502 Bad Gateway … server is currently at capacity`, no QGIS e fora dele.
 
@@ -117,7 +85,7 @@ APIs públicas como o **Overpass** (do OpenStreetMap) são recursos compartilhad
 | **Velocidade** | minutos, quando o servidor responde | **~0,9 s** para ler a malha e **< 0,5 s** por análise |
 | **Reprodutibilidade** | o OSM muda todo dia | GeoPackage fixo: resultados iguais para toda a turma |
 
-### 3.4 Os dados e as regras de cada modo
+### 2.4 Os dados e as regras de cada modo
 
 O `malha_joao_pessoa_all.gpkg` (27 MB, **EPSG:4326**) foi baixado com o script [`apoio/osmnx/malha_urbana_osmnx.py`](../../apoio/osmnx/malha_urbana_osmnx.py), com a rede **`all`** (todas as vias). Tem 4 camadas:
 
@@ -150,7 +118,7 @@ Nos dois modos, os arcos com `access` = `private` (2.315) ou `no` (151) ficam de
 
 ---
 
-## 🛠️ 4. Trilha prática guiada
+## 🛠️ 3. Trilha prática guiada
 
 ### 📍 Atividade 1: a malha no QGIS (8 min)
 
@@ -251,7 +219,7 @@ O script faz essa mesma comparação sozinho (`COMPARAR_COM_QGIS = True`), sobre
 
 ---
 
-## 🎓 5. Fechamento: checagem de aprendizagem
+## 🎓 4. Fechamento: checagem de aprendizagem
 
 ### 💬 Check-out oral
 
@@ -276,9 +244,9 @@ Peça que a turma complete as frases:
 
 ---
 
-## 💻 6. Aprofundamento técnico: o script e a IA
+## 💻 5. Aprofundamento técnico: o script e a IA
 
-### 6.1 O fluxo do exercício
+### 5.1 O fluxo do exercício
 
 ```
 ┌────────────────────────┐     ┌────────────────────────┐     ┌────────────────────────┐
@@ -297,7 +265,7 @@ Peça que a turma complete as frases:
 
 > **Por que a camada `arcos`, e não `edges`?** O *Guia OSMnx + QGIS no Windows* avisa (seção 8.1): gravado com `directed=False`, o grafo perde o sentido das vias, e uma rota pode entrar na contramão. A camada `arcos` guarda o grafo **dirigido**. Para o carro, é ela que garante a mão única.
 
-### 6.2 A lógica do script (`alcance_ifpb.py`)
+### 5.2 A lógica do script (`alcance_ifpb.py`)
 
 Os trechos centrais, copiados do script:
 
@@ -370,11 +338,11 @@ aneis, km, total = faixas_de_alcance(grafo, arcos, distancias, faixas)
       Mapas: …/alcance_ifpb/resultados/alcance_ifpb.png
 ```
 
-### 6.3 A IA não valida por você
+### 5.3 A IA não valida por você
 
 A primeira versão deste script unia as geometrias de todos os pedaços alcançados e media o comprimento da união. Deu **17,5 km** a pé: um número plausível, que passaria despercebido. Mas a soma das faixas dava **18,9 km**. A pista veio de uma conferência simples: **a soma das partes tem de dar o todo**. Contando por trecho físico, o valor certo é **16,2 km**, e as duas contas passaram a fechar.
 
-### 6.4 O prompt usado com a IA
+### 5.4 O prompt usado com a IA
 
 ```text
 Atue como especialista em PyQGIS e análise de redes.
@@ -406,11 +374,11 @@ serviço (isodistância) a partir do IFPB Campus João Pessoa
 Comentários em português.
 ```
 
-> 💡 O item 4 termina com "conte cada rua uma vez só": é a lição da seção 6.3 virando instrução. Quando a conferência acha um erro, o prompt seguinte deve dizer como evitá-lo.
+> 💡 O item 4 termina com "conte cada rua uma vez só": é a lição da seção 5.3 virando instrução. Quando a conferência acha um erro, o prompt seguinte deve dizer como evitá-lo.
 
 ---
 
-## 🛡️ 7. Resolução de problemas e dicionário
+## 🛡️ 6. Resolução de problemas e dicionário
 
 ### ⚠️ Armadilhas comuns
 
@@ -422,7 +390,7 @@ Comentários em português.
 | **alcance de carro 14% maior** | a rede foi tratada como não dirigida (`directed=False`) | usar a camada `arcos` e um `MultiDiGraph` |
 | **carro passando por calçadões, ou pedestre sem as escadarias** | o mesmo filtro de `highway` para os dois modos | regras separadas: "algum tipo" a pé, "todos os tipos" de carro |
 | **`ModuleNotFoundError: networkx`** | o NetworkX não está no Python do QGIS | seção 6.1 do *Guia OSMnx + QGIS no Windows* ([📥 baixar o PDF do Drive](https://drive.google.com/file/d/1D2I37F_BtkKuaqLJOfnzgtFQ8Ek9-Adx/view?usp=sharing)) |
-| **`502 Bad Gateway … at capacity`** ao baixar a malha | o servidor Overpass está sobrecarregado | baixar uma vez, fora da aula, e trabalhar offline (seção 3.3) |
+| **`502 Bad Gateway … at capacity`** ao baixar a malha | o servidor Overpass está sobrecarregado | baixar uma vez, fora da aula, e trabalhar offline (seção 2.3) |
 | **"o alcance sai do limite da malha"** no console | a malha é pequena demais para a distância pedida | baixar uma malha maior, que cubra todo o alcance |
 
 ### 📖 Dicionário para estudantes
@@ -439,7 +407,7 @@ Comentários em português.
 
 ---
 
-## 🚀 8. Desafios para depois da aula
+## 🚀 7. Desafios para depois da aula
 
 1. **Em minutos.** A camada `arcos` já tem `travel_time` (segundos, calculado pelo OSMnx a partir da velocidade de cada tipo de via). Troque o peso para `travel_time` e calcule o alcance de **10 minutos de carro**. A pé, use 4,8 km/h: 5, 10 e 15 minutos.
 2. **Outro ponto de partida.** Troque `CENTRO` por outro lugar de João Pessoa (a Reitoria do IFPB, uma estação, sua casa) e compare a proporção polígono ÷ círculo. Onde a rede é mais "caminhável"?
