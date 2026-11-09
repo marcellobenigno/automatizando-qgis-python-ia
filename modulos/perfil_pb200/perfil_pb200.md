@@ -3,14 +3,6 @@
 
 # Perfil topográfico da PB-200: atualizar um tutorial com IA e conferir o que ela entrega
 
-> **Roteiro de aula:** prático, guiado e com aprofundamento técnico
-> **Público:** estudantes de geotecnologias, engenharia e ciências da terra · **Nível:** 🟡 Intermediário
-> **Duração:** 35 minutos de aula prática (seções 1 a 5) + aprofundamento técnico para estudo posterior (seções 6 e 7)
-> **Tema:** perfil topográfico de uma rodovia a partir de um MDE, e atualização de código antigo com IA
-> **Tecnologias:** QGIS 3.44 (Processing e Perfil de Elevação), PyQGIS, matplotlib, MDE TOPODATA; IA generativa
-
----
-
 ## 🧭 1. A proposta da aula
 
 Este exercício junta os dois anteriores: a **PB-200** do [exercício de licenciamento](../pb200/pb200.md) e o **MDE TOPODATA** da [grade interativa](../grade_topodata/grade_topodata.md). O resultado é o **perfil topográfico** da rodovia inteira, do km 0 (Juazeirinho) ao km 104 (Congo).
@@ -35,37 +27,9 @@ Ao final da aula, a turma será capaz de:
 
 ---
 
-## 📋 2. Preparação e roteiro de tempo
+## 💡 2. Fundamentação
 
-### 🛠️ Antes da aula, o(a) professor(a) confere
-
-- [ ] **QGIS** 3.34 LTR ou mais recente (material testado no 3.44).
-- [ ] **matplotlib** no Python do QGIS, para o gráfico (opcional: sem ele, o script grava o GeoPackage e o CSV, mas não desenha o perfil).
-- [ ] **Dados:** o `minicurso_dados.gpkg` ([📥 baixar do Drive](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing)), com a camada `malha_viaria` (veja [`dados_curso/`](../../dados_curso/README.md)).
-- [ ] **MDE:** a folha TOPODATA **`07S375ZN.tif`** já baixada ([📥 cópia no Drive](https://drive.google.com/file/d/1I9LjkX1F0Z08jXRkLbOpKo4pYqBjQnNu/view?usp=sharing)). A PB-200 (lat −7,07° a −7,79°) fica inteira nessa célula, que vai de −7° a −8°. Use a **ação de clique** do exercício anterior ([Atividade 3 da grade TOPODATA](../grade_topodata/grade_topodata.md#-atividade-3-a-ação-de-clique-12-min)); se a folha já foi baixada, a ação só reaproveita o arquivo.
-- [ ] **Rede da sala:** não é preciso internet se o MDE já estiver baixado.
-
-![A PB-200 sobre a célula 07S375](../../imgs/perfil_pb200/3-celula-07S375.png)
-
-> 💡 **Dica para quem conduz a aula:** rode o script [`perfil_pb200.py`](perfil_pb200.py) uma vez antes da aula. A Atividade 3 usa a camada `pb200_linha_unica` que ele grava; com ela pronta, ninguém fica para trás.
-
-> As capturas de tela estão com o QGIS 3.44 em inglês; no texto aparecem os nomes em português e, entre parênteses, em inglês.
-
-### ⏱️ Planejamento minuto a minuto (35 min)
-
-| Intervalo | Etapa | Foco da turma |
-| :--- | :--- | :--- |
-| **0–5 min** | Pergunta e contexto | O que é um perfil topográfico? Do que ele precisa? |
-| **5–15 min** | Atividade 1: uma rodovia, uma linha | A solução "óbvia" da IA dá 5 partes. Por quê? |
-| **15–25 min** | Atividade 2: o perfil e o serrilhado | Rodar o script, ler o perfil e decidir o que é relevo e o que é ruído. |
-| **25–32 min** | Atividade 3: validação cruzada | Comparar com o Perfil de Elevação nativo do QGIS. |
-| **32–35 min** | Síntese e fechamento | Check-out oral e mensagem final. |
-
----
-
-## 💡 3. Fundamentação
-
-### 3.1 O que é um perfil topográfico
+### 2.1 O que é um perfil topográfico
 
 Um **perfil topográfico** mostra como a altitude varia ao longo de uma linha. Na duplicação da PB-200, ele ajuda a identificar rampas, pontos altos e baixos e os trechos que vão exigir corte ou aterro.
 
@@ -78,7 +42,7 @@ Para montar o perfil, precisamos de três coisas:
 2. **Um modelo de elevação** que cubra a rodovia: a folha TOPODATA `07S375`.
 3. **Um jeito de "andar" pela linha:** pontos a intervalos regulares, cada um com a distância desde o início e a altitude lida do MDE.
 
-### 3.2 Os dados
+### 2.2 Os dados
 
 | Dado | Origem | Observação |
 | --- | --- | --- |
@@ -87,15 +51,15 @@ Para montar o perfil, precisamos de três coisas:
 
 > ⚠️ **O MDE mede a superfície, não o chão.** O TOPODATA deriva do SRTM, um radar que registra o topo do que está no terreno: vegetação, construções, taludes. Ele tem um ruído próprio de alguns metros. Guarde isso para a Atividade 2.
 
-### 3.3 Um tutorial de 2021 no QGIS 3.44
+### 2.3 Um tutorial de 2021 no QGIS 3.44
 
-A referência é o tutorial [*Python QGIS Tutorial: Create Elevation Profile*](https://www.geodose.com/2021/02/python-qgis-tutorial-create-elevation-profile.html), do Geodose. Ele usa ferramentas que mudaram desde 2021: o SAGA deixou a instalação padrão no QGIS 3.30, e as duas tarefas que o tutorial faz com o GRASS e o SAGA hoje têm algoritmos nativos. Além disso, há uma armadilha de unidade escondida. A IA atualizou o código; o que conferir na resposta está na seção 6.2.
+A referência é o tutorial [*Python QGIS Tutorial: Create Elevation Profile*](https://www.geodose.com/2021/02/python-qgis-tutorial-create-elevation-profile.html), do Geodose. Ele usa ferramentas que mudaram desde 2021: o SAGA deixou a instalação padrão no QGIS 3.30, e as duas tarefas que o tutorial faz com o GRASS e o SAGA hoje têm algoritmos nativos. Além disso, há uma armadilha de unidade escondida. A IA atualizou o código; o que conferir na resposta está na seção 5.2.
 
 > 🚨 **A armadilha de unidade:** o tutorial usa o tamanho do pixel do MDE como intervalo entre pontos. Com o TOPODATA em EPSG:4326, esse valor é **0,000278 grau**. Usado como distância numa linha em UTM, vira **um ponto a cada 0,3 mm**. O intervalo certo é **30 m**.
 
 ---
 
-## 🛠️ 4. Trilha prática guiada
+## 🛠️ 3. Trilha prática guiada
 
 ### 📍 Atividade 1: uma PB-200, uma linha (10 min)
 
@@ -121,7 +85,7 @@ A referência é o tutorial [*Python QGIS Tutorial: Create Elevation Profile*](h
 | **Sentido invertido** | os trechos `0020`, `0040` e `0050` foram digitalizados do km maior para o menor | o "fim" de um trecho não encontra o "início" do seguinte |
 | **Falhas entre trechos** | ~198 m antes de `0030`, ~166 m antes de `0060`, ~57 m antes de `0040` e ~4 m antes de `0020` | o `mergelines` só junta linhas que **se tocam** |
 
-4. **A solução:** os atributos `km_inicial` e `km_final` dão a ordem certa. O script ordena os trechos pelo km, inverte os que estão ao contrário e liga as falhas em linha reta, **relatando** cada uma (seção 6.3). A linha única tem **~104,27 km**, contra **104,25 km** da soma do campo `extensao`.
+4. **A solução:** os atributos `km_inicial` e `km_final` dão a ordem certa. O script ordena os trechos pelo km, inverte os que estão ao contrário e liga as falhas em linha reta, **relatando** cada uma (seção 5.3). A linha única tem **~104,27 km**, contra **104,25 km** da soma do campo `extensao`.
 
 > 💬 **Pausa para reflexão com a turma:**
 > - *A resposta da IA (`dissolve` + `mergelines`) estava errada?*
@@ -229,7 +193,7 @@ Porque o script é **repetível** (outra rodovia é só trocar a constante `RODO
 
 ---
 
-## 🎓 5. Fechamento: checagem de aprendizagem
+## 🎓 4. Fechamento: checagem de aprendizagem
 
 ### 💬 Check-out oral
 
@@ -254,9 +218,9 @@ Peça que a turma complete as frases:
 
 ---
 
-## 💻 6. Aprofundamento técnico: o script e a IA
+## 💻 5. Aprofundamento técnico: o script e a IA
 
-### 6.1 O que o script entrega
+### 5.1 O que o script entrega
 
 ```
 ┌────────────────────────┐     ┌────────────────────────┐     ┌────────────────────────┐
@@ -273,7 +237,7 @@ Em `dados_curso/perfil_pb200/resultados/` (há uma cópia [na pasta do Drive](ht
 2. `pb200_perfil.csv`, com as colunas `km`, `lon`, `lat` e `altitude_m`;
 3. `pb200_perfil.png`, o gráfico do perfil.
 
-### 6.2 Atualizando o tutorial de 2021
+### 5.2 Atualizando o tutorial de 2021
 
 O código do Geodose tem quatro blocos: definir entradas, gerar pontos ao longo da linha, ler a altitude de cada ponto e calcular a distância acumulada, e desenhar o gráfico. O centro dele é este trecho:
 
@@ -319,7 +283,7 @@ processing.algorithmHelp("native:pointsalonglines")
 processing.algorithmHelp("native:rastersampling")
 ```
 
-### 6.3 Unir os trechos: do "óbvio" à costura
+### 5.3 Unir os trechos: do "óbvio" à costura
 
 **O prompt da solução "óbvia"** (a da Atividade 1):
 
@@ -370,9 +334,9 @@ return QgsGeometry.fromPolylineXY(pontos), falhas
 
 Se o comprimento da linha única der muito maior que 104 km (por exemplo, 150 km), algum trecho foi ligado pelo lado errado e a linha "vai e volta".
 
-### 6.4 Pontos e altitudes
+### 5.4 Pontos e altitudes
 
-Com a linha única em UTM, os dois algoritmos da seção 6.2 fazem o resto:
+Com a linha única em UTM, os dois algoritmos da seção 5.2 fazem o resto:
 
 ```python
 pontos = rodar("native:pointsalonglines", {
@@ -394,7 +358,7 @@ pontos_z = rodar("native:rastersampling", {
 
 > **E se a rodovia cruzasse duas folhas?** Seria preciso juntar os MDEs antes, por exemplo com `gdal:buildvirtualraster`, que cria um mosaico virtual. Fica como desafio.
 
-### 6.5 Rodar o script: a saída completa
+### 5.5 Rodar o script: a saída completa
 
 ```text
 [1] PB-200: 6 trechos
@@ -417,20 +381,20 @@ pontos_z = rodar("native:rastersampling", {
       Pontos sem altitude: 0 de 3476
 ```
 
-### 6.6 Perguntas para fazer à IA
+### 5.6 Perguntas para fazer à IA
 
 - *"Qual o exagero vertical deste gráfico, para `figsize=(12, 4.5)` e eixos de 0–104 km × 460–602 m? Como desenhar sem exagero?"* Depois teste com `ax.set_aspect(...)` e veja por que ninguém desenha perfis de estrada sem exagero.
 - *"Meu perfil topográfico feito com o SRTM a cada 30 m está serrilhado. É erro do script ou característica do dado? Que números do CSV eu posso calcular para decidir?"* Compare a resposta com a tabela da Atividade 2. Se a IA sugerir suavizar sem falar do custo disso, veja o Desafio 4.
 
 ---
 
-## 🛡️ 7. Resolução de problemas e dicionário
+## 🛡️ 6. Resolução de problemas e dicionário
 
 ### ⚠️ Armadilhas comuns
 
 | Sintoma | Causa | Como corrigir |
 | :--- | :--- | :--- |
-| **a linha "única" tem 5 partes** | trechos com sentido invertido e falhas entre eles; o `mergelines` só junta linhas que se tocam | ordenar por `km_inicial`, inverter e costurar (seção 6.3) |
+| **a linha "única" tem 5 partes** | trechos com sentido invertido e falhas entre eles; o `mergelines` só junta linhas que se tocam | ordenar por `km_inicial`, inverter e costurar (seção 5.3) |
 | **o "km 0" do perfil cai num lugar a 472 m** | o perfil foi gerado sobre as partes soltas, em ordem arbitrária | gerar o perfil sobre a linha única, orientada do km 0 ao 104 |
 | **a linha única tem ~150 km** | um trecho foi ligado pelo lado errado e a linha "vai e volta" | conferir a orientação de cada trecho e comparar com a soma de `extensao` |
 | **milhões de pontos, ou o QGIS trava** | o intervalo veio de `rasterUnitsPerPixelX()`, em graus | usar **30 m** com a linha em UTM |
@@ -453,7 +417,7 @@ pontos_z = rodar("native:rastersampling", {
 
 ---
 
-## 🚀 8. Desafios para depois da aula
+## 🚀 7. Desafios para depois da aula
 
 1. **Outra rodovia.** Troque `RODOVIA` por outra estadual. Se ela cruzar mais de uma folha TOPODATA, baixe as folhas com a ação de células selecionadas e crie um mosaico com `gdal:buildvirtualraster` antes de amostrar.
 2. **Pavimentada × leito natural.** Pinte o gráfico com uma cor por `sit_fisica`. Dica: guarde em `unir_trechos()` a distância acumulada em que cada trecho começa.

@@ -27,9 +27,9 @@ Ao final da aula, a turma será capaz de:
 5. **conferir** o resultado no mapa e na tabela, e achar os erros que rodam sem dar erro.
 
 
-## 💡 3. Fundamentação
+## 💡 2. Fundamentação
 
-### 3.1 O que é geocodificação
+### 2.1 O que é geocodificação
 
 **Geocodificação** (*geocoding*) é transformar um endereço em coordenadas. O caminho inverso, coordenadas → endereço, é a **geocodificação reversa**.
 
@@ -50,11 +50,11 @@ Três ideias para guardar:
 2. **A precisão varia:** pode ser o prédio, a rua, o bairro ou só o município.
 3. **"Achou" não quer dizer "achou certo":** o terceiro exemplo foi encontrado, só que no país errado.
 
-### 3.2 As regras do serviço
+### 2.2 As regras do serviço
 
 > ⚠️ **Regras do Nominatim público:** no máximo **1 consulta por segundo**, aplicação identificada no cabeçalho `User-Agent` e crédito ao OpenStreetMap ao publicar mapas. Para milhares de endereços, use outro provedor ou uma instalação própria. Política completa: <https://operations.osmfoundation.org/policies/nominatim/>
 
-### 3.3 A ordem das coordenadas
+### 2.3 A ordem das coordenadas
 
 O serviço responde "latitude, longitude", mas o QGIS pensa em **X, Y**, e X é a **longitude**:
 
@@ -66,7 +66,7 @@ QgsPointXY(longitude, latitude)   # X = longitude, Y = latitude
 
 ---
 
-## 🛠️ 4. Trilha prática guiada
+## 🛠️ 3. Trilha prática guiada
 
 ### 📍 Atividade 1: um endereço (10 min)
 
@@ -218,7 +218,7 @@ Todos estes erros **rodam sem mensagem de erro**. Leia a tabela com a turma e pe
 
 ---
 
-## 🎓 5. Fechamento: checagem de aprendizagem
+## 🎓 4. Fechamento: checagem de aprendizagem
 
 ### 💬 Check-out oral
 
@@ -243,16 +243,16 @@ Peça que a turma complete as frases:
 
 ---
 
-## 💻 6. Aprofundamento técnico: os scripts
+## 💻 5. Aprofundamento técnico: os scripts
 
-### 6.1 O que deve ser entregue
+### 5.1 O que deve ser entregue
 
 1. Uma camada `endereco_geocodificado` com **um** ponto (Atividade 1).
 2. Uma camada `enderecos_geocodificados` com **todas** as linhas do CSV e os campos `nome`, `endereco`, `local_encontrado`, `latitude`, `longitude` e `status` (Atividade 2).
 
 Requisitos: CRS **EPSG:4326** (latitude/longitude, como o serviço devolve); **nenhuma linha descartada**; **no máximo uma consulta por segundo**.
 
-### 6.2 Um endereço (`geocodificar_endereco.py`)
+### 5.2 Um endereço (`geocodificar_endereco.py`)
 
 Os trechos centrais, copiados do script:
 
@@ -291,7 +291,7 @@ feicao.setGeometry(
 )
 ```
 
-### 6.3 Uma lista (`geocodificar_lista.py`)
+### 5.3 Uma lista (`geocodificar_lista.py`)
 
 **Pausa e cache:** cada endereço novo é consultado uma vez, com 1,1 s de pausa; os repetidos vêm do dicionário:
 
@@ -330,7 +330,7 @@ except (HTTPError, URLError, TimeoutError) as erro:
 > | `PAUSA_SEGUNDOS = 1.1` | um pouco acima de 1 s, para não esbarrar no limite do serviço |
 > | todas as colunas do CSV entram na camada | a camada carrega o que veio da planilha, não só o endereço |
 
-### 6.4 Os arquivos deste exercício
+### 5.4 Os arquivos deste exercício
 
 ```
 modulos/geocodificacao/
@@ -345,7 +345,7 @@ dados_curso/geocodificacao/            ← dados (baixe do Google Drive)
 
 ---
 
-## 🛡️ 7. Resolução de problemas e dicionário
+## 🛡️ 6. Resolução de problemas e dicionário
 
 ### ⚠️ Armadilhas comuns
 
@@ -375,7 +375,7 @@ dados_curso/geocodificacao/            ← dados (baixe do Google Drive)
 
 ---
 
-## 🚀 8. Desafios para depois da aula
+## 🚀 7. Desafios para depois da aula
 
 1. **Seus próprios endereços.** Monte um CSV com 5 lugares que você frequenta e geocodifique. Quantos caíram certo de primeira? O que você teve de acrescentar aos endereços?
 2. **Geocodificação reversa.** Peça à IA um script que faça o caminho inverso: clique num ponto do mapa e receba o endereço (o Nominatim tem o serviço `reverse`). Respeite as mesmas regras do serviço.

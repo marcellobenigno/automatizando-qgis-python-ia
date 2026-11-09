@@ -3,15 +3,6 @@
 
 # Do QGIS ao WebGIS: explorando os focos de queimadas na Paraíba
 
-> **Roteiro de aula:** prático, guiado e com aprofundamento técnico
-> **Público:** estudantes de geotecnologias, meio ambiente e ciências da terra · **Nível:** 🔴 Avançado
-> **Duração:** 35 minutos de aula prática (seções 1 a 5) + aprofundamento técnico para estudo posterior (seções 6 e 7)
-> **Tema:** análise temporal de focos de calor e comunicação de dados cartográficos na web
-> **Tecnologias:** QGIS 3.44 e PyQGIS; Leaflet (TimeDimension, heat, markercluster), Vue.js 3, Tom Select, Highcharts e Tailwind CSS; GitHub Pages; IA generativa
-> **Dashboard publicado:** 🌐 [marcellobenigno.github.io/automatizando-qgis-python-ia/queimadas_pb/](https://marcellobenigno.github.io/automatizando-qgis-python-ia/queimadas_pb/)
-
----
-
 ## 🧭 1. A proposta da aula
 
 Nesta aula, investigamos **quando e onde o satélite registrou focos de calor na Paraíba em 2026** e comparamos duas formas de apresentar esses dados:
@@ -37,32 +28,9 @@ Ao final da aula, a turma será capaz de:
 
 ---
 
-## 📋 2. Preparação e roteiro de tempo
+## 💡 2. Fundamentação
 
-### 🛠️ Antes da aula, o(a) professor(a) confere
-
-- [ ] **QGIS** 3.34 LTR ou mais recente (material testado no 3.44) em todos os computadores.
-- [ ] **Dados:** o `minicurso_dados.gpkg` ([📥 baixar do Drive](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing)), com a camada `bdqueimadas_2026-01-01_2026-10-30`, na pasta `dados_curso/` (veja [`dados_curso/`](../../dados_curso/README.md)).
-- [ ] **Dashboard:** abre no [GitHub Pages](https://marcellobenigno.github.io/automatizando-qgis-python-ia/queimadas_pb/). Sem internet, rode-o localmente (seção 6.6).
-- [ ] **Rede da sala:** carrega os mapas de fundo e as bibliotecas da CDN (`cdn.jsdelivr.net`, `server.arcgisonline.com`). Se a rede bloquear algum desses endereços, o painel avisa o que faltou.
-
-> 💡 **Dica para quem conduz a aula:** montar o dashboard e programar em PyQGIS não cabem em 35 minutos. Use o painel já publicado para a exploração da turma e reserve o código (seção 6) para uma demonstração guiada ou para estudo posterior.
-
-### ⏱️ Planejamento minuto a minuto (35 min)
-
-| Intervalo | Etapa | Foco da turma |
-| :--- | :--- | :--- |
-| **0–5 min** | Pergunta e contexto | O que é um foco de calor? Os dados da Paraíba em 2026. |
-| **5–13 min** | Atividade 1: QGIS | Ligar o tempo na camada e animar os focos semana a semana. |
-| **13–25 min** | Atividade 2: WebGIS | Trocar as visualizações do mapa, filtrar um município, mudar o período. |
-| **25–32 min** | Atividade 3: validação | Conferir os focos de outubro no QGIS e no dashboard. |
-| **32–35 min** | Síntese e fechamento | Check-out oral e reflexão sobre comunicar mapas ao público. |
-
----
-
-## 💡 3. Fundamentação
-
-### 3.1 Foco de calor **não é** área queimada
+### 2.1 Foco de calor **não é** área queimada
 
 O **Programa Queimadas** do INPE processa imagens de satélite e marca um **foco** em cada pixel com temperatura bem acima da vizinhança. Nesta camada, o sensor é o **VIIRS**, a bordo do satélite **NOAA-20**, com pixel de **~375 m**.
 
@@ -78,7 +46,7 @@ O **Programa Queimadas** do INPE processa imagens de satélite e marca um **foco
 
 Por isso, a contagem de focos é uma **amostra comparável**: ótima para comparar meses e regiões com o mesmo satélite, mas não é um inventário de incêndios.
 
-### 3.2 O satélite de referência (NOAA-20)
+### 2.2 O satélite de referência (NOAA-20)
 
 Vários satélites detectam o mesmo fogo, e somar todos contaria o mesmo incêndio várias vezes. Por isso o INPE usa um **satélite de referência**, que forma a série comparável ano a ano. Os **2.445 focos** desta aula são todos do **NOAA-20** (confira no campo `Satelite`).
 
@@ -89,7 +57,7 @@ Em órbita polar, o satélite passa sobre a Paraíba **duas vezes por dia**. Nos
 
 > ⚠️ **Atenção:** não há foco às 10h da manhã. Não é que não haja fogo: é que o satélite não estava passando. O gráfico *Hora da detecção* do dashboard mostra isso.
 
-### 3.3 Os campos, o fuso e a armadilha do `-999`
+### 2.3 Os campos, o fuso e a armadilha do `-999`
 
 | Campo | O que é | Cuidado |
 | :--- | :--- | :--- |
@@ -104,7 +72,7 @@ Em órbita polar, o satélite passa sobre a Paraíba **duas vezes por dia**. Nos
 > 🚨 **O perigo do valor sentinela `-999`:**
 > em bases ambientais, `-999` quer dizer "não calculado". Calcule a média de `RiscoFogo` sem tirá-lo e o resultado sai **negativo**. Antes de qualquer estatística, o `-999` vira "sem dado".
 
-### 3.4 A sazonalidade dos focos em 2026
+### 2.4 A sazonalidade dos focos em 2026
 
 | Mês | jan | fev | mar | abr | mai | jun | jul | ago | set | out |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -118,7 +86,7 @@ A série tem **dois picos** e um vale:
 
 ---
 
-## 🛠️ 4. Trilha prática guiada
+## 🛠️ 3. Trilha prática guiada
 
 ### 📍 Atividade 1: a animação temporal no QGIS (8 min)
 
@@ -221,7 +189,7 @@ Uma página bonita com números errados é pior que nenhuma página. Confira se 
 
 ---
 
-## 🎓 5. Fechamento: checagem de aprendizagem
+## 🎓 4. Fechamento: checagem de aprendizagem
 
 ### 💬 Check-out oral
 
@@ -246,9 +214,9 @@ Peça que a turma complete as frases:
 
 ---
 
-## 💻 6. Aprofundamento técnico: automação e arquitetura
+## 💻 5. Aprofundamento técnico: automação e arquitetura
 
-### 6.1 O fluxo dos dados: do GeoPackage ao WebGIS
+### 5.1 O fluxo dos dados: do GeoPackage ao WebGIS
 
 ```
 ┌────────────────────────┐     ┌────────────────────────┐     ┌────────────────────────┐
@@ -270,7 +238,7 @@ Peça que a turma complete as frases:
 
 Sem simplificar, os municípios teriam 13 MB. Para o coroplético e os contornos, o script usa as camadas `municipios` e `limite_pb` do mesmo GeoPackage.
 
-### 6.2 O script de automação (`queimadas_pb.py`)
+### 5.2 O script de automação (`queimadas_pb.py`)
 
 Os trechos centrais, copiados do script:
 
@@ -353,7 +321,7 @@ props = {"municipio": f["nome"].upper(), "nome": f["nome"]}  # 'Cajazeiras' → 
 [6] 1 feições de 'limite_pb' em limite_pb.geojson (34 KB)
 ```
 
-### 6.3 As peças do dashboard
+### 5.3 As peças do dashboard
 
 O painel é uma página estática com cinco arquivos em [`docs/queimadas_pb/`](../../docs/queimadas_pb/): `index.html` (a estrutura), `app.js` (a lógica) e os três GeoJSON. Não há servidor nem banco de dados; as bibliotecas vêm de uma CDN.
 
@@ -399,7 +367,7 @@ A página, de cima para baixo:
 
 > ⚠️ **Leaflet 1.9, não 2.0.** Os três plugins foram escritos para o Leaflet 1.x. A série 2.0 mudou a API e os quebra.
 
-### 6.4 Um estado, várias vistas
+### 5.4 Um estado, várias vistas
 
 Todo o dashboard deriva de seis valores:
 
@@ -453,7 +421,7 @@ watch(municipio, (valor) => {                                       // Vue → T
 });
 ```
 
-### 6.5 Como o painel chegou aqui: quatro rodadas de revisão com a IA
+### 5.5 Como o painel chegou aqui: quatro rodadas de revisão com a IA
 
 | Rodada | O que estava errado | O que mudou |
 | --- | --- | --- |
@@ -464,7 +432,7 @@ watch(municipio, (valor) => {                                       // Vue → T
 
 Em todas as rodadas, a IA escreveu o código **e** sugeriu melhorias, mas quem decidiu o que adotar, e quem conferiu no navegador se ficou certo, foi uma pessoa. Duas sugestões foram recusadas, com justificativa: uma grade hexagonal H3 (virou desafio) e um botão "minha localização", sem uso nesta análise.
 
-### 6.6 Rodar localmente e publicar
+### 5.6 Rodar localmente e publicar
 
 **Rodar localmente.** O navegador **não deixa** uma página aberta direto do disco (`file://`) ler os GeoJSON. Sirva a pasta `docs/`:
 
@@ -485,7 +453,7 @@ O arquivo vazio `docs/.nojekyll` diz ao GitHub para servir os arquivos como est�
 
 > ⚠️ **Tudo em `docs/` fica público**, mesmo o que a página não usa. Antes do *push*, confira com `git status` se não entrou nenhum arquivo de trabalho (um `.zip`, um rascunho, uma planilha).
 
-### 6.7 Os prompts usados com a IA
+### 5.7 Os prompts usados com a IA
 
 #### 🤖 Prompt do script PyQGIS
 
@@ -559,11 +527,11 @@ Vue 3 (build global), Highcharts 12 e Tailwind CSS 4 (browser).
 - Textos em português; datas no fuso America/Fortaleza.
 ```
 
-> 💡 O prompt do dashboard é o **resultado** das quatro rodadas da seção 6.5, não o ponto de partida. Ninguém escreve um prompt assim de primeira: ele cresce a cada vez que você olha o painel e encontra o que não funciona.
+> 💡 O prompt do dashboard é o **resultado** das quatro rodadas da seção 5.5, não o ponto de partida. Ninguém escreve um prompt assim de primeira: ele cresce a cada vez que você olha o painel e encontra o que não funciona.
 
 ---
 
-## 🛡️ 7. Resolução de problemas e dicionário
+## 🛡️ 6. Resolução de problemas e dicionário
 
 ### ⚠️ Armadilhas comuns
 
@@ -578,7 +546,7 @@ Vue 3 (build global), Highcharts 12 e Tailwind CSS 4 (browser).
 | **animação travando** | 2.445 marcadores recriados a cada quadro | criar uma vez e reaproveitar |
 | **mapa poluído, duas legendas** | calor, agrupamentos e cores de FRP ligados juntos | uma visualização por vez, com a legenda dela |
 | **dez meses de focos sobrepostos ao abrir** | o painel abria no acumulado | abrir no último mês, só o passo atual |
-| **a busca mostra um município e o painel filtra outro** | o filtro mudou por outro caminho e ninguém avisou o Tom Select | sincronizar nos dois sentidos (seção 6.4) |
+| **a busca mostra um município e o painel filtra outro** | o filtro mudou por outro caminho e ninguém avisou o Tom Select | sincronizar nos dois sentidos (seção 5.4) |
 | **o ✕ do popup fica fora da caixa** | o `padding` do popup foi zerado e a margem do conteúdo "vazou" (colapso de margens do CSS) | manter o `padding` do `.leaflet-popup-content-wrapper` |
 | **1ª semana "29/12/2025 a 04/01/2026"** | as semanas vão de segunda a domingo, e 1º/01/2026 foi uma quinta | cortar os passos em 1º de janeiro |
 
@@ -599,7 +567,7 @@ Vue 3 (build global), Highcharts 12 e Tailwind CSS 4 (browser).
 
 ---
 
-## 🚀 8. Desafios para depois da aula
+## 🚀 7. Desafios para depois da aula
 
 1. **Vídeo no QGIS.** Use **Exportar animação** do Controlador Temporal, com o rótulo de data da Atividade 1, e transforme os quadros num GIF. Compare o esforço com o de mandar o link do dashboard.
 2. **Focos por 1.000 km².** Cajazeiras lidera em número de focos, mas é também um município grande? Calcule a área de cada município num SRC métrico (ver [`dados_curso/`](../../dados_curso/README.md)), grave-a em `municipios_pb.geojson` e faça o coroplético por densidade. O ranking muda?
