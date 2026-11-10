@@ -17,7 +17,9 @@
 ---
 
 <table align="center">
-  <tr><td>🎤 <b>Palestrante</b></td><td>Prof. Msc. Marcello Benigno — <a href="mailto:marcello@ifpb.edu.br">marcello@ifpb.edu.br</a></td></tr>
+  <tr><td>🎤 <b>Palestrante</b></td><td>Prof. Msc. Marcello Benigno — <a href="mailto:marcello@ifpb.edu.br">marcello@ifpb.edu.br</a> <br>
+  <a  target="_blank" href="https://claude.ai/artifact/54CbKp53hNd3U6J4fZsJH2#slide-52b36be19cd3">Slides do Curso</a>
+  </td></tr>
   <tr><td>🏛️ <b>Instituição</b></td><td>Instituto Federal da Paraíba (IFPB) — Campus João Pessoa</td></tr>
   <tr><td>📅 <b>Evento</b></td><td>2º GeoTEC — Encontro de Geotecnologias</td></tr>
   <tr><td>📍 <b>Data e local</b></td><td>10/11/2026 — IFPB, Campus João Pessoa</td></tr>
