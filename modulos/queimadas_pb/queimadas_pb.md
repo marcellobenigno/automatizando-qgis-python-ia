@@ -1,5 +1,5 @@
 <!-- navegação -->
-[⬅️ 🚶 Alcance a partir do IFPB](../alcance_ifpb/alcance_ifpb.md) · [🏠 Início](../../README.md)
+[⬅️ 🚶 Acessibilidade a pé à escola](../acessibilidade_escola/acessibilidade_escola.md) · [🏠 Início](../../README.md)
 
 # Do QGIS ao WebGIS: explorando os focos de queimadas na Paraíba
 
@@ -113,12 +113,12 @@ A série tem **dois picos** e um vale:
 <summary>Respostas esperadas</summary>
 
 - Os pontos quase somem: é a quadra chuvosa (10 focos em abril, 22 em maio, 29 em junho).
-- O QGIS, os dados (um GeoPackage de 548 MB) e alguém que saiba configurar as propriedades temporais. É exatamente o que o dashboard dispensa:
+- O QGIS, os dados (um GeoPackage de 544 MB) e alguém que saiba configurar as propriedades temporais. É exatamente o que o dashboard dispensa:
 
 | Para ver a animação, a pessoa precisa… | No QGIS | No dashboard web |
 | --- | :---: | :---: |
 | instalar um programa | ✅ QGIS (~1 GB) | ❌ só o navegador |
-| receber os dados | ✅ GeoPackage de 548 MB | ❌ já estão na página (~900 KB) |
+| receber os dados | ✅ GeoPackage de 544 MB | ❌ já estão na página (~900 KB) |
 | saber configurar propriedades temporais | ✅ | ❌ |
 | abrir no celular | ❌ | ✅ |
 | ver gráficos ligados ao mapa | ❌ (precisa montar à parte) | ✅ |
@@ -224,11 +224,11 @@ Peça que a turma complete as frases:
 │ • 2.445 focos          │     │ • liga o tempo e o     │     │ • 3 GeoJSON leves      │
 │ • todas as camadas     │     │   Controlador Temporal │     │ • HTML + Vue.js +      │
 │   do curso             │     │ • limpa os -999        │     │   Leaflet + Highcharts │
-│ • 548 MB               │     │ • simplifica limites   │     │ • GitHub Pages         │
+│ • 544 MB               │     │ • simplifica limites   │     │ • GitHub Pages         │
 └────────────────────────┘     └────────────────────────┘     └────────────────────────┘
 ```
 
-**Por que não publicar o GeoPackage?** Ele tem **548 MB** porque guarda todas as camadas do curso. O script [`queimadas_pb.py`](queimadas_pb.py) extrai só o que o painel usa:
+**Por que não publicar o GeoPackage?** Ele tem **544 MB** porque guarda todas as camadas do curso. O script [`queimadas_pb.py`](queimadas_pb.py) extrai só o que o painel usa:
 
 | Arquivo | Conteúdo | Tamanho |
 | --- | --- | ---: |
@@ -579,4 +579,4 @@ Vue 3 (build global), Highcharts 12 e Tailwind CSS 4 (browser).
 ---
 
 <!-- navegação -->
-[⬅️ 🚶 Alcance a partir do IFPB](../alcance_ifpb/alcance_ifpb.md) · [🏠 Início](../../README.md)
+[⬅️ 🚶 Acessibilidade a pé à escola](../acessibilidade_escola/acessibilidade_escola.md) · [🏠 Início](../../README.md)

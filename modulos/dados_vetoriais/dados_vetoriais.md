@@ -39,8 +39,8 @@ Requisitos:
 
 | Dado | Onde está |
 | --- | --- |
-| Os três shapefiles | `dados_curso/dados_vetoriais/entrada/` ([📥 baixar do Drive](https://drive.google.com/drive/folders/1I-V0V_dQjDD9pB8zMpLOssW9xFTjuh0D?usp=sharing)) |
-| Camada `municipios` (IBGE, EPSG:4326) | `minicurso_dados.gpkg` ([📥 baixar do Drive](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing)) — veja [`dados_curso/README.md`](../../dados_curso/README.md) |
+| Os três shapefiles | `dados_curso/dados_vetoriais/entrada/` ([📥 baixar do Drive](https://drive.google.com/drive/folders/1Ns_koQT9KXnFHzRcGthi_UMx4-eBi4jk?usp=sharing)) |
+| Camada `municipios` (IBGE, EPSG:4326) | `minicurso_dados.gpkg` ([📥 baixar do Drive](https://drive.google.com/file/d/1-V3TuUkvq82hJhzAR0swleoTV5NxNqA8/view?usp=sharing)) — veja [`dados_curso/README.md`](../../dados_curso/README.md) |
 
 ## Roteiro
 
