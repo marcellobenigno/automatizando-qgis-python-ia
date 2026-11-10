@@ -32,7 +32,7 @@ Requisitos: cada composição é um **raster virtual (`.vrt`)**, sem cópia das 
 | [`dados_curso/composicao_rgb/S2A_MSIL2A_20261008T125321_…/`](https://drive.google.com/drive/folders/19AlCCNVxS4TOTijpRP7nZcjtiECXZ-ci?usp=sharing) | Sentinel-2A / L2A | 08/10/2026 | auge da seca |
 | [`dados_curso/composicao_rgb/area_interese.geojson`](https://drive.google.com/file/d/1MRuehfp8Yw9P6NC6oTk4rbIy4GY7gaa2/view?usp=sharing) | polígono da área de interesse | — | — |
 
-> 📥 [Baixe a pasta `composicao_rgb` inteira do Drive](https://drive.google.com/drive/folders/1s1_s0s2mqa_WXL7tElY-EFEzUS5jPFKV?usp=sharing). As bandas já vêm **recortadas** pelo polígono (as [cenas completas](https://drive.google.com/drive/folders/1VMYyxBeslxJ5wzObmRJKGsMKWuIJ7HOi?usp=sharing), opcionais, somam 1,7 GB; os recortes, 27 MB), mantendo a grade original dos pixels.
+> 📥 [Baixe a pasta `composicao_rgb` inteira do Drive](https://drive.google.com/drive/folders/1s1_s0s2mqa_WXL7tElY-EFEzUS5jPFKV?usp=sharing). As bandas já vêm **recortadas** pelo polígono (27 MB), mantendo a grade original dos pixels.
 
 ## Roteiro
 
@@ -205,8 +205,7 @@ imgs/composicao_rgb/             ← infográficos e capturas de tela
 dados_curso/composicao_rgb/      ← dados (baixe do Google Drive)
 ├── area_interese.geojson        ← polígono da área de interesse
 ├── LC08_L1TP_216065_…/          ← bandas do Landsat 8 (recortadas)
-├── S2A_MSIL2A_…/                ← bandas do Sentinel-2 (recortadas)
-└── cenas_completas/             ← cenas originais, sem recorte (1,7 GB, opcional)
+└── S2A_MSIL2A_…/                ← bandas do Sentinel-2 (recortadas)
 ```
 
 ---

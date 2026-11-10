@@ -40,17 +40,15 @@ dados_curso/
 ├── acessibilidade_escola/
 │   ├── malha_joao_pessoa_all.gpkg    ← malha a pé (arcos, nodes), os imóveis (imoveis_jp) e o ponto da escola
 │   ├── malha_joao_pessoa_drive.gpkg  ← vias de carro, para o desafio de carro (20 MB)
-│   ├── joao_pessoa_poligonos_osm.gpkg ← polígonos do OSM de João Pessoa baixados com o QuickOSM (aprofundamento)
 │   └── isocronas_escola.gpkg, imoveis_por_isocrona.gpkg, layout_imoveis_isocronas.pdf ← saídas dos scripts, para conferir
 ├── composicao_rgb/
 │   ├── area_interese.geojson
 │   ├── LC08_L1TP_216065_…/     ← bandas Landsat 8 recortadas
-│   ├── S2A_MSIL2A_…/           ← bandas Sentinel-2 recortadas
-│   └── cenas_completas/        ← cenas originais, sem recorte (1,7 GB, opcional)
+│   └── S2A_MSIL2A_…/           ← bandas Sentinel-2 recortadas
 ├── dados_vetoriais/
 │   ├── entrada/                ← os três shapefiles problemáticos
 │   └── resultados/             ← criada ao fazer o exercício; não vem no download
-└── material_apoio/             ← PyQGIS Developer Cookbook e Guia OSMnx + QGIS no Windows (PDFs), arquivos de teste
+└── material_apoio/             ← PyQGIS Developer Cookbook e Guia OSMnx + QGIS no Windows (PDFs)
 ```
 
 ## O GeoPackage `minicurso_dados.gpkg`
