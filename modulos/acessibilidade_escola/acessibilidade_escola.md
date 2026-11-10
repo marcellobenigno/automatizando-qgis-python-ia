@@ -189,19 +189,6 @@ Restrições:
 
 > 💡 **Por que anexar a tabela de atributos?** Foi ela que mostrou à IA que as isócronas são cumulativas: as áreas crescem de 0,39 a 3,34 km² e a de 20 minutos inclui as outras. Sem ela, a IA teria de adivinhar a estrutura da saída do plugin. **Contexto concreto vale mais que uma descrição.**
 
-**O que a IA entregou.** A resposta transformou a regra num laço curto (copiado do script):
-
-```python
-for f in poligonos.getFeatures(req):
-    ...
-    for m in ordem:                                  # 5, 10, 15, 20
-        if engines[m].intersects(g.constGet()):
-            grupos[m].append((f, g))
-            break                                    # o menor tempo prevalece
-```
-
-O `break` é a regra do bloco 4: ao achar a menor isócrona que o imóvel intersecta, o laço para, e o imóvel não entra nas maiores.
-
 **Rodar.** Abra [`imoveis_por_isocrona.py`](imoveis_por_isocrona.py) no **Editor do Console Python**, ajuste `PASTA` e clique em **Executar script**:
 
 ```text
@@ -266,16 +253,6 @@ cada imóvel entra. Depois, liste os casos em que essa regra pode contar como
 alcançado um imóvel que, na prática, não está a esse tempo da escola, e diga
 como eu conferiria cada caso no QGIS.
 ```
-
-> 💬 **Pausa para reflexão:** *qual das três regras está certa?*
-
-<details>
-<summary>Resposta esperada</summary>
-
-Nenhuma é "a certa": cada uma responde a uma pergunta. **Intersectar** pergunta "algum pedaço do terreno é alcançado?", e é generosa com terrenos grandes que só encostam na faixa de 40 m. **Inteiro dentro** é conservadora. **Ponto interior** fica no meio. O importante é escolher, escrever a escolha no prompt e no relatório, e conferir que o script faz o que foi escrito.
-
-</details>
-
 ---
 
 ### 📍 Atividade 4: o layout, e o que só se vê no PDF (7 min)
