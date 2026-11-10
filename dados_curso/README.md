@@ -1,8 +1,10 @@
 # Dados do minicurso
 
-Os dados **não ficam no git**: estão numa pasta do **Google Drive**. Baixe a pasta inteira e coloque o conteúdo aqui, em `dados_curso/`, na raiz do repositório:
+Os dados **não ficam no git**: estão no **Google Drive**. Baixe tudo de uma vez, descompacte e coloque o conteúdo aqui, em `dados_curso/`, na raiz do repositório:
 
-> 📥 **[Pasta `dados_curso` no Google Drive](https://drive.google.com/drive/folders/1rqgB9Fe6D7ApSjebBoSYNgK5c1ZJoipq?usp=sharing)**
+> 📦 **[`dados_curso-ia.zip`: todos os dados num arquivo só (217 MB)](https://drive.google.com/file/d/1r99KsFYZnMR3KYoU4EH4_qw_IqPgI0Xs/view?usp=sharing)**
+>
+> 📥 [Pasta `dados_curso` no Google Drive](https://drive.google.com/drive/folders/1rqgB9Fe6D7ApSjebBoSYNgK5c1ZJoipq?usp=sharing), para baixar só uma parte
 
 Tudo nesta pasta, exceto este `README.md`, é ignorado pelo git (veja o `.gitignore`). Os scripts trazem caminhos de exemplo como `/caminho/para/dados_curso/...`: ajuste-os para o local onde você salvou a pasta.
 
