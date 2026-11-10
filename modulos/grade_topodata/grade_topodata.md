@@ -441,14 +441,5 @@ Na 2ª execução, nada é baixado. Repare que ela rodou com um **raster como ca
 
 ---
 
-## 🚀 7. Desafios para depois da aula
-
-1. **Outro plano de informação.** Crie uma segunda ação que baixe a **declividade** (`SN`) em vez da altitude. O que muda no script? (Dica: o sufixo `ZN` aparece em dois lugares, na URL e no nome do arquivo.)
-2. **Várias células.** Configure a ação da seção 5.6 e baixe as 4 células em volta da sua cidade. Rode duas vezes e confira o relatório.
-3. **O mosaico.** Com as 4 folhas carregadas, crie um mosaico virtual (`gdal:buildvirtualraster`) e use-o no [perfil topográfico](../perfil_pb200/perfil_pb200.md) de uma rodovia que cruze mais de uma folha.
-4. **Outro mapa índice.** Escolha outro mapa web que mostre uma grade ou camada sem oferecer download, e repita a investigação da Atividade 1. Onde estavam os dados?
-
----
-
 <!-- navegação -->
 [⬅️ 🛣️ Duplicação da PB-200](../pb200/pb200.md) · [🏠 Início](../../README.md) · [⛰️ Perfil da PB-200 ➡️](../perfil_pb200/perfil_pb200.md)
