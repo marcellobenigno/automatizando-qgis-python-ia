@@ -50,7 +50,7 @@ Para montar o perfil, precisamos de três coisas:
 
 | Dado | Origem | Observação |
 | --- | --- | --- |
-| `malha_viaria` em `minicurso_dados.gpkg` | [📥 baixar do Drive](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing) ([`dados_curso/README.md`](../../dados_curso/README.md)) | campo `rodovia_nome = 'PB-200'`: **6 trechos** |
+| `malha_viaria` em `minicurso_dados.gpkg` | [📥 baixar do Drive](https://drive.google.com/file/d/1-V3TuUkvq82hJhzAR0swleoTV5NxNqA8/view?usp=sharing) ([`dados_curso/README.md`](../../dados_curso/README.md)) | campo `rodovia_nome = 'PB-200'`: **6 trechos** |
 | `07S375ZN.tif` | ação de clique da [grade TOPODATA](../grade_topodata/grade_topodata.md#-atividade-3-a-ação-de-clique-12-min) | EPSG:4326, pixel de 1″ (~30 m), altitude em metros (EGM96), NoData = −9999 |
 
 > ⚠️ **O MDE mede a superfície, não o chão.** O TOPODATA deriva do SRTM, um radar que registra o topo do que está no terreno: vegetação, construções, taludes. Ele tem um ruído próprio de alguns metros. Guarde isso para a Atividade 2.
@@ -235,7 +235,7 @@ Peça que a turma complete as frases:
 └────────────────────────┘     └────────────────────────┘     └────────────────────────┘
 ```
 
-Em `dados_curso/perfil_pb200/resultados/` (há uma cópia [na pasta do Drive](https://drive.google.com/drive/folders/1T8M9rUB1jAWbrI4MB6kLhXyoDxp2P2vm?usp=sharing), para conferir):
+Em `dados_curso/perfil_pb200/resultados/` (há uma cópia [na pasta do Drive](https://drive.google.com/drive/folders/10nChUkuWfTP3IuMDqhtikrnxqeWbyV8M?usp=sharing), para conferir):
 
 1. `pb200_perfil.gpkg`, com a camada `pb200_linha_unica` (1 feição, ~104 km, EPSG:31984) e a camada `pb200_pontos_z` (pontos a cada 30 m com `distance` e `z_1`);
 2. `pb200_perfil.csv`, com as colunas `km`, `lon`, `lat` e `altitude_m`;

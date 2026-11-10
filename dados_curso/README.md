@@ -12,22 +12,22 @@ Se não quiser baixar tudo, pegue só o que o módulo usa:
 
 | Módulo | Dados no Drive |
 | --- | --- |
-| [Introdução](../modulos/introducao/introducao.md) | [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing) |
-| [Geocodificação](../modulos/geocodificacao/geocodificacao.md) | [`geocodificacao/`](https://drive.google.com/drive/folders/1sMk6E18Lu9LnYXmv_o3ELq2YchB26NiH?usp=sharing) |
-| [PB-200](../modulos/pb200/pb200.md) | [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing) e, para conferir, [`pb200/resultados/`](https://drive.google.com/drive/folders/1KdjPupDrzpn4-qIDxIJtdmXwXIf4ETzv?usp=sharing) |
-| [Grade TOPODATA](../modulos/grade_topodata/grade_topodata.md) | [`grade_topodata/`](https://drive.google.com/drive/folders/1EaqyV0aaCFmxmxR3NnACL1rRs2t9DuYq?usp=sharing), com a folha [`07S375ZN.tif`](https://drive.google.com/file/d/1I9LjkX1F0Z08jXRkLbOpKo4pYqBjQnNu/view?usp=sharing) |
-| [Perfil da PB-200](../modulos/perfil_pb200/perfil_pb200.md) | [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing) e, para conferir, [`perfil_pb200/resultados/`](https://drive.google.com/drive/folders/1T8M9rUB1jAWbrI4MB6kLhXyoDxp2P2vm?usp=sharing); a folha [`07S375ZN.tif`](https://drive.google.com/file/d/1I9LjkX1F0Z08jXRkLbOpKo4pYqBjQnNu/view?usp=sharing) é o MDE |
-| [Acessibilidade a pé à escola](../modulos/acessibilidade_escola/acessibilidade_escola.md) | [`acessibilidade_escola/`](https://drive.google.com/drive/folders/1N9YNpuLcsy-DmibgXSA9uLUqzpck7Oi_?usp=sharing) |
-| [Queimadas na Paraíba](../modulos/queimadas_pb/queimadas_pb.md) | [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing) |
-| [Composição RGB](../modulos/composicao_rgb/composicao_rgb.md) | [`composicao_rgb/`](https://drive.google.com/drive/folders/1s1_s0s2mqa_WXL7tElY-EFEzUS5jPFKV?usp=sharing) |
-| [Dados vetoriais](../modulos/dados_vetoriais/dados_vetoriais.md) | [`dados_vetoriais/entrada/`](https://drive.google.com/drive/folders/1I-V0V_dQjDD9pB8zMpLOssW9xFTjuh0D?usp=sharing) e [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing) |
-| Material de apoio | [`material_apoio/`](https://drive.google.com/drive/folders/1RNGJsYnxZyGzq5CVr_Fwq4XlaUi9XmW9?usp=sharing), com o [PyQGIS Developer Cookbook (PDF)](https://drive.google.com/file/d/1tkHn5JVJSlkSB8RE90MOZzo4XKLegCjT/view?usp=sharing) e o [Guia OSMnx + QGIS no Windows (PDF)](https://drive.google.com/file/d/1D2I37F_BtkKuaqLJOfnzgtFQ8Ek9-Adx/view?usp=sharing) |
+| [Introdução](../modulos/introducao/introducao.md) | [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1-V3TuUkvq82hJhzAR0swleoTV5NxNqA8/view?usp=sharing) |
+| [Geocodificação](../modulos/geocodificacao/geocodificacao.md) | [`geocodificacao/`](https://drive.google.com/drive/folders/14GFuZCBRNZdKZZ2wXu1tSmewwH_QoTHK?usp=sharing) |
+| [PB-200](../modulos/pb200/pb200.md) | [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1-V3TuUkvq82hJhzAR0swleoTV5NxNqA8/view?usp=sharing) e, para conferir, [`pb200/resultados/`](https://drive.google.com/drive/folders/1UdU-RlLDg6WNzSVlISo5S0fqhAxp3CwN?usp=sharing) |
+| [Grade TOPODATA](../modulos/grade_topodata/grade_topodata.md) | [`grade_topodata/`](https://drive.google.com/drive/folders/12hXG-S2Ym_UGycpbwzryD1s08LkMGTym?usp=sharing), com a folha [`07S375ZN.tif`](https://drive.google.com/file/d/12B5p5EBSmvvN1QbqdFhzvqBNZGvcwv5b/view?usp=sharing) |
+| [Perfil da PB-200](../modulos/perfil_pb200/perfil_pb200.md) | [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1-V3TuUkvq82hJhzAR0swleoTV5NxNqA8/view?usp=sharing) e, para conferir, [`perfil_pb200/resultados/`](https://drive.google.com/drive/folders/10nChUkuWfTP3IuMDqhtikrnxqeWbyV8M?usp=sharing); a folha [`07S375ZN.tif`](https://drive.google.com/file/d/12B5p5EBSmvvN1QbqdFhzvqBNZGvcwv5b/view?usp=sharing) é o MDE |
+| [Acessibilidade a pé à escola](../modulos/acessibilidade_escola/acessibilidade_escola.md) | [`acessibilidade_escola/`](https://drive.google.com/drive/folders/1nLdnMuQQkE2FB9WV3GAf5mBgK3kZnLep?usp=sharing) |
+| [Queimadas na Paraíba](../modulos/queimadas_pb/queimadas_pb.md) | [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1-V3TuUkvq82hJhzAR0swleoTV5NxNqA8/view?usp=sharing) |
+| [Composição RGB](../modulos/composicao_rgb/composicao_rgb.md) | [`composicao_rgb/`](https://drive.google.com/drive/folders/1_ogFrju31UT5nTKDPsn4z2Ca9ycJuNjS?usp=sharing) |
+| [Dados vetoriais](../modulos/dados_vetoriais/dados_vetoriais.md) | [`dados_vetoriais/entrada/`](https://drive.google.com/drive/folders/1Ns_koQT9KXnFHzRcGthi_UMx4-eBi4jk?usp=sharing) e [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1-V3TuUkvq82hJhzAR0swleoTV5NxNqA8/view?usp=sharing) |
+| Material de apoio | [`material_apoio/`](https://drive.google.com/drive/folders/10eWQKFH2ejOHlSgyjFZw347EzZQsn_t1?usp=sharing), com o [PyQGIS Developer Cookbook (PDF)](https://drive.google.com/file/d/1AL1bHiJekqPYNMzvHrU6o1qXhqYbUmsZ/view?usp=sharing) e o [Guia OSMnx + QGIS no Windows (PDF)](https://drive.google.com/file/d/1oqxWvQPgbtTPc1CFdSGqSav6C5DlCbWl/view?usp=sharing) |
 
 ## Estrutura esperada
 
 ```
 dados_curso/
-├── minicurso_dados.gpkg        ← GeoPackage principal (~548 MB), usado por vários módulos
+├── minicurso_dados.gpkg        ← GeoPackage principal (~544 MB), usado por vários módulos
 ├── geocodificacao/
 │   └── enderecos.csv
 ├── pb200/
