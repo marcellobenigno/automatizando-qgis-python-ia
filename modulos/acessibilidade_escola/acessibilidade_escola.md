@@ -94,10 +94,10 @@ O plugin desenha a isócrona como uma **faixa de 40 m em volta das vias alcança
 
 ## 🛠️ 3. Trilha prática guiada
 
-### 📦 Antes da aula (professor)
+### 📦 Instalação dos plugins e dados
 
 1. Instale os plugins **QuickOSM** e **OSMnx Routing & Isochrones** pelo *Gerenciador de complementos* (para o segundo, marque *Mostrar também os complementos experimentais*). O OSMnx tem de estar no Python do QGIS: o passo a passo está na [página de instalação do plugin](https://marcellobenigno.github.io/osmnx-routing-isochrones/pt-br/#install).
-2. Distribua a pasta `dados_curso/acessibilidade_escola/` com `malha_joao_pessoa_all.gpkg`.
+2. Baixe do Drive a pasta [`dados_curso/acessibilidade_escola/`](https://drive.google.com/drive/folders/1nLdnMuQQkE2FB9WV3GAf5mBgK3kZnLep?usp=sharing), com `malha_joao_pessoa_all.gpkg`.
 3. Rode uma vez [`imoveis_por_isocrona.py`](imoveis_por_isocrona.py) e [`layout_isocronas.py`](layout_isocronas.py), ajustando `PASTA` nos dois. O layout baixa as tiles do OSM: confira a internet antes.
 
 A aula tem quatro atividades em 35 minutos: **8 + 12 + 8 + 7**. O cerne são os prompts da Atividade 2 e a conferência da Atividade 3.
