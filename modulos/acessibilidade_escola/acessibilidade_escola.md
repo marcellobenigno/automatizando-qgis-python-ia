@@ -309,25 +309,6 @@ A causa do primeiro defeito: numa camada de **símbolo único**, o texto que a l
 
 ---
 
-## 🎓 4. Fechamento: checagem de aprendizagem
-
-### 💬 Check-out oral
-
-Peça que a turma complete as frases:
-
-1. *"Somar os imóveis que intersectam cada isócrona do plugin dá um número errado porque…"*
-2. *"Antes de pedir o código, eu tive de decidir…"*
-3. *"Mesmo com o script rodando sem erro, eu conferi…"*
-
-<details>
-<summary>Respostas esperadas</summary>
-
-1. … as isócronas são cumulativas: a de 20 minutos contém as outras, e cada imóvel próximo da escola seria contado até quatro vezes.
-2. … a pergunta (até × entre), o que conta como imóvel (todos os polígonos × só edificações) e o que é estar dentro (intersectar × estar inteiro dentro).
-3. … que a soma das faixas dá o acumulado e bate com a seleção por localização (3.795), o que entrou como imóvel e cada texto do layout exportado.
-
-</details>
-
 ### 🏁 Mensagem final
 
 > *"A IA escreveu três scripts em minutos, e escreveu bem. Mas foi a tabela de atributos anexada que revelou as isócronas cumulativas, foi você quem decidiu que o menor tempo prevalece e foi a sua conferência que achou as piscinas na contagem e a legenda errada no PDF. A IA acelera a escrita; a responsabilidade pelo número continua sendo de quem assina o mapa."*
