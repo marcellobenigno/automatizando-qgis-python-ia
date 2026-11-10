@@ -50,7 +50,7 @@ Os exercícios formam uma **trilha progressiva**, em ordem crescente de complexi
 | 🛣️ [**Impacto ambiental da duplicação da PB-200**](modulos/pb200/pb200.md) | 🟡 Intermediário | Fazer a análise à mão e traduzir cada passo em `processing.run(...)`: buffer de 3 km, municípios atingidos e uso do solo em hectares. |
 | 🗺️ [**Grade interativa SRTM/TOPODATA**](modulos/grade_topodata/grade_topodata.md) | 🟡 Intermediário | Investigar uma página web com IA, gerar uma grade vetorial e criar ações em Python que baixam o MDE da célula clicada. |
 | ⛰️ [**Perfil topográfico da PB-200**](modulos/perfil_pb200/perfil_pb200.md) | 🟡 Intermediário | Unir os trechos da rodovia numa linha só, amostrar o MDE TOPODATA a cada 30 m, desenhar o perfil com matplotlib e atualizar com IA um tutorial escrito para uma versão antiga do QGIS. |
-| 🚶 [**Alcance a partir do IFPB**](modulos/alcance_ifpb/alcance_ifpb.md) | 🔴 Avançado | Baixar uma vez a malha viária de João Pessoa com o OSMnx e, offline, calcular com PyQGIS e NetworkX até onde se chega pelas ruas: 800 m a pé e 4 km de carro, respeitando a mão única. |
+| 🚶 [**Acessibilidade a pé à escola**](modulos/acessibilidade_escola/acessibilidade_escola.md) | 🔴 Avançado | Contar quantos imóveis do OpenStreetMap estão a 5, 10, 15 e 20 minutos a pé de uma escola, com isócronas do plugin OSMnx Routing & Isochrones: decidir as regras antes de pedir o código, iterar com a IA um ajuste por vez, conferir a contagem no QGIS e gerar o layout de impressão. |
 | 🔥 [**Focos de queimadas na Paraíba**](modulos/queimadas_pb/queimadas_pb.md) | 🔴 Avançado | Animar os focos de 2026 com o Controlador Temporal, automatizar com PyQGIS e publicar no GitHub Pages um dashboard interativo (Leaflet, Vue.js e Highcharts) que qualquer pessoa abre no navegador. 🌐 [**Abrir o dashboard**](https://marcellobenigno.github.io/automatizando-qgis-python-ia/queimadas_pb/) |
 | 🚧 **Próximos módulos** | — | Em produção. |
 
@@ -92,7 +92,7 @@ Introdução à automação de tarefas de geoprocessamento no QGIS. Apresentaç�
 │   ├── pb200/
 │   ├── grade_topodata/
 │   ├── perfil_pb200/
-│   ├── alcance_ifpb/
+│   ├── acessibilidade_escola/
 │   ├── queimadas_pb/
 │   ├── composicao_rgb/
 │   └── dados_vetoriais/

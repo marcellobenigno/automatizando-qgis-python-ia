@@ -17,7 +17,7 @@ Se não quiser baixar tudo, pegue só o que o módulo usa:
 | [PB-200](../modulos/pb200/pb200.md) | [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing) e, para conferir, [`pb200/resultados/`](https://drive.google.com/drive/folders/1KdjPupDrzpn4-qIDxIJtdmXwXIf4ETzv?usp=sharing) |
 | [Grade TOPODATA](../modulos/grade_topodata/grade_topodata.md) | [`grade_topodata/`](https://drive.google.com/drive/folders/1EaqyV0aaCFmxmxR3NnACL1rRs2t9DuYq?usp=sharing), com a folha [`07S375ZN.tif`](https://drive.google.com/file/d/1I9LjkX1F0Z08jXRkLbOpKo4pYqBjQnNu/view?usp=sharing) |
 | [Perfil da PB-200](../modulos/perfil_pb200/perfil_pb200.md) | [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing) e, para conferir, [`perfil_pb200/resultados/`](https://drive.google.com/drive/folders/1T8M9rUB1jAWbrI4MB6kLhXyoDxp2P2vm?usp=sharing); a folha [`07S375ZN.tif`](https://drive.google.com/file/d/1I9LjkX1F0Z08jXRkLbOpKo4pYqBjQnNu/view?usp=sharing) é o MDE |
-| [Alcance a partir do IFPB](../modulos/alcance_ifpb/alcance_ifpb.md) | [`alcance_ifpb/`](https://drive.google.com/drive/folders/1N9YNpuLcsy-DmibgXSA9uLUqzpck7Oi_?usp=sharing) |
+| [Acessibilidade a pé à escola](../modulos/acessibilidade_escola/acessibilidade_escola.md) | [`acessibilidade_escola/`](https://drive.google.com/drive/folders/1N9YNpuLcsy-DmibgXSA9uLUqzpck7Oi_?usp=sharing) |
 | [Queimadas na Paraíba](../modulos/queimadas_pb/queimadas_pb.md) | [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing) |
 | [Composição RGB](../modulos/composicao_rgb/composicao_rgb.md) | [`composicao_rgb/`](https://drive.google.com/drive/folders/1s1_s0s2mqa_WXL7tElY-EFEzUS5jPFKV?usp=sharing) |
 | [Dados vetoriais](../modulos/dados_vetoriais/dados_vetoriais.md) | [`dados_vetoriais/entrada/`](https://drive.google.com/drive/folders/1I-V0V_dQjDD9pB8zMpLOssW9xFTjuh0D?usp=sharing) e [`minicurso_dados.gpkg`](https://drive.google.com/file/d/1avZzj_OwWAjikV--fU01Vr3i02C64zpS/view?usp=sharing) |
@@ -37,10 +37,11 @@ dados_curso/
 │   └── 07S375ZN.tif            ← folha da PB-200 (67 MB), usada na grade e no perfil
 ├── perfil_pb200/
 │   └── resultados/             ← perfil pronto, para conferir
-├── alcance_ifpb/
-│   ├── malha_joao_pessoa_all.gpkg    ← todas as vias, baixada uma vez com o OSMnx (27 MB): a pé
-│   ├── malha_joao_pessoa_drive.gpkg  ← vias de carro, baixada com o plugin OSMnx Routing & Isochrones (20 MB)
-│   └── resultados/             ← saídas do script NetworkX (aprofundamento)
+├── acessibilidade_escola/
+│   ├── malha_joao_pessoa_all.gpkg    ← malha a pé (arcos, nodes), os imóveis (imoveis_jp) e o ponto da escola
+│   ├── malha_joao_pessoa_drive.gpkg  ← vias de carro, para o desafio de carro (20 MB)
+│   ├── joao_pessoa_poligonos_osm.gpkg ← polígonos do OSM de João Pessoa baixados com o QuickOSM (aprofundamento)
+│   └── isocronas_escola.gpkg, imoveis_por_isocrona.gpkg, layout_imoveis_isocronas.pdf ← saídas dos scripts, para conferir
 ├── composicao_rgb/
 │   ├── area_interese.geojson
 │   ├── LC08_L1TP_216065_…/     ← bandas Landsat 8 recortadas

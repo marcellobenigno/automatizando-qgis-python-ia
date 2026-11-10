@@ -376,18 +376,18 @@ Nos exercícios seguintes, este fluxo será aplicado a cenários reais de análi
 
 👉 [Abrir o exercício](../perfil_pb200/perfil_pb200.md)
 
-#### 🚶 Exercício 5 — Alcance a partir do IFPB
+#### 🚶 Exercício 5 — Acessibilidade a pé à escola
 
 - **Nível:** 🔴 Avançado
-- **O desafio:** descobrir até onde se chega, pelas ruas, a partir do IFPB Campus João Pessoa: andando 800 m e dirigindo 4 km. A malha viária é baixada uma única vez do OpenStreetMap, e as análises rodam offline.
+- **O desafio:** contar quantos imóveis estão a 5, 10, 15 e 20 minutos de caminhada de uma escola de João Pessoa, a 4,8 km/h. Os polígonos vêm do OpenStreetMap pelo QuickOSM, as isócronas vêm do plugin OSMnx Routing & Isochrones e a IA escreve os scripts PyQGIS.
 - **O que você irá aprender:**
-  - separar o download (OSMnx, uma vez) da análise (PyQGIS + NetworkX, sem internet), ganhando velocidade e independência de servidores públicos;
-  - montar um grafo dirigido a partir de um GeoPackage e tirar dele duas redes: a pé e de carro, com mão única;
-  - calcular a distância pela rede (Dijkstra) e cortar as ruas em faixas de distância;
-  - comparar o alcance pela rede com o círculo em linha reta;
-  - conferir o resultado com a Área de serviço nativa do QGIS e desconfiar de números que não fecham.
+  - gerar isócronas a pé numa malha viária offline e reconhecer que as do plugin são cumulativas;
+  - transformar a pergunta em regras explícitas antes de pedir o código: o que é imóvel, o que é "estar dentro" e em que faixa cada um entra;
+  - escrever um prompt para GIS com contexto, dados, regra, saídas e restrições, e iterar com a IA um ajuste por pedido;
+  - conferir a contagem com a Seleção por localização e ver o número mudar com cada regra (3.795, 3.713 ou 3.420 imóveis);
+  - gerar o layout de impressão com PyQGIS e corrigir o que a primeira versão errou.
 
-👉 [Abrir o exercício](../alcance_ifpb/alcance_ifpb.md)
+👉 [Abrir o exercício](../acessibilidade_escola/acessibilidade_escola.md)
 
 #### 🔥 Exercício 6 — Focos de queimadas na Paraíba
 

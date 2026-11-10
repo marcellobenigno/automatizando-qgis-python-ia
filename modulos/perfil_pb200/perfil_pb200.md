@@ -1,5 +1,5 @@
 <!-- navegação -->
-[⬅️ 🗺️ Grade SRTM/TOPODATA](../grade_topodata/grade_topodata.md) · [🏠 Início](../../README.md) · [🚶 Alcance a partir do IFPB ➡️](../alcance_ifpb/alcance_ifpb.md)
+[⬅️ 🗺️ Grade SRTM/TOPODATA](../grade_topodata/grade_topodata.md) · [🏠 Início](../../README.md) · [🚶 Acessibilidade a pé à escola ➡️](../acessibilidade_escola/acessibilidade_escola.md)
 
 # Perfil topográfico da PB-200: atualizar um tutorial com IA e conferir o que ela entrega
 
@@ -454,4 +454,4 @@ pontos_z = rodar("native:rastersampling", {
 ---
 
 <!-- navegação -->
-[⬅️ 🗺️ Grade SRTM/TOPODATA](../grade_topodata/grade_topodata.md) · [🏠 Início](../../README.md) · [🚶 Alcance a partir do IFPB ➡️](../alcance_ifpb/alcance_ifpb.md)
+[⬅️ 🗺️ Grade SRTM/TOPODATA](../grade_topodata/grade_topodata.md) · [🏠 Início](../../README.md) · [🚶 Acessibilidade a pé à escola ➡️](../acessibilidade_escola/acessibilidade_escola.md)

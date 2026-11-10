@@ -1,5 +1,5 @@
 <!-- navegação -->
-[⬅️ 🚶 Alcance a partir do IFPB](../alcance_ifpb/alcance_ifpb.md) · [🏠 Início](../../README.md)
+[⬅️ 🚶 Acessibilidade a pé à escola](../acessibilidade_escola/acessibilidade_escola.md) · [🏠 Início](../../README.md)
 
 # Do QGIS ao WebGIS: explorando os focos de queimadas na Paraíba
 
@@ -579,4 +579,4 @@ Vue 3 (build global), Highcharts 12 e Tailwind CSS 4 (browser).
 ---
 
 <!-- navegação -->
-[⬅️ 🚶 Alcance a partir do IFPB](../alcance_ifpb/alcance_ifpb.md) · [🏠 Início](../../README.md)
+[⬅️ 🚶 Acessibilidade a pé à escola](../acessibilidade_escola/acessibilidade_escola.md) · [🏠 Início](../../README.md)
